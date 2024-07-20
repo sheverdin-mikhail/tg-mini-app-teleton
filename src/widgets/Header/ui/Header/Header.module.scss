@@ -1,0 +1,23 @@
+.header {
+    position: fixed;
+    top: 0;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+}
+
+.avatar {
+    margin-right: 12px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+// .userLabel {
+//     span {
+//         font-size: 14px;
+//     }
+// }

@@ -1,0 +1,9 @@
+.title, .description {
+    text-align: center;
+}
+
+.pageContentHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
