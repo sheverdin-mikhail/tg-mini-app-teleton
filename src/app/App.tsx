@@ -1,33 +1,50 @@
 import './styles/index.scss';
 
-import { BottomNavbar } from 'widgets/BottomNavbar';
 import { useEffect, useState } from 'react';
 import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
-import { getUserIsNew } from 'entities/User';
-import { useSelector } from 'react-redux';
 import { WelcomeModal } from 'widgets/WelcomeModal';
-import { Header } from 'widgets/Header';
+import { request } from '@telegram-apps/sdk';
+import { PageLoader } from 'widgets/PageLoader';
 import { AppRouter } from './router';
 
 const App = () => {
   const { tg } = useTelegram();
-  const userIsNew = useSelector(getUserIsNew);
-  // const [welcomeModalIsOpen, setWelcomModalIsOpen] = useState<boolean>(false);
+  const [welcomeModalIsOpen, setWelcomeModalIsOpen] = useState(false);
+  const [isInit, setIsInit] = useState(false);
+
+  useEffect(() => {
+    const firstTime = localStorage.getItem('firstTime');
+
+    if (Number(firstTime) === null || Number(firstTime) === 0) {
+      setWelcomeModalIsOpen(true);
+      localStorage.setItem('firstTime', 'true');
+    }
+  }, []);
 
   useEffect(() => {
     tg.ready();
-  }, []);
 
-  // useEffect(() => {
-  //   if (userIsNew) {
-  //     setWelcomModalIsOpen(false);
-  //   }
-  // }, [userIsNew]);
+    setTimeout(() => setIsInit(true), 2000);// убрать на проде
+
+    request({
+      method: 'web_app_expand',
+      event: 'viewport_changed',
+    })
+      .then((res) => res.is_expanded && setTimeout(() => setIsInit(true), 2000));
+  }, [tg]);
 
   return (
     <>
-      <AppRouter />
-      {/* <WelcomeModal isOpen={welcomeModalIsOpen ?? false} /> */}
+      {
+        isInit
+          ? (
+            <>
+              <AppRouter />
+              <WelcomeModal isOpen={welcomeModalIsOpen ?? false} setIsOpen={setWelcomeModalIsOpen} />
+            </>
+          )
+          : <PageLoader />
+      }
     </>
   );
 };

@@ -1,5 +1,5 @@
-export interface QuestSettings {
-    link: string;
+export interface QuestSettings extends Record<string, any> {
+    link?: string;
     title: string;
     action: string;
     header: string;

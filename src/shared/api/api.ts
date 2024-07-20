@@ -9,21 +9,21 @@ export const $api = axios.create({
   },
 });
 
-// $api.interceptors.request.use(
-//   (config) => {
-//     const tokenJson = localStorage.getItem(USER_LOCALSTORAGE_TOKEN);
-//     let token: JWTTokenData | null = null;
-//     if (tokenJson) {
-//       token = JSON.parse(tokenJson);
-//     }
+$api.interceptors.request.use(
+  (config) => {
+    const tokenJson = localStorage.getItem(USER_LOCALSTORAGE_TOKEN);
+    let token: JWTTokenData | null = null;
+    if (tokenJson) {
+      token = JSON.parse(tokenJson);
+    }
 
-//     if (token) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
-//     return config;
-//   },
-//   (error) => Promise.reject(error),
-// );
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
 
 // $api.interceptors.response.use(
 //   (response) => response,

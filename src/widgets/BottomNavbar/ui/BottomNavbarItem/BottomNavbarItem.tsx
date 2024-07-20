@@ -10,7 +10,7 @@ interface BottomNavbarItemProps {
 }
 
 export const BottomNavbarItem: React.FC<BottomNavbarItemProps> = (props) => {
-  const { className, selected = false, item } = props;
+  const { selected = false, item } = props;
 
   const navigate = useNavigate();
 

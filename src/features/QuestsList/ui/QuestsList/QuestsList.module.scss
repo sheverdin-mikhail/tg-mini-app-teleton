@@ -1,0 +1,22 @@
+.questsList {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+   padding: 4px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sectionItems {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(45%, 1fr));
+    gap: 16px;
+}
+
+.sectionTitle {
+    margin-left: 16px;
+}

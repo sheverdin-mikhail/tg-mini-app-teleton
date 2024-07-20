@@ -1,14 +1,13 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
+import { useUserData } from 'shared/lib/hooks/useUserData/useUserData';
 
 interface RequireAuthProps {
   children?: React.ReactNode;
 }
 
-const token = localStorage.getItem(USER_LOCALSTORAGE_TOKEN);
-
 export const RequireAuth = ({ children }: RequireAuthProps) => {
   const location = useLocation();
+  const { token } = useUserData();
 
   if (!token) {
     return (

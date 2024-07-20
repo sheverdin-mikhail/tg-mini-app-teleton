@@ -1,7 +1,34 @@
 .modal {
-    height: 100svh;
+    // height: 80svh;
+    > div {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .title {
     text-align: center;
+}
+
+.button {
+    display: block;
+    button {
+        width: 100%;
+    }
+}
+
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    padding: 14px;
+    flex-grow: 1;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }

@@ -11,7 +11,7 @@
 }
 :focus,:active{outline: none;}
 a:focus,a:active{outline: none;}
-a{color: #000;}
+a{color: #000;text-decoration: none;}
 a,button,input{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
 nav,footer,header,aside{display: block;}
 
@@ -33,7 +33,7 @@ input,button,textarea{font-family:inherit;}
 input::-ms-clear{display: none;}
 button{cursor: pointer;}
 button::-moz-focus-inner {padding:0;border:0;}
-/* a:hover{text-decoration: none;} */
+a:hover{text-decoration: none;}
 ul li{list-style: none;}
 img{vertical-align: top;}
 

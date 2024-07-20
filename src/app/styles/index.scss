@@ -14,5 +14,7 @@
     width: 100svw;
     display: flex;
     flex-direction: column;
-    padding-bottom: 44px;
+    padding-bottom: var(--bottom-navbar-height);
+    background: var(--tg-theme-secondary-bg-color);
+    overflow-y: auto;
 }
