@@ -24,7 +24,7 @@ const App = () => {
   useEffect(() => {
     tg.ready();
 
-    setTimeout(() => setIsInit(true), 2000);// убрать на проде
+    // setTimeout(() => setIsInit(true), 2000);// убрать на проде
 
     request({
       method: 'web_app_expand',

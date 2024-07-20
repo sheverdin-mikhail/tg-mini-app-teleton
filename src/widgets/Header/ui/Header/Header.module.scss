@@ -1,9 +1,11 @@
 .header {
+    width: 100%;
     position: fixed;
     top: 0;
     height: var(--header-height);
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 14px;
 }
 
@@ -16,8 +18,7 @@
     flex-direction: column;
 }
 
-// .userLabel {
-//     span {
-//         font-size: 14px;
-//     }
-// }
+.block {
+    display: flex;
+    align-items: center;
+}

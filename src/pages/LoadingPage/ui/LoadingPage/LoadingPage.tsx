@@ -15,7 +15,7 @@ export const LoadingPage: React.FC<LoadingPageProps> = (props) => {
   const { className } = props;
   const [isInit, setIsInit] = useState(false);
 
-  const { token } = useUserData();
+  const { token, createUserToken } = useUserData();
   const { tgDataRow } = useTelegram();
   const navigate = useNavigate();
 
@@ -24,14 +24,14 @@ export const LoadingPage: React.FC<LoadingPageProps> = (props) => {
       if (!token && tgDataRow) {
         try {
           // вернуть на проде
-          // createUserToken(tgDataRow).then((res) => {
-          //   if (res.status === 'success') {
-          //     navigate(-1);
-          //   }
-          // });
-          localStorage.setItem(USER_LOCALSTORAGE_TOKEN, process.env.REACT_APP_JWT_TOKEN!!); // убрать на проде
+          createUserToken(tgDataRow).then((res) => {
+            if (res.status === 'success') {
+              navigate(-1);
+            }
+          });
+          // localStorage.setItem(USER_LOCALSTORAGE_TOKEN, process.env.REACT_APP_JWT_TOKEN!!); // убрать на проде
         } catch (e) {
-          // console.log(e);
+          console.log(e);
         }
       } else if (token) {
         navigate('/');
@@ -39,7 +39,7 @@ export const LoadingPage: React.FC<LoadingPageProps> = (props) => {
     } else {
       setIsInit(true);
     }
-  }, [isInit, setIsInit, navigate, token, tgDataRow]);
+  }, [isInit, setIsInit, navigate, token, tgDataRow, createUserToken]);
 
   return (
     <div className={clsx(cls.loadingPage, {}, [className])}>

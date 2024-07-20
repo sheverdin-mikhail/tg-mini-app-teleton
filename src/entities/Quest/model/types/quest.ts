@@ -1,3 +1,9 @@
+export enum QuestStatus {
+    START = 'Start',
+    CLAIM = 'Claim',
+    DONE = 'Done'
+}
+
 export interface QuestSettings extends Record<string, any> {
     link?: string;
     title: string;
@@ -12,5 +18,5 @@ export interface Quest {
     id: string;
     section: string;
     settings: QuestSettings;
-    status: string;
+    status: QuestStatus;
 }

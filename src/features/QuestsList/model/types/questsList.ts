@@ -1,6 +1,6 @@
 import { Quest } from 'entities/Quest';
 
-export interface QuestsList {
+export interface QuestListResponse {
+    data: Quest[];
     success: boolean;
-    data: Quest[]
 }
