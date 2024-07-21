@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Quest, QuestItem } from 'entities/Quest';
 import { useMemo } from 'react';
-import { Text, Title } from '@telegram-apps/telegram-ui';
+import { Headline, Text, Title } from '@telegram-apps/telegram-ui';
 import cls from './QuestsList.module.scss';
 import { useQuestsList } from '../../api/questsListApi';
 import { QuestsListSkeleton } from '../QuestsListSkeleton/QuestsListSkeleton';
@@ -29,9 +29,9 @@ export const QuestsList: React.FC<QuestsListProps> = (props) => {
     if (sections) {
       return Object.keys(sections).map((item) => (
         <div className={cls.section} key={item}>
-          <Title caps weight="1" className={cls.sectionTitle}>
+          <Headline caps weight="1" className={cls.sectionTitle}>
             {item}
-          </Title>
+          </Headline>
           <div className={cls.sectionItems}>
             {
               sections[item].map((item: Quest) => (
@@ -51,6 +51,7 @@ export const QuestsList: React.FC<QuestsListProps> = (props) => {
 
   return (
     <div className={clsx(cls.questsList, {}, [className])}>
+      <Title className={cls.title} weight="1" caps>Quests</Title>
       {
         isLoading
           ? <div className={cls.sectionItems}><QuestsListSkeleton /></div>

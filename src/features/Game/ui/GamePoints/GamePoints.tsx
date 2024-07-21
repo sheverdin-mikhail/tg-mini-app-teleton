@@ -16,7 +16,7 @@ export const GamePoints: React.FC<GamePointsProps> = (props) => {
 
   const anime = useSpring({
     points: +userPoints,
-    config: { duration: 1000 },
+    config: { duration: 500 },
   });
 
   return (

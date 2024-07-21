@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {
-  useState, useEffect, useCallback, MouseEventHandler,
+  useState, useEffect, useCallback,
 } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getUserTotalPoins, userActions } from 'entities/User';
@@ -45,16 +45,9 @@ export const Game: React.FC<GameProps> = (props) => {
     dispatcher(userActions.increaseUserPoints(points));
   };
 
-  const handleOnClick: MouseEventHandler<HTMLDivElement> = (event) => {
-    event.preventDefault();
-    const points = 1;
-    dispatcher(userActions.increaseUserPoints(points));
-  };
-
   return (
     <div
       className={clsx(cls.game, {}, [className])}
-      onClick={handleOnClick}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >

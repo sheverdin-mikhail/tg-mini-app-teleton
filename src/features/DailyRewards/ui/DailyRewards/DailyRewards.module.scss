@@ -1,0 +1,18 @@
+.dailyRewardItems {
+    width: 100%;
+    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(30%, 1fr));
+}
+
+.dailyRewards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 14px 0;
+
+}
+
+.title {
+    text-align: center;
+}

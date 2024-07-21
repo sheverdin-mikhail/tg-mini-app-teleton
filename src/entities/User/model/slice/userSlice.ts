@@ -8,6 +8,7 @@ const initialState: UserSchema = {
   error: '',
   user: {
     totalPoints: 0,
+    dailyReward: undefined,
   },
 };
 

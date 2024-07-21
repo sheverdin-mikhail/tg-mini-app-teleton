@@ -1,7 +1,13 @@
+import { DailyReward } from 'entities/DailyReward';
 import { Referal } from 'entities/Referal';
 
 export interface JWTTokenData {
     token: string
+}
+
+export interface UserDailyReward {
+    lastReward: DailyReward;
+    rewardDate: Date;
 }
 
 export interface User {
@@ -10,6 +16,7 @@ export interface User {
     referals?: Referal[];
     referalCode?: string;
     complitedDailyTasksCount?: number;
+    dailyReward: UserDailyReward | undefined;
 }
 
 export interface UserSchema {
