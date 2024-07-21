@@ -18,8 +18,6 @@ export const GameTouch: React.FC<GameTouchProps> = (props) => {
   }));
 
   useEffect(() => {
-    console.log(touch);
-    // Trigger the animation when touch changes
     api.start({
       width: 50,
       height: 50,

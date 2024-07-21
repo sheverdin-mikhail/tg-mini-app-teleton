@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {
-  useState, useEffect, useCallback, MouseEventHandler, TouchEventHandler,
+  useState, useEffect, useCallback, MouseEventHandler,
 } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getUserTotalPoins, userActions } from 'entities/User';
@@ -25,12 +25,11 @@ export const Game: React.FC<GameProps> = (props) => {
 
   const handleTouchStart = (event: any) => {
     setTouches(event.touches);
-    console.log(event.touches);
   };
 
   const savePoints = useCallback(debounce(() => {
     if (userIsInit) {
-      // savePointsMutation(totalPoints);
+      savePointsMutation(totalPoints);
     }
   }, 1000), [totalPoints]);
 
@@ -47,7 +46,7 @@ export const Game: React.FC<GameProps> = (props) => {
   };
 
   const handleOnClick: MouseEventHandler<HTMLDivElement> = (event) => {
-    // event.preventDefault();
+    event.preventDefault();
     const points = 1;
     dispatcher(userActions.increaseUserPoints(points));
   };
