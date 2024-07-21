@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
 import { useNavigate } from 'react-router-dom';
 import { useUserData } from 'shared/lib/hooks/useUserData/useUserData';
-import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
 import cls from './LoadingPage.module.scss';
 
 interface LoadingPageProps {
@@ -23,15 +22,13 @@ export const LoadingPage: React.FC<LoadingPageProps> = (props) => {
     if (isInit) {
       if (!token && tgDataRow) {
         try {
-          // вернуть на проде
           createUserToken(tgDataRow).then((res) => {
             if (res.status === 'success') {
-              navigate(-1);
+              navigate('/');
             }
           });
-          // localStorage.setItem(USER_LOCALSTORAGE_TOKEN, process.env.REACT_APP_JWT_TOKEN!!); // убрать на проде
         } catch (e) {
-          console.log(e);
+          // console.log(e);
         }
       } else if (token) {
         navigate('/');
@@ -39,7 +36,7 @@ export const LoadingPage: React.FC<LoadingPageProps> = (props) => {
     } else {
       setIsInit(true);
     }
-  }, [isInit, setIsInit, navigate, token, tgDataRow, createUserToken]);
+  }, [isInit, token, createUserToken, navigate, tgDataRow]);
 
   return (
     <div className={clsx(cls.loadingPage, {}, [className])}>

@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { Game } from 'entities/Game';
-import cls from './MainPage.module.scss';
+import { Game, GamePoints } from 'features/Game';
 import { mainPageReducer } from '../../model/slice/mainPageSlice';
+import cls from './MainPage.module.scss';
 
 interface MainPageProps {
   className?: string;
@@ -18,6 +18,7 @@ export const MainPage: React.FC<MainPageProps> = (props) => {
   return (
     <DynamicModuleLoader reducers={reducers}>
       <div className={clsx(cls.mainPage, {}, [className])}>
+        <GamePoints />
         <Game className={cls.game} />
       </div>
     </DynamicModuleLoader>

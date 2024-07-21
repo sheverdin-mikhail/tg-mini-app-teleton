@@ -4,11 +4,10 @@ import {
   Button,
   Headline,
   Image,
-  Spinner,
   Text,
 } from '@telegram-apps/telegram-ui';
 import cls from './QuestItem.module.scss';
-import { useQuestClaim, useQuestVerify } from '../../model/api/questsListApi';
+import { useQuestClaim, useQuestVerify } from '../../api/questsListApi';
 
 interface QuestItemProps {
     className?: string;

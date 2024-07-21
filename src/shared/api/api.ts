@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { JWTTokenData } from 'entities/User';
 import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
 
 export const $api = axios.create({
@@ -11,11 +10,7 @@ export const $api = axios.create({
 
 $api.interceptors.request.use(
   (config) => {
-    const tokenJson = localStorage.getItem(USER_LOCALSTORAGE_TOKEN);
-    let token: JWTTokenData | null = null;
-    if (tokenJson) {
-      token = JSON.parse(tokenJson);
-    }
+    const token = localStorage.getItem(USER_LOCALSTORAGE_TOKEN);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

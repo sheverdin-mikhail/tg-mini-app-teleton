@@ -1,9 +1,11 @@
 .game {
-    position: absolute;
-    bottom: 0;
+    // position: absolute;
+    // bottom: 0;
 }
 
 .mainPage {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     width: 100%;
     position: relative;

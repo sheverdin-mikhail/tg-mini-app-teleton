@@ -5,12 +5,17 @@ import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
 import { WelcomeModal } from 'widgets/WelcomeModal';
 import { request } from '@telegram-apps/sdk';
 import { PageLoader } from 'widgets/PageLoader';
+import { useSelector } from 'react-redux';
+import { getUserInfo, getUserIsInit } from 'entities/User';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { AppRouter } from './router';
 
 const App = () => {
   const { tg } = useTelegram();
   const [welcomeModalIsOpen, setWelcomeModalIsOpen] = useState(false);
   const [isInit, setIsInit] = useState(false);
+  const userIsInit = useSelector(getUserIsInit);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const firstTime = localStorage.getItem('firstTime');
@@ -24,7 +29,7 @@ const App = () => {
   useEffect(() => {
     tg.ready();
 
-    // setTimeout(() => setIsInit(true), 2000);// убрать на проде
+    setTimeout(() => setIsInit(true), 2000);
 
     request({
       method: 'web_app_expand',
@@ -32,6 +37,12 @@ const App = () => {
     })
       .then((res) => res.is_expanded && setTimeout(() => setIsInit(true), 2000));
   }, [tg]);
+
+  useEffect(() => {
+    if (!userIsInit) {
+      dispatch(getUserInfo());
+    }
+  }, [userIsInit, dispatch]);
 
   return (
     <>

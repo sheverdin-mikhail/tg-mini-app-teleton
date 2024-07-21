@@ -1,8 +1,8 @@
 import { Quest } from 'entities/Quest';
 import { rtkApi } from 'shared/api/rtkApi';
-import { QuestListResponse } from '../types/questsList';
+import { QuestListResponse } from '../model/types/questsList';
 
-export const questsListApi = rtkApi.injectEndpoints({
+const questsListApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     getQuestsList: build.query<QuestListResponse, null>({
       query: () => ({

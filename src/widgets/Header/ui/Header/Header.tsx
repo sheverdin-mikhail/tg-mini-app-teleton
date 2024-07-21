@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import {
   Avatar, Caption, Text,
 } from '@telegram-apps/telegram-ui';
-import { useUserData } from 'shared/lib/hooks/useUserData/useUserData';
 import { CircularProgress } from 'shared/ui/CircularProgress/CircularProgress';
 import cls from './Header.module.scss';
 
@@ -14,7 +13,6 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = (props) => {
   const { className } = props;
   const { tgUser } = useTelegram();
-  const {} = useUserData();
 
   return (
     <header className={clsx(cls.header, {}, [className])}>
@@ -27,7 +25,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
       </div>
       <div className={cls.block}>
         <CircularProgress size="large" progress={33}>
-          1/3
+          1|3
         </CircularProgress>
       </div>
     </header>

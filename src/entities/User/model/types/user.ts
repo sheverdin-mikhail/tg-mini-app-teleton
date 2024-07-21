@@ -1,16 +1,23 @@
+import { Referal } from 'entities/Referal';
+
 export interface JWTTokenData {
     token: string
 }
 
-export interface UserData {
-    isNew: boolean;
+export interface User {
+    id?: number;
+    totalPoints: number;
+    referals?: Referal[];
+    referalCode?: string;
+    complitedDailyTasksCount?: number;
 }
 
 export interface UserSchema {
     isLoading: boolean;
     isInit: boolean;
     token?: JWTTokenData;
-    data?: UserData;
+    error: string;
+    user: User;
 }
 
 export interface UserAuthData {

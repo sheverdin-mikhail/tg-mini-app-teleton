@@ -1,12 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
+import { getUserIsInit } from 'entities/User';
+import { useCallback, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { $api } from 'shared/api/api';
 import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
 
 const localStorageToken = localStorage.getItem(USER_LOCALSTORAGE_TOKEN);
 
 export const useUserData = () => {
-  const [token, setToken] = useState<string | null>(localStorageToken);
-  const [isInit, setIsInit] = useState(false);
+  const [tokenData, setTokenData] = useState<string | null>(localStorageToken);
+  const userIsInit = useSelector(getUserIsInit);
 
   const createUserToken = useCallback(async (initData: string) => {
     try {
@@ -17,7 +19,7 @@ export const useUserData = () => {
       const { token } = tokensResponse.data.data;
       if (token) {
         localStorage.setItem(USER_LOCALSTORAGE_TOKEN, token);
-        setToken(token);
+        setTokenData(token);
       }
       return {
         token,
@@ -29,20 +31,12 @@ export const useUserData = () => {
         status: 'fail',
       };
     }
-  }, [setToken]);
-
-  useEffect(() => {
-    if (isInit) {
-      const localStorageToken = localStorage.getItem(USER_LOCALSTORAGE_TOKEN);
-      setToken(localStorageToken);
-    } else {
-      setIsInit(true);
-    }
-  }, [isInit, setIsInit]);
+  }, [setTokenData]);
 
   return {
-    token,
-    setToken,
+    token: tokenData,
+    setToken: setTokenData,
     createUserToken,
+    isInit: userIsInit,
   };
 };

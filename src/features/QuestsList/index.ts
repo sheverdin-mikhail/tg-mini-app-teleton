@@ -1,2 +1,2 @@
 export { QuestsList } from './ui/QuestsList/QuestsList';
-export { questsListApi } from './model/api/questsListApi';
+export { useQuestClaim, useQuestVerify, useQuestsList } from './api/questsListApi';
