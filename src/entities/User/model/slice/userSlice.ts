@@ -9,6 +9,7 @@ const initialState: UserSchema = {
   user: {
     totalPoints: 0,
     dailyReward: undefined,
+    currentLevel: undefined,
   },
 };
 

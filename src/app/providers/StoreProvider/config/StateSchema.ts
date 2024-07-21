@@ -6,9 +6,11 @@ import { AxiosInstance } from 'axios';
 import { MainPageSchema } from 'pages/MainPage';
 import { UserSchema } from 'entities/User';
 import { rtkApi } from 'shared/api/rtkApi';
+import { LevelsSchema } from 'entities/Level';
 
 export interface StateSchema {
     user: UserSchema
+    levels: LevelsSchema
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
     // Асинхронные редюсеры
     // pages

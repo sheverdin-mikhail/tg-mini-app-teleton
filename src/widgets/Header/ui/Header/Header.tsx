@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import {
   Avatar, Caption, Text,
 } from '@telegram-apps/telegram-ui';
-import { CircularProgress } from 'shared/ui/CircularProgress/CircularProgress';
+import { GameLevelProgress } from 'features/Game';
 import cls from './Header.module.scss';
 
 interface HeaderProps {
@@ -24,9 +24,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
         </div>
       </div>
       <div className={cls.block}>
-        <CircularProgress size="large" progress={33}>
-          1|3
-        </CircularProgress>
+        <GameLevelProgress />
       </div>
     </header>
   );

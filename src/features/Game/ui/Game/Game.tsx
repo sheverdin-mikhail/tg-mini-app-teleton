@@ -17,7 +17,7 @@ interface GameProps {
 
 export const Game: React.FC<GameProps> = (props) => {
   const { className } = props;
-  const dispatcher = useAppDispatch();
+  const dispatch = useAppDispatch();
   const [touches, setTouches] = useState<any[]>([]);
   const [savePointsMutation] = useSavePoints();
   const totalPoints = useSelector(getUserTotalPoins);
@@ -25,6 +25,7 @@ export const Game: React.FC<GameProps> = (props) => {
 
   const handleTouchStart = (event: any) => {
     setTouches(event.touches);
+    dispatch(userActions.increaseUserPoints(1));
   };
 
   const savePoints = useCallback(debounce(() => {
@@ -40,16 +41,10 @@ export const Game: React.FC<GameProps> = (props) => {
     };
   }, [savePoints, userIsInit]);
 
-  const handleTouchEnd = (event: any) => {
-    const points = touches.length;
-    dispatcher(userActions.increaseUserPoints(points));
-  };
-
   return (
     <div
       className={clsx(cls.game, {}, [className])}
       onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
     >
       {Array.from(touches).map((touch, index) => (
         <GameTouch key={`${index + touch.clientX}`} touch={touch} />

@@ -1,4 +1,5 @@
 import { DailyReward } from 'entities/DailyReward';
+import { Level } from 'entities/Level';
 import { Referal } from 'entities/Referal';
 
 export interface JWTTokenData {
@@ -13,10 +14,11 @@ export interface UserDailyReward {
 export interface User {
     id?: number;
     totalPoints: number;
+    complitedDailyTasksCount?: number;
     referals?: Referal[];
     referalCode?: string;
-    complitedDailyTasksCount?: number;
     dailyReward: UserDailyReward | undefined;
+    currentLevel: Level | undefined;
 }
 
 export interface UserSchema {

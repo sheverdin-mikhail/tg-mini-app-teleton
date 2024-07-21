@@ -1,12 +1,7 @@
-export interface GameLevel {
-    level: number;
-    pointToNextLevel: number;
-    referalsToNextLevel: number;
-    imgUrl: string;
-}
+import { Level } from 'entities/Level';
 
 export interface Game {
-    level: GameLevel;
+    level: Level;
     points: number;
 }
 
