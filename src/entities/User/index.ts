@@ -9,6 +9,7 @@ export {
   getUserCurrentLevel,
   getUserLastDailyRewardClaimDate,
   getUserAvailableToClaimDailyRewardDate,
+  getUserCurrentConditions,
 } from './model/selectors/userSelector';
 export { CreateToken } from './model/services/UserAuth';
 export { getUserInfo } from './model/services/getUserInfo';

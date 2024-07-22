@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { InlineButtons, Title } from '@telegram-apps/telegram-ui';
 import { useSelector } from 'react-redux';
-import { getUserAvailableToClaimDailyRewardDate, getUserCurrentDailyReward, getUserLastDailyRewardClaimDate } from 'entities/User';
-import { useEffect, useMemo } from 'react';
+import { getUserCurrentDailyReward } from 'entities/User';
+import { useMemo } from 'react';
 import { DailyReward } from 'entities/DailyReward';
-import moment from 'moment';
+// import moment from 'moment';
 import cls from './DailyRewards.module.scss';
 import { DailyRewardItem } from '../DailyRewardItem/DailyRewardItem';
 import { useGetDailyRewardsList } from '../../api/dailyRewardsApi';
@@ -17,20 +17,19 @@ interface DailyRewardsProps {
 export const DailyRewards: React.FC<DailyRewardsProps> = (props) => {
   const { className } = props;
   const { isError, isLoading, data: dailyRewards } = useGetDailyRewardsList();
-  const userLastDailyRewardDate = useSelector(getUserLastDailyRewardClaimDate);
-  const userAvailableToClaimDailyRewardDate = useSelector(getUserAvailableToClaimDailyRewardDate);
+  // const userLastDailyRewardDate = useSelector(getUserLastDailyRewardClaimDate);
+  // const userAvailableToClaimDailyRewardDate = useSelector(getUserAvailableToClaimDailyRewardDate);
   const lastDailyReward = useSelector(getUserCurrentDailyReward);
 
-  useEffect(() => {
-    const now = moment();
-    const availableToClaimDate = moment(userAvailableToClaimDailyRewardDate);
-    const diffInMilliseconds = availableToClaimDate.diff(now);
-    const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
-    const hours = String(Math.floor(diffInMinutes / 60)).padStart(2, '0');
-    const minutes = String(diffInMinutes % 60).padStart(2, '0');
-    const timeUntilAvailable = `${hours}:${minutes}`;
-    console.log(timeUntilAvailable);
-  }, [userAvailableToClaimDailyRewardDate]);
+  // useEffect(() => {
+  //   const now = moment();
+  //   const availableToClaimDate = moment(userAvailableToClaimDailyRewardDate);
+  //   const diffInMilliseconds = availableToClaimDate.diff(now);
+  //   const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
+  //   const hours = String(Math.floor(diffInMinutes / 60)).padStart(2, '0');
+  //   const minutes = String(diffInMinutes % 60).padStart(2, '0');
+  //   const timeUntilAvailable = `${hours}:${minutes}`;
+  // }, [userAvailableToClaimDailyRewardDate]);
 
   const currentDailyReward = useMemo<DailyReward>(() => {
     if (!lastDailyReward) {

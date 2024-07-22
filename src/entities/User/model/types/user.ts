@@ -15,12 +15,12 @@ export interface User {
     id?: number;
     totalPoints: number;
     complitedDailyTasksCount?: number;
-    referals?: Referal[];
+    referrals?: Referal[];
     referalCode?: string;
     daily_reward: DailyReward | undefined;
     lastClaimDailyReward: Date | undefined;
     availableToClaimDailyRewardDate: Date | undefined;
-    currentLevel: Level | undefined;
+    level: Level | undefined;
 }
 
 export interface UserSchema {

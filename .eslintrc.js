@@ -56,6 +56,7 @@ module.exports = {
     'no-nested-ternary': 'off',
     'react/jsx-one-expression-per-line': 'off',
     'no-unsafe-optional-chaining': 'off',
+    camelcase: 'off',
     // 'react-hooks/exhaustive-deps': 'off',
   },
   globals: {

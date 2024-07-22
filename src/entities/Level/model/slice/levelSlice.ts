@@ -10,19 +10,19 @@ const initialState: LevelsSchema = {
     {
       level: 1,
       pointToNextLevel: 20000,
-      referalsToNextLevel: 3,
+      referralsToNextLevel: 3,
       tasksToNextLevel: 3,
     },
     {
       level: 2,
       pointToNextLevel: 60000,
-      referalsToNextLevel: 3,
+      referralsToNextLevel: 3,
       tasksToNextLevel: 5,
     },
     {
       level: 3,
       pointToNextLevel: 100000,
-      referalsToNextLevel: 6,
+      referralsToNextLevel: 6,
       tasksToNextLevel: 15,
     },
   ],

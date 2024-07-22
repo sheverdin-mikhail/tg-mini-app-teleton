@@ -9,7 +9,7 @@ const initialState: UserSchema = {
   user: {
     totalPoints: 0,
     daily_reward: undefined,
-    currentLevel: undefined,
+    level: undefined,
     lastClaimDailyReward: undefined,
     availableToClaimDailyRewardDate: undefined,
   },

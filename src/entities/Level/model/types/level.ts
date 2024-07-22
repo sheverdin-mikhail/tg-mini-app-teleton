@@ -1,7 +1,7 @@
 export interface Level {
     level: number;
     pointToNextLevel: number;
-    referalsToNextLevel: number;
+    referralsToNextLevel: number;
     tasksToNextLevel: number;
 }
 
