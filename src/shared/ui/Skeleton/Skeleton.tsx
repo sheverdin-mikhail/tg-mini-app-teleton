@@ -20,14 +20,18 @@ export const Skeleton: React.FC<SkeletonProps> = (props) => {
   } = props;
 
   return (
-    <TgSkeleton
-      visible
-      className={clsx(cls.skeleton, {}, [className])}
+    <div
+      className={clsx(cls.skeletonContainer, {}, [className])}
       style={{
         width,
         height: isSquare ? width : height,
         borderRadius: isCircle ? '100%' : '16px',
       }}
-    />
+    >
+      <TgSkeleton
+        className={cls.skeleton}
+        visible
+      />
+    </div>
   );
 };

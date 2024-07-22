@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { LevelsSchema } from '../types/level';
 
 const initialState: LevelsSchema = {
@@ -12,21 +12,18 @@ const initialState: LevelsSchema = {
       pointToNextLevel: 20000,
       referalsToNextLevel: 3,
       tasksToNextLevel: 3,
-      imgUrl: '',
     },
     {
       level: 2,
       pointToNextLevel: 60000,
       referalsToNextLevel: 3,
       tasksToNextLevel: 5,
-      imgUrl: '',
     },
     {
       level: 3,
       pointToNextLevel: 100000,
       referalsToNextLevel: 6,
       tasksToNextLevel: 15,
-      imgUrl: '',
     },
   ],
 };

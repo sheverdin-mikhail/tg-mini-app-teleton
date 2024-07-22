@@ -17,7 +17,9 @@ export interface User {
     complitedDailyTasksCount?: number;
     referals?: Referal[];
     referalCode?: string;
-    dailyReward: UserDailyReward | undefined;
+    daily_reward: DailyReward | undefined;
+    lastClaimDailyReward: Date | undefined;
+    availableToClaimDailyRewardDate: Date | undefined;
     currentLevel: Level | undefined;
 }
 

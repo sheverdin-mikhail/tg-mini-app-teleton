@@ -3,7 +3,6 @@ export interface Level {
     pointToNextLevel: number;
     referalsToNextLevel: number;
     tasksToNextLevel: number;
-    imgUrl: string;
 }
 
 export interface LevelsSchema {

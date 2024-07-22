@@ -14,7 +14,7 @@ export const rtkApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Quest'],
+  tagTypes: ['Quest', 'DailyReward'],
   endpoints: (builder) => ({
   }),
 });

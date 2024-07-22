@@ -5,6 +5,10 @@ export {
   getUserIsLoading,
   getUserIsInit,
   getUserTotalPoins,
+  getUserCurrentDailyReward,
+  getUserCurrentLevel,
+  getUserLastDailyRewardClaimDate,
+  getUserAvailableToClaimDailyRewardDate,
 } from './model/selectors/userSelector';
 export { CreateToken } from './model/services/UserAuth';
 export { getUserInfo } from './model/services/getUserInfo';

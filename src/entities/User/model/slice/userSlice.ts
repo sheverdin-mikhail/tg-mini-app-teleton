@@ -8,8 +8,10 @@ const initialState: UserSchema = {
   error: '',
   user: {
     totalPoints: 0,
-    dailyReward: undefined,
+    daily_reward: undefined,
     currentLevel: undefined,
+    lastClaimDailyReward: undefined,
+    availableToClaimDailyRewardDate: undefined,
   },
 };
 
@@ -25,6 +27,12 @@ export const userSlice = createSlice({
     },
     increaseUserPoints: (state, action: PayloadAction<number>) => {
       state.user.totalPoints = Number(state.user.totalPoints) + action.payload;
+    },
+    claimDailyReward: (state, action: PayloadAction<Pick<User, 'daily_reward' | 'lastClaimDailyReward' | 'totalPoints' | 'availableToClaimDailyRewardDate'>>) => {
+      state.user.totalPoints = action.payload.totalPoints;
+      state.user.daily_reward = action.payload.daily_reward;
+      state.user.lastClaimDailyReward = action.payload.lastClaimDailyReward;
+      state.user.availableToClaimDailyRewardDate = action.payload.availableToClaimDailyRewardDate;
     },
   },
   extraReducers: (builder) => builder

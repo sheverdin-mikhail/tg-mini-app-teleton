@@ -1,5 +1,12 @@
-import { mockTelegramEnv, parseInitData, retrieveLaunchParams } from '@telegram-apps/sdk';
+import {
+  initSettingsButton,
+  mockTelegramEnv,
+  parseInitData,
+  retrieveLaunchParams,
+} from '@telegram-apps/sdk';
 import { TelegramWebApps } from 'app/types/global';
+import { useEffect } from 'react';
+import { copyToClipboard } from 'shared/lib/utils/clipboard';
 
 declare global {
     interface Window {
@@ -9,34 +16,36 @@ declare global {
 
 // убрать на проде
 // eslint-disable-next-line max-len
-// const initDataRaw = 'query_id=AAHWD2IuAAAAANYPYi6F7ysv&user=%7B%22id%22%3A778178518%2C%22first_name%22%3A%22%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22sheverdin_mikhail%22%2C%22language_code%22%3A%22ru%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1721434145&hash=c9ad971d388c41c2219fb3355ff6e6274f4c673b790ceba1c5c4c69bc1b0f594';
+const initDataRaw = 'query_id=AAHWD2IuAAAAANYPYi4lF4mZ&user=%7B%22id%22%3A778178518%2C%22first_name%22%3A%22%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22sheverdin_mikhail%22%2C%22language_code%22%3A%22ru%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1721655780&hash=647d20e6777cab9f7d445c015abe87706b37d5c760222e8829fd7974ea518f6b';
 
-// mockTelegramEnv({
-//   themeParams: {
-//     accentTextColor: '#6ab2f2',
-//     bgColor: '#17212b',
-//     buttonColor: '#5288c1',
-//     buttonTextColor: '#ffffff',
-//     destructiveTextColor: '#ec3942',
-//     headerBgColor: '#17212b',
-//     hintColor: '#708499',
-//     linkColor: '#6ab3f3',
-//     secondaryBgColor: '#232e3c',
-//     sectionBgColor: '#17212b',
-//     sectionHeaderTextColor: '#6ab3f3',
-//     subtitleTextColor: '#708499',
-//     textColor: '#f5f5f5',
-//   },
-//   initData: parseInitData(initDataRaw),
-//   initDataRaw,
-//   version: '7.2',
-//   platform: 'tdesktop',
-// });
+mockTelegramEnv({
+  themeParams: {
+    accentTextColor: '#6ab2f2',
+    bgColor: '#17212b',
+    buttonColor: '#5288c1',
+    buttonTextColor: '#ffffff',
+    destructiveTextColor: '#ec3942',
+    headerBgColor: '#17212b',
+    hintColor: '#708499',
+    linkColor: '#6ab3f3',
+    secondaryBgColor: '#232e3c',
+    sectionBgColor: '#17212b',
+    sectionHeaderTextColor: '#6ab3f3',
+    subtitleTextColor: '#708499',
+    textColor: '#f5f5f5',
+  },
+  initData: parseInitData(initDataRaw),
+  initDataRaw,
+  version: '7.2',
+  platform: 'tdesktop',
+});
 
 export const useTelegram = () => {
   const tg = window.Telegram.WebApp;
 
   const { initData, initDataRaw } = retrieveLaunchParams();
+
+  const [settingsButton] = initSettingsButton();
 
   const tgUser = initData?.user;
 
@@ -51,6 +60,14 @@ export const useTelegram = () => {
       tg.MainButton.show();
     }
   };
+
+  useEffect(() => { // убрать на проде
+    settingsButton.show();
+    settingsButton.on('click', () => {
+      copyToClipboard(initDataRaw!!);
+      console.log('copy: ', initDataRaw);
+    });
+  }, []);
 
   return ({
     tg,
