@@ -33,7 +33,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
     if (userIsInit) {
       savePointsMutation(totalPoints);
     }
-  }, 1000), [totalPoints]);
+  }, 2000), [totalPoints]);
 
   useEffect(() => {
     savePoints();

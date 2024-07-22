@@ -26,7 +26,7 @@ export const GamePoints: React.FC<GamePointsProps> = (props) => {
     >
       {(userIsLoading && userPoints === 0) ? <Spinner size="m" />
         : (
-          <animated.div>
+          <animated.div className={cls.points}>
             {
               anime.points.to((value) => value.toFixed(0))
             }

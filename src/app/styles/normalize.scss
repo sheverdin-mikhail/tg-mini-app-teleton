@@ -25,7 +25,8 @@ html,body{
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
-    color: #000;
+    color: var(--tg-theme-text-color);
+    background: var(--tg-theme-bg-color);
 }
 input,button,textarea{font-family:inherit;}
 
