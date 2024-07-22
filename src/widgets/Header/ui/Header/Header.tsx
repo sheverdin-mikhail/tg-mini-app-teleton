@@ -18,7 +18,6 @@ export const Header: React.FC<HeaderProps> = (props) => {
   const [uplevelConditionsIsOpen, setUplevelConditionsIsOpen] = useState<boolean>(false);
 
   const onLevelClickHandler = useCallback(() => {
-    console.log('click');
     setUplevelConditionsIsOpen(true);
   }, []);
 

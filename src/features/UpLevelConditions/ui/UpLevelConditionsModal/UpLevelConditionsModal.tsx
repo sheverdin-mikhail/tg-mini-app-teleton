@@ -1,5 +1,6 @@
 import { Modal } from '@telegram-apps/telegram-ui';
 import clsx from 'clsx';
+import { ModalHeader } from '@telegram-apps/telegram-ui/dist/components/Overlays/Modal/components/ModalHeader/ModalHeader';
 import cls from './UpLevelConditionsModal.module.scss';
 import { UpLevelConditionsList } from '../UpLevelConditionsList/UpLevelConditionsList';
 
@@ -16,7 +17,7 @@ export const UpLevelConditionsModal: React.FC<UpLevelConditionsModalProps> = (pr
     <Modal
       className={clsx(cls.upLevelConditionsModal, {}, [className])}
       open={isOpen}
-      header
+      header={<ModalHeader />}
     >
       <UpLevelConditionsList />
     </Modal>

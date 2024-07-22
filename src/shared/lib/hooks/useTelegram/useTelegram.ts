@@ -65,9 +65,8 @@ export const useTelegram = () => {
     settingsButton.show();
     settingsButton.on('click', () => {
       copyToClipboard(initDataRaw!!);
-      console.log('copy: ', initDataRaw);
     });
-  }, []);
+  }, [initDataRaw, settingsButton]);
 
   return ({
     tg,

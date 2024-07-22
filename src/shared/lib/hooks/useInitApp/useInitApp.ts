@@ -46,7 +46,7 @@ export const useInitApp = () => {
     if (!levelsIsInit) {
       dispatch(levelsActions.initLevels());
     }
-  }, [levelsIsInit]);
+  }, [levelsIsInit, dispatch]);
 
   useEffect(() => {
     if (tgIsInit && levelsIsInit && userIsInit) {

@@ -45,7 +45,6 @@ export const GameLevelProgress: React.FC<GameLevelProgressProps> = (props) => {
       <CircularProgress size="large" progress={progress + 1}>
         <div className={cls.level}>
           <span className={cls.curLevel}>{user.level?.level ?? 1}</span>
-          <span className={cls.maxLevel}>{levels.length}</span>
         </div>
       </CircularProgress>
     </div>

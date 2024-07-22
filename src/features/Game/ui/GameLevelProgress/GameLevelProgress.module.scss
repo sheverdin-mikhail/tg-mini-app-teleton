@@ -1,22 +1,10 @@
 .level {
     position: relative;
     display: flex;
-    gap: 6px;
-    &::before {
-        content: '';
-        display: block;
-        width: 2px;
-        height: 110%;
-        position: absolute;
-        background: var(--tg-theme-text-color);
-        border-radius: 2px;
-        left: 50%;
-        transform: translateX(-75%);
-    }
 }
 
 .curLevel {
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     font-weight: 600;
     line-height: 100%;
 }
