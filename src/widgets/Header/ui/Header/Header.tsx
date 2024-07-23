@@ -5,7 +5,7 @@ import {
 } from '@telegram-apps/telegram-ui';
 import { GameLevelProgress } from 'features/Game';
 import { UpLevelConditionsModal } from 'features/UpLevelConditions';
-import { useCallback, useState } from 'react';
+import { useRef } from 'react';
 import cls from './Header.module.scss';
 
 interface HeaderProps {
@@ -15,12 +15,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = (props) => {
   const { className } = props;
   const { tgUser } = useTelegram();
-  const [uplevelConditionsIsOpen, setUplevelConditionsIsOpen] = useState<boolean>(false);
-
-  const onLevelClickHandler = useCallback(() => {
-    setUplevelConditionsIsOpen(true);
-  }, []);
-
+  const trigger = useRef(null);
   return (
     <>
       <header className={clsx(cls.header, {}, [className])}>
@@ -31,11 +26,13 @@ export const Header: React.FC<HeaderProps> = (props) => {
             <Text weight="2" caps>{tgUser?.firstName}</Text>
           </div>
         </div>
-        <div className={cls.block}>
-          <GameLevelProgress onClick={onLevelClickHandler} />
-        </div>
+        <UpLevelConditionsModal trigger={(
+          <div className={cls.block} ref={trigger}>
+            <GameLevelProgress />
+          </div>
+        )}
+        />
       </header>
-      <UpLevelConditionsModal isOpen={uplevelConditionsIsOpen} setIsOpen={() => setUplevelConditionsIsOpen} />
     </>
   );
 };

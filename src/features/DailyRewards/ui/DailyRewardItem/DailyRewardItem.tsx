@@ -4,7 +4,7 @@ import { InlineButtonsItem } from '@telegram-apps/telegram-ui/dist/components/Bl
 import { Spinner, Text } from '@telegram-apps/telegram-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getUserAvailableToClaimDailyRewardDate, getUserLastDailyRewardClaimDate } from 'entities/User';
+import { getUserAvailableToClaimDailyRewardDate, getUserCurrentDailyReward, getUserLastDailyRewardClaimDate } from 'entities/User';
 import moment from 'moment';
 import cls from './DailyRewardItem.module.scss';
 import { useClaimDailyRewards } from '../../api/dailyRewardsApi';
@@ -24,6 +24,7 @@ export const DailyRewardItem: React.FC<DailyRewardItemProps> = (props) => {
   const [isAvailabelToClaim, setIsAvailabelToClaim] = useState(false);
   const userLastDailyRewardDate = useSelector(getUserLastDailyRewardClaimDate);
   const userAvailableToClaimDailyRewardDate = useSelector(getUserAvailableToClaimDailyRewardDate);
+  const userCurrentReward = useSelector(getUserCurrentDailyReward);
   const [claimDailyRewardMutation, { isLoading }] = useClaimDailyRewards();
 
   const onClaimRewardHandler = useCallback(() => {
@@ -32,14 +33,22 @@ export const DailyRewardItem: React.FC<DailyRewardItemProps> = (props) => {
 
   useEffect(() => {
     if (userLastDailyRewardDate) {
-      const lastClaimDate = moment(userLastDailyRewardDate);
+    // Получаем текущее время и дату доступности для получения награды
+      const today = moment();
       const availableToClaimDate = moment(userAvailableToClaimDailyRewardDate);
-      const isToday = lastClaimDate.isSame(availableToClaimDate, 'day');
-      setIsAvailabelToClaim(!isToday);
+
+      // Проверяем, является ли дата доступности для получения награды сегодняшним днем или более поздней датой
+      const isAvailableToday = availableToClaimDate.isSameOrBefore(today);
+
+      // Определяем, доступна ли награда для получения
+      const isRewardAvailable = isAvailableToday && (Number(userCurrentReward?.order) + 1 === reward.order);
+
+      setIsAvailabelToClaim(isRewardAvailable);
     } else {
+    // Если дата последнего получения награды отсутствует, делаем награду доступной
       setIsAvailabelToClaim(true);
     }
-  }, [userLastDailyRewardDate, userAvailableToClaimDailyRewardDate]);
+  }, [userLastDailyRewardDate, userAvailableToClaimDailyRewardDate, reward.order, userCurrentReward?.order]);
 
   return (
     <InlineButtonsItem

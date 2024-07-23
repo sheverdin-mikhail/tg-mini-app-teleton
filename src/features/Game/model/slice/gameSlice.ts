@@ -24,9 +24,9 @@ export const gameSlice = createSlice({
         state.isAvailableToStart = true;
       }
     },
-    startGame: (state, action: PayloadAction<Pick<User, 'streamDurationMinuts'>>) => {
+    startGame: (state, action: PayloadAction<Pick<User, 'streamDurationMinutes'>>) => {
       state.startedAt = moment().toISOString();
-      state.finishAt = moment(state.startedAt).add(action.payload.streamDurationMinuts, 'minutes').toISOString();
+      state.finishAt = moment(state.startedAt).add(action.payload.streamDurationMinutes, 'minutes').toISOString();
       state.isDisabled = false;
       state.isStarted = true;
       state.isAvailableToStart = false;

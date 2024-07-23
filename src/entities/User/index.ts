@@ -10,7 +10,8 @@ export {
   getUserLastDailyRewardClaimDate,
   getUserAvailableToClaimDailyRewardDate,
   getUserCurrentConditions,
-  getUserStreamDurationMinuts,
+  getUserStreamDurationMinutes,
+  getUserDailyRewardStreak,
 } from './model/selectors/userSelector';
 export { CreateToken } from './model/services/UserAuth';
 export { getUserInfo } from './model/services/getUserInfo';

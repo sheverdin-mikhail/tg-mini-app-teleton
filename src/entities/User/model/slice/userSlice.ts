@@ -12,7 +12,7 @@ const initialState: UserSchema = {
     level: undefined,
     lastClaimDailyReward: undefined,
     availableToClaimDailyRewardDate: undefined,
-    streamDurationMinuts: 0.1,
+    streamDurationMinutes: 0.1,
   },
 };
 

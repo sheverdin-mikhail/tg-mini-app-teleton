@@ -6,18 +6,20 @@ import { UpLevelConditionsList } from '../UpLevelConditionsList/UpLevelCondition
 
 interface UpLevelConditionsModalProps {
   className?: string;
-  isOpen?: boolean;
-  setIsOpen: () => void;
+  trigger: any;
+  // isOpen?: boolean;
+  // setIsOpen: () => void;
 }
 
 export const UpLevelConditionsModal: React.FC<UpLevelConditionsModalProps> = (props) => {
-  const { className, isOpen = false } = props;
+  const { className, trigger } = props;
 
   return (
     <Modal
       className={clsx(cls.upLevelConditionsModal, {}, [className])}
-      open={isOpen}
+      // open={isOpen}
       header={<ModalHeader />}
+      trigger={trigger}
     >
       <UpLevelConditionsList />
     </Modal>

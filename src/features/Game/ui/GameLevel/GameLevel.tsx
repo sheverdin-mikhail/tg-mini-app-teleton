@@ -5,7 +5,7 @@ import {
 } from 'react';
 import debounce from 'lodash.debounce';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { getUserStreamDurationMinuts, getUserTotalPoins, userActions } from 'entities/User';
+import { getUserStreamDurationMinutes, getUserTotalPoins, userActions } from 'entities/User';
 import { useSelector } from 'react-redux';
 import { useUserData } from 'shared/lib/hooks/useUserData/useUserData';
 import { gameActions } from 'features/Game/model/slice/gameSlice';
@@ -25,7 +25,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const [savePointsMutation] = useSavePoints();
   const totalPoints = useSelector(getUserTotalPoins);
   const isDisabled = useSelector(getGameIsDisabled);
-  const streamDurationMinuts = useSelector(getUserStreamDurationMinuts);
+  const streamDurationMinutes = useSelector(getUserStreamDurationMinutes);
   const isAvailableToStart = useSelector(getGameIsAvaiableToStart);
   const { isInit: userIsInit } = useUserData();
   const gameIsInit = useSelector(getGameIsInit);
@@ -34,10 +34,10 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
     if (!isDisabled) {
       setTouches(event.touches);
       dispatch(userActions.increaseUserPoints(1));
-    } else if (isAvailableToStart && streamDurationMinuts) {
-      dispatch(gameActions.startGame({ streamDurationMinuts }));
+    } else if (isAvailableToStart && streamDurationMinutes) {
+      dispatch(gameActions.startGame({ streamDurationMinutes }));
     }
-  }, [dispatch, isAvailableToStart, isDisabled, streamDurationMinuts]);
+  }, [dispatch, isAvailableToStart, isDisabled, streamDurationMinutes]);
 
   const savePoints = useCallback(debounce(() => {
     if (userIsInit) {
