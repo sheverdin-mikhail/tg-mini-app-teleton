@@ -12,6 +12,7 @@ const initialState: UserSchema = {
     level: undefined,
     lastClaimDailyReward: undefined,
     availableToClaimDailyRewardDate: undefined,
+    streamDurationMinuts: 0.1,
   },
 };
 
@@ -20,7 +21,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<User>) => {
-      state.user = action.payload;
+      state.user = { ...state.user, ...action.payload };
     },
     initUser: (state) => {
       state.isInit = true;
@@ -44,7 +45,7 @@ export const userSlice = createSlice({
     .addCase(getUserInfo.fulfilled, (state, action: PayloadAction<User>) => {
       state.isLoading = false;
       state.isInit = true;
-      state.user = action.payload;
+      state.user = { ...state.user, ...action.payload };
     })
     .addCase(getUserInfo.rejected, (state, action: PayloadAction<string | undefined>) => {
       state.isLoading = false;

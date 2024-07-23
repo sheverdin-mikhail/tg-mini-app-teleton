@@ -5,12 +5,14 @@ import {
 } from 'react';
 import debounce from 'lodash.debounce';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { getUserTotalPoins, userActions } from 'entities/User';
+import { getUserStreamDurationMinuts, getUserTotalPoins, userActions } from 'entities/User';
 import { useSelector } from 'react-redux';
 import { useUserData } from 'shared/lib/hooks/useUserData/useUserData';
+import { gameActions } from 'features/Game/model/slice/gameSlice';
 import { GameTouch } from '../GameTouch/GameTouch';
 import cls from './GameLevel.module.scss';
 import { useSavePoints } from '../../api/gameApi';
+import { getGameIsAvaiableToStart, getGameIsDisabled, getGameIsInit } from '../../model/selectors/gameSelector';
 
 interface GameLevelProps {
     className?: string;
@@ -22,12 +24,20 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const dispatch = useAppDispatch();
   const [savePointsMutation] = useSavePoints();
   const totalPoints = useSelector(getUserTotalPoins);
+  const isDisabled = useSelector(getGameIsDisabled);
+  const streamDurationMinuts = useSelector(getUserStreamDurationMinuts);
+  const isAvailableToStart = useSelector(getGameIsAvaiableToStart);
   const { isInit: userIsInit } = useUserData();
+  const gameIsInit = useSelector(getGameIsInit);
 
-  const handleTouchStart = (event: any) => {
-    setTouches(event.touches);
-    dispatch(userActions.increaseUserPoints(1));
-  };
+  const handleTouchStart = useCallback((event: any) => {
+    if (!isDisabled) {
+      setTouches(event.touches);
+      dispatch(userActions.increaseUserPoints(1));
+    } else if (isAvailableToStart && streamDurationMinuts) {
+      dispatch(gameActions.startGame({ streamDurationMinuts }));
+    }
+  }, [dispatch, isAvailableToStart, isDisabled, streamDurationMinuts]);
 
   const savePoints = useCallback(debounce(() => {
     if (userIsInit) {
@@ -36,11 +46,13 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   }, 2000), [totalPoints]);
 
   useEffect(() => {
-    savePoints();
+    if (gameIsInit && userIsInit) {
+      savePoints();
+    }
     return () => {
       savePoints.cancel();
     };
-  }, [savePoints, userIsInit]);
+  }, [savePoints, userIsInit, gameIsInit]);
 
   return (
     <div

@@ -9,6 +9,7 @@ export const getUserAvailableToClaimDailyRewardDate = (state: StateSchema) => st
 export const getUserIsInit = (state: StateSchema) => state.user.isInit;
 export const getUserIsLoading = (state: StateSchema) => state.user.isLoading;
 export const getUserTotalPoins = (state: StateSchema) => state.user.user.totalPoints;
+export const getUserStreamDurationMinuts = (state: StateSchema) => state.user.user.streamDurationMinuts;
 
 export const getUserCurrentConditions = createSelector(getUser, (user) => {
   const {

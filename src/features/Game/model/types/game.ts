@@ -8,4 +8,12 @@ export interface Game {
 export interface GameSchema {
     isLoading: boolean;
     isInit: boolean;
+    isDisabled: boolean;
+    isStarted: boolean;
+    isFinish: boolean;
+    isAvailableToStart: boolean;
+    startAvailableAt?: string;
+
+    startedAt?: string;
+    finishAt?: string;
 }

@@ -7,6 +7,7 @@ import { MainPageSchema } from 'pages/MainPage';
 import { UserSchema } from 'entities/User';
 import { rtkApi } from 'shared/api/rtkApi';
 import { LevelsSchema } from 'entities/Level';
+import { GameSchema } from 'features/Game';
 
 export interface StateSchema {
     user: UserSchema
@@ -20,6 +21,7 @@ export interface StateSchema {
     // widgets
 
     // features
+    game?: GameSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;

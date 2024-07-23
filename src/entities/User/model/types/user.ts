@@ -21,6 +21,7 @@ export interface User {
     lastClaimDailyReward: Date | undefined;
     availableToClaimDailyRewardDate: Date | undefined;
     level: Level | undefined;
+    streamDurationMinuts?: number;
 }
 
 export interface UserSchema {
