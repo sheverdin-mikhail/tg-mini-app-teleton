@@ -1,10 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers';
 import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
-import { JWTTokenData } from '../types/user';
 
 export const CreateToken = createAsyncThunk<
-    JWTTokenData,
+    string,
     string,
     ThunkConfig<string>
 >(

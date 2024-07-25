@@ -1,0 +1,12 @@
+.boosts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.boostsList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}

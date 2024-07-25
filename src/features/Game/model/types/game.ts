@@ -1,4 +1,5 @@
 import { Level } from 'entities/Level';
+import { Stream } from 'entities/Stream';
 
 export interface Game {
     level: Level;
@@ -12,8 +13,8 @@ export interface GameSchema {
     isStarted: boolean;
     isFinish: boolean;
     isAvailableToStart: boolean;
-    startAvailableAt?: string;
 
     startedAt?: string;
     finishAt?: string;
+    activeStream?: Stream;
 }

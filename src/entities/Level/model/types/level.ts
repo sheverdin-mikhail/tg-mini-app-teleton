@@ -1,8 +1,6 @@
 export interface Level {
     level: number;
     pointToNextLevel: number;
-    referralsToNextLevel: number;
-    tasksToNextLevel: number;
 }
 
 export interface LevelsSchema {

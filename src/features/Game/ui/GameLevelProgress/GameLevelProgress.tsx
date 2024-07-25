@@ -23,19 +23,7 @@ export const GameLevelProgress: React.FC<GameLevelProgressProps> = (props) => {
       pointsPercents = 100;
     }
 
-    const curReferalsCount = user?.referrals?.length || 0;
-    let refrelPercents = curReferalsCount / (curLevel?.referralsToNextLevel ?? 1) * 100;
-    if (refrelPercents > 100 || !curLevel?.referralsToNextLevel) {
-      refrelPercents = 100;
-    }
-
-    const curTasksCount = user.complitedDailyTasksCount || 0;
-    let tasksPercents = curTasksCount / (curLevel?.tasksToNextLevel ?? 1) * 100;
-    if (tasksPercents > 100) {
-      tasksPercents = 100;
-    }
-
-    const totalPercents = pointsPercents / 3 + refrelPercents / 3 + tasksPercents / 3;
+    const totalPercents = pointsPercents;
     return totalPercents;
   }, [user, levels]);
 

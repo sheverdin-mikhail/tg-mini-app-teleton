@@ -1,0 +1,38 @@
+.boostsListItem {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--tgui--bg_color);
+    border-radius: 12px;
+}
+
+.title {
+    font-size: var(--text-lg);
+}
+
+
+.description {
+    font-size: var(--text-base);
+}
+
+.button {
+    flex: 0 0 25%;
+    h6 {
+        line-height: 100%;
+    }
+    
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--tg-theme-text-color)
+}
+
+.buttonText {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}

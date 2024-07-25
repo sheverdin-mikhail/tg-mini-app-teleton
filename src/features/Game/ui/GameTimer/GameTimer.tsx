@@ -3,17 +3,14 @@ import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import {
   useCallback,
-  useEffect,
   useMemo,
-  useState,
 } from 'react';
 import moment from 'moment';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { Text } from '@telegram-apps/telegram-ui';
+import { getCurrentAvailableStreamsCount } from 'entities/User';
 import cls from './GameTimer.module.scss';
 import {
-  getGameIsAvaiableToStart,
-  getGameIsFinish,
   getGameIsStarted,
   getGameTime,
 } from '../../model/selectors/gameSelector';
@@ -27,12 +24,12 @@ export const GameTimer: React.FC<GameTimerProps> = (props) => {
   const { className } = props;
 
   const gameTime = useSelector(getGameTime);
-  const isFinish = useSelector(getGameIsFinish);
-  const availableToStart = useSelector(getGameIsAvaiableToStart);
+  const isStarted = useSelector(getGameIsStarted);
   const dispatch = useAppDispatch();
+  const availableStreams = useSelector(getCurrentAvailableStreamsCount);
 
   const time = useMemo(() => {
-    if (!gameTime.startedAt || !gameTime.finishAt) {
+    if ((!gameTime.startedAt || !gameTime.finishAt) && isStarted) {
       return { minutes: 0, seconds: 0 };
     }
 
@@ -46,20 +43,18 @@ export const GameTimer: React.FC<GameTimerProps> = (props) => {
       minutes,
       seconds,
     };
-  }, [gameTime]);
+  }, [gameTime, isStarted]);
 
   const onFinishHandler = useCallback(() => {
-    dispatch(gameActions.finishGame());
+    dispatch(gameActions.finishStream());
   }, [dispatch]);
 
   return (
     <div className={clsx(cls.gameTimer, {}, [className])}>
       {
-        availableToStart
-          ? <Text className={cls.text} weight="1"> Stream is ready to START! </Text>
-          : (isFinish && !availableToStart)
-            ? <Text className={cls.text} weight="1"> Stream is over :( take a rest! </Text>
-            : <Timer time={time} onFinish={onFinishHandler} />
+        !isStarted
+          ? <Text weight="1" caps> <span className={cls.text}>{availableStreams} available streams</span> </Text>
+          : <Timer time={time} onFinish={onFinishHandler} />
       }
 
     </div>

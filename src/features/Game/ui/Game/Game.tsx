@@ -1,20 +1,15 @@
-import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { GameLevel } from '../GameLevel/GameLevel';
-import { GamePoints } from '../GamePoints/GamePoints';
 import { GameTimer } from '../GameTimer/GameTimer';
-import { gameActions, gameReducer } from '../../model/slice/gameSlice';
+import { gameActions } from '../../model/slice/gameSlice';
 import { getGameIsInit } from '../../model/selectors/gameSelector';
+import { GameStreams } from '../GameStreams/GameStreams';
 
 interface GameProps {
   className?: string;
 }
-
-const reducers: ReducersList = {
-  game: gameReducer,
-};
 
 export const Game: React.FC<GameProps> = (props) => {
   const isInit = useSelector(getGameIsInit);
@@ -28,10 +23,10 @@ export const Game: React.FC<GameProps> = (props) => {
 
   return (
 
-    <DynamicModuleLoader reducers={reducers}>
-      <GamePoints />
+    <>
+      <GameStreams />
       <GameTimer />
       <GameLevel />
-    </DynamicModuleLoader>
+    </>
   );
 };

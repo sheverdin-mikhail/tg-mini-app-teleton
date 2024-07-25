@@ -5,6 +5,7 @@ import { $api } from 'shared/api/api';
 import { userReducer } from 'entities/User';
 import { rtkApi } from 'shared/api/rtkApi';
 import { levelsReducer } from 'entities/Level';
+import { gameReducer } from 'features/Game';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './ReducerManager';
 
@@ -16,6 +17,7 @@ export function createReduxStore(
     ...asyncReducers,
     user: userReducer,
     levels: levelsReducer,
+    game: gameReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 

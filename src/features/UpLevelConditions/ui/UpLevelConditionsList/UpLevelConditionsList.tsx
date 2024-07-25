@@ -15,10 +15,7 @@ export const UpLevelConditionsList: React.FC<UpLevelConditionsListProps> = (prop
 
   return (
     <div className={clsx(cls.upLevelConditionsList, {}, [className])}>
-      <ConditionItem curValue={currentConditions.totalPoints} needValue={currentLevel?.pointToNextLevel ?? 0} description="Набрано очков" />
-      <ConditionItem curValue={currentConditions.referrals?.length} needValue={currentLevel?.referralsToNextLevel ?? 0} description="Приглашено друзей" />
-      <ConditionItem curValue={currentConditions.dailyRewardStreak ?? 0} needValue={5} description="Собрано ежедневных наград" />
-      <ConditionItem curValue={currentConditions.complitedDailyTasksCount ?? 0} needValue={currentLevel?.tasksToNextLevel ?? 0} description="Выполнено ежедневных заданий" />
+      <ConditionItem curValue={Math.trunc(currentConditions.totalPoints)} needValue={currentLevel?.pointToNextLevel ?? 0} description="Набрано очков" />
     </div>
   );
 };

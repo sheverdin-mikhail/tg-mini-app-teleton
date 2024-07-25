@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from 'entities/User';
 import moment from 'moment';
+import { Stream } from 'entities/Stream';
+import { Boost } from 'entities/Boost';
 import { GameSchema } from '../types/game';
 
 const initialState: GameSchema = {
@@ -11,6 +12,15 @@ const initialState: GameSchema = {
   isFinish: false,
   isAvailableToStart: false,
 };
+
+interface StartStreamProps {
+  stream: Stream;
+  boost?: Boost;
+  time?: {
+    startedAt?: string;
+    finishAt?: string;
+  }
+}
 
 export const gameSlice = createSlice({
   name: 'game',
@@ -24,18 +34,30 @@ export const gameSlice = createSlice({
         state.isAvailableToStart = true;
       }
     },
-    startGame: (state, action: PayloadAction<Pick<User, 'streamDurationMinutes'>>) => {
+    startStream: (state, { payload: { stream, boost } }: PayloadAction<StartStreamProps>) => {
       state.startedAt = moment().toISOString();
-      state.finishAt = moment(state.startedAt).add(action.payload.streamDurationMinutes, 'minutes').toISOString();
+      const duration = stream.duration * (boost?.settings.durationMultiply ?? 1);
+      state.finishAt = moment(state.startedAt).add(duration, 'minutes').toISOString();
       state.isDisabled = false;
       state.isStarted = true;
       state.isAvailableToStart = false;
+      state.activeStream = stream;
     },
-    finishGame: (state) => {
+    realoadStream: (state, { payload: { stream, time } }: PayloadAction<StartStreamProps>) => {
+      state.startedAt = time?.startedAt;
+      state.finishAt = time?.finishAt;
+      state.isDisabled = false;
+      state.isStarted = true;
+      state.isAvailableToStart = false;
+      state.activeStream = stream;
+      state.isFinish = false;
+    },
+    finishStream: (state) => {
+      state.startedAt = undefined;
+      state.finishAt = undefined;
       state.isDisabled = true;
       state.isStarted = false;
       state.isFinish = true;
-      state.isAvailableToStart = false;
     },
   },
   extraReducers: (builder) => builder,

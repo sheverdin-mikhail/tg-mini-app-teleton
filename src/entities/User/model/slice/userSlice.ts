@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, UserSchema } from '../types/user';
 import { getUserInfo } from '../services/getUserInfo';
+import { applyUserBoost } from '../services/applyUserBoost';
 
 const initialState: UserSchema = {
   isInit: false,
@@ -12,7 +13,6 @@ const initialState: UserSchema = {
     level: undefined,
     lastClaimDailyReward: undefined,
     availableToClaimDailyRewardDate: undefined,
-    streamDurationMinutes: 0.1,
   },
 };
 
@@ -27,7 +27,7 @@ export const userSlice = createSlice({
       state.isInit = true;
     },
     increaseUserPoints: (state, action: PayloadAction<number>) => {
-      state.user.totalPoints = Number(state.user.totalPoints) + action.payload;
+      state.user.totalPoints = Number(state.user.totalPoints) + Number(action.payload);
     },
     claimDailyReward: (state, action: PayloadAction<Pick<User, 'daily_reward' | 'lastClaimDailyReward' | 'totalPoints' | 'availableToClaimDailyRewardDate'>>) => {
       state.user.totalPoints = action.payload.totalPoints;
@@ -48,6 +48,17 @@ export const userSlice = createSlice({
       state.user = { ...state.user, ...action.payload };
     })
     .addCase(getUserInfo.rejected, (state, action: PayloadAction<string | undefined>) => {
+      state.isLoading = false;
+      state.error = action.payload ?? '';
+    })
+    // Использование буста
+    .addCase(applyUserBoost.pending, (state, action) => {
+      state.error = '';
+    })
+    .addCase(applyUserBoost.fulfilled, (state, action: PayloadAction<Pick<User, 'boosts'>>) => {
+      state.user.boosts = action.payload.boosts;
+    })
+    .addCase(applyUserBoost.rejected, (state, action: PayloadAction<string | undefined>) => {
       state.isLoading = false;
       state.error = action.payload ?? '';
     }),

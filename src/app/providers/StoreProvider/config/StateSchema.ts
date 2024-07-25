@@ -12,6 +12,7 @@ import { GameSchema } from 'features/Game';
 export interface StateSchema {
     user: UserSchema
     levels: LevelsSchema
+    game: GameSchema
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
     // Асинхронные редюсеры
     // pages
@@ -21,7 +22,6 @@ export interface StateSchema {
     // widgets
 
     // features
-    game?: GameSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;

@@ -57,6 +57,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'no-unsafe-optional-chaining': 'off',
     camelcase: 'off',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     // 'react-hooks/exhaustive-deps': 'off',
   },
   globals: {

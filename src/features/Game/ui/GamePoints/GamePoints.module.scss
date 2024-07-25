@@ -1,8 +1,14 @@
 .points {
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
     text-align: center;
-    flex-grow: 1;
-    font-size: 56px;
+    font-size: var(--text-2xl);
+    gap: 8px;
+}
+
+.icon {
+    width: auto;
+    height: 32px;
+    fill: var(--tg-theme-text-color);
 }

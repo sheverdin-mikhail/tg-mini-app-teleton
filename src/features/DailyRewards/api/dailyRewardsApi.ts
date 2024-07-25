@@ -22,17 +22,11 @@ const dailyRewardsApi = rtkApi.injectEndpoints({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          dispatch(userActions.claimDailyReward({
-            totalPoints: data.totalPoints,
-            daily_reward: data.daily_reward,
-            lastClaimDailyReward: data.lastClaimDailyReward,
-            availableToClaimDailyRewardDate: data.availableToClaimDailyRewardDate,
-          }));
+          dispatch(userActions.setUser(data));
         } catch (e) {
-          console.log(e);
+          console.error(e);
         }
       },
-      invalidatesTags: ['DailyReward'],
     }),
   }),
 });

@@ -6,12 +6,11 @@ declare module '*.scss' {
     }
     const classnames: IClassNames;
     export = classnames;
-  }
+}
 
-  declare module '*.png'
-  declare module '*.jpg'
-  declare module '*.jpeg'
-  declare module '*.svg'
+declare module '*.png'
+declare module '*.jpg'
+declare module '*.jpeg'
 
 export declare namespace TelegramWebApps {
     interface SDK {

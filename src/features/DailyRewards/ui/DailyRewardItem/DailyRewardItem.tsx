@@ -41,8 +41,7 @@ export const DailyRewardItem: React.FC<DailyRewardItemProps> = (props) => {
       const isAvailableToday = availableToClaimDate.isSameOrBefore(today);
 
       // Определяем, доступна ли награда для получения
-      const isRewardAvailable = isAvailableToday && (Number(userCurrentReward?.order) + 1 === reward.order);
-
+      const isRewardAvailable = isAvailableToday && (Number(userCurrentReward?.order ?? 0) + 1 === reward.order);
       setIsAvailabelToClaim(isRewardAvailable);
     } else {
     // Если дата последнего получения награды отсутствует, делаем награду доступной
