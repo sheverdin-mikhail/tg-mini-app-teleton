@@ -4,7 +4,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { request } from '@telegram-apps/sdk';
 import { useEffect, useState, useRef } from 'react';
 import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
-import { getLevelsIsInit, levelsActions } from 'entities/Level';
+import { fetchLevelsList, getLevelsIsInit } from 'entities/Level';
 import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
 
 export const useInitApp = () => {
@@ -61,7 +61,7 @@ export const useInitApp = () => {
 
   useEffect(() => {
     if (!levelsIsInit) {
-      dispatch(levelsActions.initLevels());
+      dispatch(fetchLevelsList());
     }
   }, [levelsIsInit, dispatch]);
 

@@ -6,6 +6,7 @@ import { getUserCurrentLevel, getUserTotalPoins } from 'entities/User';
 import { Modal } from 'shared/ui/Modal/Modal';
 import { Button, Title } from '@telegram-apps/telegram-ui';
 import { getGameIsStarted, useLevelUp } from 'features/Game';
+import { getLevels } from 'entities/Level';
 import cls from './LevelUpModal.module.scss';
 
 interface LevelUpModalProps {
@@ -22,14 +23,16 @@ export const LevelUpModal: React.FC<LevelUpModalProps> = (props) => {
   const totalPoints = useSelector(getUserTotalPoins);
   const gameIsStart = useSelector(getGameIsStarted);
   const userLevel = useSelector(getUserCurrentLevel);
+  const levelsList = useSelector(getLevels);
 
   useEffect(() => {
-    if (userLevel?.pointToNextLevel && (totalPoints >= userLevel?.pointToNextLevel)) {
+    const nextLevel = levelsList.find((level) => level.level === Number(userLevel?.level) + 1);
+    if (nextLevel && userLevel?.pointToNextLevel && (totalPoints >= userLevel?.pointToNextLevel)) {
       if (!gameIsStart) {
         setIsOpen(true);
       }
     }
-  }, [gameIsStart, userLevel, totalPoints]);
+  }, [gameIsStart, userLevel, totalPoints, levelsList]);
 
   const onCloseHandler = useCallback(() => {
     onClose?.();
