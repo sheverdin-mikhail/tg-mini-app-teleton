@@ -6,6 +6,7 @@ import {
 import { useCallback } from 'react';
 import { ReactComponent as ViewsIcon } from 'shared/assets/icons/views-icon.svg';
 import { ReactComponent as CheckIcon } from 'shared/assets/icons/check-icon.svg';
+import { formatNumber } from 'shared/lib/utils/formatNumber';
 import cls from './BoostsListItem.module.scss';
 import { useBuyBoost } from '../../api/boostsListApi';
 
@@ -33,7 +34,7 @@ export const BoostsListItem: React.FC<BoostsListItemProps> = (props) => {
         {
           alreadyHave
             ? <CheckIcon className={cls.icon} />
-            : <span className={cls.buttonText}><ViewsIcon className={cls.icon} />{item.cost}</span>
+            : <span className={cls.buttonText}><ViewsIcon className={cls.icon} />{formatNumber(String(item.cost))}</span>
         }
       </Button>
     </div>

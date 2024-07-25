@@ -14,6 +14,7 @@ root.render(
       <StoreProvider>
         <AppRoot>
           <App />
+          <div id="app-modals" />
         </AppRoot>
       </StoreProvider>
     </BrowserRouter>

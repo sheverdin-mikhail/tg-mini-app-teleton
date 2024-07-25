@@ -3,6 +3,7 @@ import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/Dynamic
 import {
   Game,
 } from 'features/Game';
+import { LevelUpModal } from 'features/LevelUpModal';
 import { mainPageReducer } from '../../model/slice/mainPageSlice';
 import cls from './MainPage.module.scss';
 
@@ -22,6 +23,7 @@ export const MainPage: React.FC<MainPageProps> = (props) => {
       <div className={clsx(cls.mainPage, {}, [className])}>
         <Game className={cls.game} />
       </div>
+      <LevelUpModal />
     </DynamicModuleLoader>
   );
 };

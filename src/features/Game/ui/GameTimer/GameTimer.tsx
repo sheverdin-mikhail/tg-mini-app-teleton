@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import {
   useCallback,
   useMemo,
+  useState,
 } from 'react';
 import moment from 'moment';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { Text } from '@telegram-apps/telegram-ui';
 import { getCurrentAvailableStreamsCount } from 'entities/User';
 import cls from './GameTimer.module.scss';
@@ -14,7 +14,7 @@ import {
   getGameIsStarted,
   getGameTime,
 } from '../../model/selectors/gameSelector';
-import { gameActions } from '../../model/slice/gameSlice';
+import { GameFinishModal } from '../GameFinishModal/GameFinishModal';
 
 interface GameTimerProps {
     className?: string;
@@ -25,8 +25,8 @@ export const GameTimer: React.FC<GameTimerProps> = (props) => {
 
   const gameTime = useSelector(getGameTime);
   const isStarted = useSelector(getGameIsStarted);
-  const dispatch = useAppDispatch();
   const availableStreams = useSelector(getCurrentAvailableStreamsCount);
+  const [finishModalIsOpen, setFinishModalIsOpen] = useState(false);
 
   const time = useMemo(() => {
     if ((!gameTime.startedAt || !gameTime.finishAt) && isStarted) {
@@ -45,18 +45,22 @@ export const GameTimer: React.FC<GameTimerProps> = (props) => {
     };
   }, [gameTime, isStarted]);
 
-  const onFinishHandler = useCallback(() => {
-    dispatch(gameActions.finishStream());
-  }, [dispatch]);
+  const onTimerFinishHandler = useCallback(() => {
+    setFinishModalIsOpen(true);
+  }, []);
+
+  const onModalCloseHandler = useCallback(() => {
+    setFinishModalIsOpen(false);
+  }, []);
 
   return (
     <div className={clsx(cls.gameTimer, {}, [className])}>
       {
         !isStarted
           ? <Text weight="1" caps> <span className={cls.text}>{availableStreams} available streams</span> </Text>
-          : <Timer time={time} onFinish={onFinishHandler} />
+          : <Timer time={time} onFinish={onTimerFinishHandler} />
       }
-
+      <GameFinishModal isOpen={finishModalIsOpen} onClose={onModalCloseHandler} />
     </div>
   );
 };

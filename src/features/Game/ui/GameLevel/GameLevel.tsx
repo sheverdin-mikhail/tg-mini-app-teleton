@@ -13,6 +13,7 @@ import { useSavePoints } from '../../api/gameApi';
 import { getGameIsDisabled, getGameIsInit, getGameStream } from '../../model/selectors/gameSelector';
 import { GamePoints } from '../GamePoints/GamePoints';
 import { GameBackground } from '../GameBackground/GameBackground';
+import { gameActions } from '../../model/slice/gameSlice';
 
 interface GameLevelProps {
   className?: string;
@@ -33,15 +34,17 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const handleTouchStart = useCallback((event: any) => {
     if (!isDisabled && stream) {
       setTouches(event.touches);
-      dispatch(userActions.increaseUserPoints(stream.pointsMultiplier));
+      dispatch(userActions.increaseUserPoints(1));
+      dispatch(gameActions.increaseFarmedPoints(1));
     }
   }, [dispatch, isDisabled, stream]);
 
-  const savePoints = debounce(() => {
+  // eslint-disable-next-line
+  const savePoints = useCallback(debounce(() => {
     if (userIsInit) {
       savePointsMutation(totalPoints);
     }
-  }, 2000);
+  }, 2000), [userIsInit, totalPoints]);
 
   useEffect(() => {
     if (gameIsInit && userIsInit) {

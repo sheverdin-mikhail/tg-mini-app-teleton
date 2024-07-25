@@ -1,0 +1,34 @@
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.button {
+    display: flex;
+    flex: 0 1 50%;
+    text-transform: uppercase;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.energy {
+    font-size: var(--text-sm);
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    text-align: center;
+    font-size: var(--text-lg);
+}
+
+.gameStartModal {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

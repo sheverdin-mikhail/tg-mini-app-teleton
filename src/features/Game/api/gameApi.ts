@@ -10,7 +10,7 @@ interface StartGameProps {
 
 const gameApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    savePoints: build.mutation<number, number>({
+    savePoints: build.mutation<User, number>({
       query: (points) => ({
         url: '/games/save-points/',
         method: 'POST',
@@ -18,6 +18,14 @@ const gameApi = rtkApi.injectEndpoints({
           points,
         },
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(userActions.setUser(data));
+        } catch (e) {
+          console.error(e);
+        }
+      },
     }),
     startGame: build.mutation<User, StartGameProps>({
       query: ({ stream, boost }) => ({
@@ -37,8 +45,23 @@ const gameApi = rtkApi.injectEndpoints({
         }
       },
     }),
+    levelUp: build.mutation<User, void>({
+      query: () => ({
+        url: '/games/level-up/',
+        method: 'POST',
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(userActions.setUser(data));
+        } catch (e) {
+          console.error(e);
+        }
+      },
+    }),
   }),
 });
 
 export const useSavePoints = gameApi.useSavePointsMutation;
 export const useStartGame = gameApi.useStartGameMutation;
+export const useLevelUp = gameApi.useLevelUpMutation;

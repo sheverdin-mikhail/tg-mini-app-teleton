@@ -11,6 +11,7 @@ const initialState: GameSchema = {
   isStarted: false,
   isFinish: false,
   isAvailableToStart: false,
+  farmedPoints: 0,
 };
 
 interface StartStreamProps {
@@ -34,6 +35,9 @@ export const gameSlice = createSlice({
         state.isAvailableToStart = true;
       }
     },
+    choseStream: (state, { payload: stream }: PayloadAction<Stream>) => {
+      state.activeStream = stream;
+    },
     startStream: (state, { payload: { stream, boost } }: PayloadAction<StartStreamProps>) => {
       state.startedAt = moment().toISOString();
       const duration = stream.duration * (boost?.settings.durationMultiply ?? 1);
@@ -42,6 +46,10 @@ export const gameSlice = createSlice({
       state.isStarted = true;
       state.isAvailableToStart = false;
       state.activeStream = stream;
+      state.farmedPoints = 0;
+    },
+    increaseFarmedPoints: (state, action: PayloadAction<number>) => {
+      state.farmedPoints = Number(state.farmedPoints) + Number(action.payload);
     },
     realoadStream: (state, { payload: { stream, time } }: PayloadAction<StartStreamProps>) => {
       state.startedAt = time?.startedAt;

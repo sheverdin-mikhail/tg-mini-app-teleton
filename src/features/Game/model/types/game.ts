@@ -17,4 +17,5 @@ export interface GameSchema {
     startedAt?: string;
     finishAt?: string;
     activeStream?: Stream;
+    farmedPoints: number;
 }

@@ -27,7 +27,6 @@ export const Timer: React.FC<TimerProps> = (props) => {
     // Sync component state with props
     setMinutes(time.minutes);
     setSeconds(time.seconds);
-    setCounted(false); // Reset counted flag when time changes
   }, [time]);
 
   useEffect(() => {

@@ -1,17 +1,15 @@
 import { Stream, StreamsList } from 'entities/Stream';
 import clsx from 'clsx';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSelector } from 'react-redux';
 import {
-  getUserBoosts,
-  applyUserBoost,
   getCurrentAvailableStreamsCount,
 } from 'entities/User';
 import cls from './GameStreams.module.scss';
-import { gameActions } from '../../model/slice/gameSlice';
 import { getGameIsStarted } from '../../model/selectors/gameSelector';
-import { useStartGame } from '../../api/gameApi';
+import { GameStartModal } from '../GameStartModal/GameStartModal';
+import { gameActions } from '../../model/slice/gameSlice';
 
 interface GameStreamsProps {
     className?: string;
@@ -21,43 +19,22 @@ export const GameStreams: React.FC<GameStreamsProps> = (props) => {
   const { className } = props;
   const dispatch = useAppDispatch();
   const isStarted = useSelector(getGameIsStarted);
-  const userBoosts = useSelector(getUserBoosts);
-  const [startGameMutation] = useStartGame();
   const availableStreams = useSelector(getCurrentAvailableStreamsCount);
+  const [gameStartIsOpnen, setGameStartIsOpnen] = useState(false);
 
-  const handleTouchStart = useCallback((stream: Stream) => {
-    const boost = userBoosts?.find((boost) => Object.hasOwn(boost?.settings ?? {}, 'durationMultiply'));
-    if (boost) {
-      startGameMutation({ stream, boost });
-      dispatch(gameActions.startStream({
-        stream,
-        boost,
-      }));
-      dispatch(applyUserBoost(boost));
-    } else {
-      startGameMutation({ stream });
-      dispatch(gameActions.startStream({
-        stream,
-      }));
-    }
-  }, [dispatch, userBoosts, startGameMutation]);
+  const handleTouch = useCallback((stream: Stream) => {
+    setGameStartIsOpnen(true);
+    dispatch(gameActions.choseStream(stream));
+  }, [dispatch]);
 
-  // reload stream on reconnection
-  // useEffect(() => {
-  //   if (userGameTime && userActiveStream) {
-  //     const now = moment();
-  //     if (now.isBefore(moment(userGameTime.finishAt))) {
-  //       dispatch(gameActions.realoadStream({
-  //         stream: userActiveStream,
-  //         time: userGameTime,
-  //       }));
-  //     }
-  //   }
-  // }, [userGameTime, dispatch, userActiveStream, userBoosts]);
+  const onModalCloseHandler = useCallback(() => {
+    setGameStartIsOpnen(false);
+  }, []);
 
   return (
     <div className={clsx(cls.gameStreams, {}, [className])}>
-      <StreamsList onClick={handleTouchStart} disabled={isStarted || availableStreams === 0} />
+      <StreamsList onClick={handleTouch} disabled={isStarted || availableStreams === 0} />
+      <GameStartModal isOpen={gameStartIsOpnen} onClose={onModalCloseHandler} />
     </div>
   );
 };
