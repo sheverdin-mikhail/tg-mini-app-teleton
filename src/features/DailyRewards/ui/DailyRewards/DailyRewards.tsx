@@ -16,7 +16,7 @@ interface DailyRewardsProps {
 
 export const DailyRewards: React.FC<DailyRewardsProps> = (props) => {
   const { className } = props;
-  const { isError, isLoading, data: dailyRewards } = useGetDailyRewardsList();
+  const { isError, isLoading, data: dailyRewardsList } = useGetDailyRewardsList();
   // const userLastDailyRewardDate = useSelector(getUserLastDailyRewardClaimDate);
   // const userAvailableToClaimDailyRewardDate = useSelector(getUserAvailableToClaimDailyRewardDate);
   const lastDailyReward = useSelector(getUserCurrentDailyReward);
@@ -30,6 +30,14 @@ export const DailyRewards: React.FC<DailyRewardsProps> = (props) => {
   //   const minutes = String(diffInMinutes % 60).padStart(2, '0');
   //   const timeUntilAvailable = `${hours}:${minutes}`;
   // }, [userAvailableToClaimDailyRewardDate]);
+
+  const dailyRewards = useMemo(() => {
+    if (dailyRewardsList) {
+      // Создаем копию массива перед сортировкой
+      return [...dailyRewardsList].sort((a, b) => a.order - b.order);
+    }
+    return null;
+  }, [dailyRewardsList]);
 
   const currentDailyReward = useMemo<DailyReward>(() => {
     if (!lastDailyReward) {
@@ -58,7 +66,7 @@ export const DailyRewards: React.FC<DailyRewardsProps> = (props) => {
           isLoading
             ? <DailyRewardsSkeleton />
             : (
-              dailyRewards.map((reward) => (
+              dailyRewards?.map((reward) => (
                 <DailyRewardItem
                   key={reward.id}
                   reward={reward}

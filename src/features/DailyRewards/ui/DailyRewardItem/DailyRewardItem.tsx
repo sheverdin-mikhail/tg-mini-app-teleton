@@ -54,7 +54,7 @@ export const DailyRewardItem: React.FC<DailyRewardItemProps> = (props) => {
       onClick={onClaimRewardHandler}
       className={clsx(cls.dailyRewardItem, {}, [className])}
       text={`day ${reward.order}`}
-      mode={(isAvailabelToClaim || claimed) ? 'bezeled' : 'gray'}
+      mode={(claimed || (Number(userCurrentReward?.order ?? 0) + 1 === reward.order)) ? 'bezeled' : 'gray'}
       disabled={disabled || claimed || !isAvailabelToClaim}
     >
       {
