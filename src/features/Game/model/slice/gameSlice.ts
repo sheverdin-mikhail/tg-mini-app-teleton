@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
-import { Stream } from 'entities/Stream';
-import { Boost } from 'entities/Boost';
+import { Stream } from '@/entities/Stream';
+import { Boost } from '@/entities/Boost';
 import { GameSchema } from '../types/game';
 
 const initialState: GameSchema = {

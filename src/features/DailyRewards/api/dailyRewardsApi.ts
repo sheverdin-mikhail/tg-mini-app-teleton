@@ -1,6 +1,6 @@
-import { DailyReward } from 'entities/DailyReward';
-import { User, userActions } from 'entities/User';
-import { rtkApi } from 'shared/api/rtkApi';
+import { DailyReward } from '@/entities/DailyReward';
+import { User, userActions } from '@/entities/User';
+import { rtkApi } from '@/shared/api/rtkApi';
 
 const dailyRewardsApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({

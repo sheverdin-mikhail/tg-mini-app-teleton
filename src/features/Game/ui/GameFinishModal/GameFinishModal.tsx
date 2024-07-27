@@ -1,10 +1,10 @@
 import { useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getUserTotalPoins } from 'entities/User';
-import { Modal } from 'shared/ui/Modal/Modal';
+import { getUserTotalPoins } from '@/entities/User';
+import { Modal } from '@/shared/ui/Modal/Modal';
 import { Button, Text, Title } from '@telegram-apps/telegram-ui';
-import { ReactComponent as ViewsIcon } from 'shared/assets/icons/views-icon.svg';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import ViewsIcon from '@/shared/assets/icons/views-icon.svg';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { gameActions } from '../../model/slice/gameSlice';
 import { useSavePoints } from '../../api/gameApi';
 import { getGameFarmedPoints, getGameStream } from '../../model/selectors/gameSelector';
@@ -44,7 +44,7 @@ export const GameFinishModal: React.FC<GameFinishModalProps> = (props) => {
         Stream is Finished!
       </Text>
       <Title caps className={cls.title} weight="1">
-        Your bonus {Math.trunc(bonus)} <ViewsIcon className={cls.icon} />
+        Your bonus {Math.trunc(bonus)} <img src={ViewsIcon} className={cls.icon} />
       </Title>
       <div className={cls.buttons}>
         <Button className={cls.button} onClick={onCloseHandler}>Cool!</Button>

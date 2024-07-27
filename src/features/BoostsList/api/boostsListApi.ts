@@ -1,6 +1,6 @@
-import { Boost } from 'entities/Boost';
-import { User, userActions } from 'entities/User';
-import { rtkApi } from 'shared/api/rtkApi';
+import { Boost } from '@/entities/Boost';
+import { User, userActions } from '@/entities/User';
+import { rtkApi } from '@/shared/api/rtkApi';
 
 const BoostsApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({

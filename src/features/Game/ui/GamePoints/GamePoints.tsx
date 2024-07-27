@@ -1,9 +1,9 @@
 import { LargeTitle, Spinner } from '@telegram-apps/telegram-ui';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
-import { getUserIsLoading, getUserTotalPoins } from 'entities/User';
+import { getUserIsLoading, getUserTotalPoins } from '@/entities/User';
 import { useSpring, animated } from '@react-spring/web';
-import { ReactComponent as ViewsIcon } from 'shared/assets/icons/views-icon.svg';
+import ViewsIcon from '@/shared/assets/icons/views-icon.svg';
 import cls from './GamePoints.module.scss';
 
 interface GamePointsProps {
@@ -28,7 +28,7 @@ export const GamePoints: React.FC<GamePointsProps> = (props) => {
       {(userIsLoading && userPoints === 0) ? <Spinner size="m" />
         : (
           <>
-            <ViewsIcon className={cls.icon} />
+            <img src={ViewsIcon} className={cls.icon} />
             <animated.div className={cls.points}>
               {
                 anime.points.to((value) => Math.trunc(value))

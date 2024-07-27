@@ -1,4 +1,4 @@
-import { Timer } from 'shared/ui/Timer/Timer';
+import { Timer } from '@/shared/ui/Timer/Timer';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import {
@@ -8,7 +8,7 @@ import {
 } from 'react';
 import moment from 'moment';
 import { Text } from '@telegram-apps/telegram-ui';
-import { getCurrentAvailableStreamsCount } from 'entities/User';
+import { getCurrentAvailableStreamsCount } from '@/entities/User';
 import cls from './GameTimer.module.scss';
 import {
   getGameIsStarted,

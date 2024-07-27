@@ -1,5 +1,5 @@
-import { Level } from 'entities/Level';
-import { Stream } from 'entities/Stream';
+import { Level } from '@/entities/Level';
+import { Stream } from '@/entities/Stream';
 
 export interface Game {
     level: Level;

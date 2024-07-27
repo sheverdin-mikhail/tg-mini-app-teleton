@@ -1,7 +1,7 @@
-import { Boost } from 'entities/Boost';
-import { Stream } from 'entities/Stream';
-import { User, userActions } from 'entities/User';
-import { rtkApi } from 'shared/api/rtkApi';
+import { Boost } from '@/entities/Boost';
+import { Stream } from '@/entities/Stream';
+import { User, userActions } from '@/entities/User';
+import { rtkApi } from '@/shared/api/rtkApi';
 
 interface StartGameProps {
   stream: Stream;

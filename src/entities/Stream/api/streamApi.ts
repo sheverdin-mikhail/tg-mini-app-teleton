@@ -1,4 +1,4 @@
-import { rtkApi } from 'shared/api/rtkApi';
+import { rtkApi } from '@/shared/api/rtkApi';
 import { Stream } from '../model/types/stream';
 
 const streamApi = rtkApi.injectEndpoints({

@@ -3,10 +3,10 @@ import {
   useState, useEffect, useCallback,
 } from 'react';
 import debounce from 'lodash.debounce';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { getUserCurrentLevel, getUserTotalPoins, userActions } from 'entities/User';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { getUserCurrentLevel, getUserTotalPoins, userActions } from '@/entities/User';
 import { useSelector } from 'react-redux';
-import { useUserData } from 'shared/lib/hooks/useUserData/useUserData';
+import { useUserData } from '@/shared/lib/hooks/useUserData/useUserData';
 import { GameTouch } from '../GameTouch/GameTouch';
 import cls from './GameLevel.module.scss';
 import { useSavePoints } from '../../api/gameApi';

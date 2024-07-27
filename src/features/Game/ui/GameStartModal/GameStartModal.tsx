@@ -1,13 +1,13 @@
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { applyUserBoost, getUserBoosts } from 'entities/User';
-import { useStartGame } from 'features/Game/api/gameApi';
-import { gameActions } from 'features/Game/model/slice/gameSlice';
-import { Modal } from 'shared/ui/Modal/Modal';
-import { getGameStream } from 'features/Game/model/selectors/gameSelector';
+import { applyUserBoost, getUserBoosts } from '@/entities/User';
+import { useStartGame } from '@/features/Game/api/gameApi';
+import { gameActions } from '@/features/Game/model/slice/gameSlice';
+import { Modal } from '@/shared/ui/Modal/Modal';
+import { getGameStream } from '@/features/Game/model/selectors/gameSelector';
 import { Button, Title } from '@telegram-apps/telegram-ui';
-import { ReactComponent as FlashIcon } from 'shared/assets/icons/flash-icon.svg';
+import FlashIcon from '@/shared/assets/icons/flash-icon.svg';
 import cls from './GameStartModal.module.scss';
 
 interface GameStartModalProps {
@@ -26,7 +26,7 @@ export const GameStartModal: React.FC<GameStartModalProps> = (props) => {
   const [startGameMutation] = useStartGame();
   const stream = useSelector(getGameStream);
 
-  const energyBoost = useMemo(() => userBoosts?.find((boost) => Object.hasOwn(boost?.settings ?? {}, 'durationMultiply')), [userBoosts]);
+  const energyBoost = useMemo(() => userBoosts?.find((boost) => Object.keys((boost?.settings ?? {})).includes('durationMultiply')), [userBoosts]);
 
   const onCloseHandler = useCallback(() => {
     onClose?.();
@@ -58,7 +58,7 @@ export const GameStartModal: React.FC<GameStartModalProps> = (props) => {
       </Title>
       <div className={cls.buttons}>
         <Button className={cls.button} onClick={onCloseHandler}>No, Thanks</Button>
-        <Button className={cls.button} onClick={onStartHandler}>Yes { energyBoost && <span className={cls.energy}>(<FlashIcon className={cls.icon} />boost )</span> }</Button>
+        <Button className={cls.button} onClick={onStartHandler}>Yes { energyBoost && <span className={cls.energy}>(<img src={FlashIcon} className={cls.icon} />boost )</span> }</Button>
       </div>
     </Modal>
   );

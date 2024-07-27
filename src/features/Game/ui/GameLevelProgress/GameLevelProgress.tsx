@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { getLevels } from 'entities/Level';
-import { getUser } from 'entities/User/model/selectors/userSelector';
+import { getLevels } from '@/entities/Level';
+import { getUser } from '@/entities/User/model/selectors/userSelector';
 import { useSelector } from 'react-redux';
-import { CircularProgress } from 'shared/ui/CircularProgress/CircularProgress';
+import { CircularProgress } from '@/shared/ui/CircularProgress/CircularProgress';
 import { HTMLAttributes, useMemo } from 'react';
 import { Text } from '@telegram-apps/telegram-ui';
 import cls from './GameLevelProgress.module.scss';

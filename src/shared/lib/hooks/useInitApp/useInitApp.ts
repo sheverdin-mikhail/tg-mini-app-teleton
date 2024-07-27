@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
-import { CreateToken, getUserInfo, getUserIsInit } from 'entities/User';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { CreateToken, getUserInfo, getUserIsInit } from '@/entities/User';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { request } from '@telegram-apps/sdk';
 import { useEffect, useState, useRef } from 'react';
-import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
-import { fetchLevelsList, getLevelsIsInit } from 'entities/Level';
-import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
+import { useTelegram } from '@/shared/lib/hooks/useTelegram/useTelegram';
+import { fetchLevelsList, getLevelsIsInit } from '@/entities/Level';
+import { USER_LOCALSTORAGE_TOKEN } from '@/shared/const/localStorage';
 
 export const useInitApp = () => {
   const { tg, tgDataRow } = useTelegram();

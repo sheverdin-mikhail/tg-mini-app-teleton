@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers';
-import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
+import { USER_LOCALSTORAGE_TOKEN } from '@/shared/const/localStorage';
 
 export const CreateToken = createAsyncThunk<
     string,

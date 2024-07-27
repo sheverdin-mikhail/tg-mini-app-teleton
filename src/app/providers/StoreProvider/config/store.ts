@@ -1,11 +1,11 @@
 import {
   CombinedState, configureStore, Reducer, ReducersMapObject,
 } from '@reduxjs/toolkit';
-import { $api } from 'shared/api/api';
-import { userReducer } from 'entities/User';
-import { rtkApi } from 'shared/api/rtkApi';
-import { levelsReducer } from 'entities/Level';
-import { gameReducer } from 'features/Game';
+import { userReducer } from '@/entities/User';
+import { levelsReducer } from '@/entities/Level';
+import { gameReducer } from '@/features/Game';
+import { rtkApi } from '@/shared/api/rtkApi';
+import { $api } from '@/shared/api/api';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './ReducerManager';
 

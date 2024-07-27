@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Quest, QuestStatus } from 'entities/Quest';
+import { Quest, QuestStatus } from '@/entities/Quest';
 import {
   Button,
   Headline,

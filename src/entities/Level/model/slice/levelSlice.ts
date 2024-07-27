@@ -21,7 +21,7 @@ export const levelsSlice = createSlice({
   },
   extraReducers: (builder) => builder
   // Получение списка уровней
-    .addCase(fetchLevelsList.pending, (state, action) => {
+    .addCase(fetchLevelsList.pending, (state) => {
       state.error = '';
       state.isLoading = true;
     })

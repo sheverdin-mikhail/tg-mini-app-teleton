@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Quest, QuestItem } from 'entities/Quest';
+import { Quest, QuestItem } from '@/entities/Quest';
 import { useMemo } from 'react';
 import { Headline, Text, Title } from '@telegram-apps/telegram-ui';
 import cls from './QuestsList.module.scss';

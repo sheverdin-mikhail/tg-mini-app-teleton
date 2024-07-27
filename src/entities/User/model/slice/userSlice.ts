@@ -38,7 +38,7 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => builder
   // Аунтификация пользователя
-    .addCase(getUserInfo.pending, (state, action) => {
+    .addCase(getUserInfo.pending, (state) => {
       state.error = '';
       state.isLoading = true;
     })
@@ -52,7 +52,7 @@ export const userSlice = createSlice({
       state.error = action.payload ?? '';
     })
     // Использование буста
-    .addCase(applyUserBoost.pending, (state, action) => {
+    .addCase(applyUserBoost.pending, (state) => {
       state.error = '';
     })
     .addCase(applyUserBoost.fulfilled, (state, action: PayloadAction<Pick<User, 'boosts'>>) => {

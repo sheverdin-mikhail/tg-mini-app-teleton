@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers';
-import { Boost } from 'entities/Boost';
+import { Boost } from '@/entities/Boost';
 import { User } from '../types/user';
 
 export const applyUserBoost = createAsyncThunk<

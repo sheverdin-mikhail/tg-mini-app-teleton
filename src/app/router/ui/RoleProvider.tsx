@@ -1,5 +1,3 @@
-import { Navigate, useLocation } from 'react-router-dom';
-
 interface RoleProviderProps {
   children?: React.ReactNode;
   // sawatzkyOnly: boolean;
@@ -8,7 +6,6 @@ interface RoleProviderProps {
 
 export const RoleProvider = (props: RoleProviderProps) => {
   const { children } = props;
-  const location = useLocation();
   // const { isSawatzky, role } = useUserData();
 
   // if (permittedRoles?.length ? (role && !permittedRoles?.includes(role)) : null) {

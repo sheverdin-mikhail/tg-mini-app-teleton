@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { PageContentHeader } from 'widgets/PageContentHeader';
+import { PageContentHeader } from '@/widgets/PageContentHeader';
 import cls from './InvitePage.module.scss';
 
 interface InvitePageProps {

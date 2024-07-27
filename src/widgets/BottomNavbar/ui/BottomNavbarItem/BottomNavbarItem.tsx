@@ -14,7 +14,7 @@ export const BottomNavbarItem: React.FC<BottomNavbarItemProps> = (props) => {
 
   const navigate = useNavigate();
 
-  const onClickHandler: MouseEventHandler<HTMLButtonElement> = useCallback((event) => {
+  const onClickHandler: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
     navigate(item.path);
   }, [navigate, item.path]);
 

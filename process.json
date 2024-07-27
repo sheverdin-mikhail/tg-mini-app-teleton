@@ -1,0 +1,15 @@
+{
+    "apps" : [
+      {
+        "name"            : "tap-fe",
+        "script"          : "npm run preview",
+        "log_date_format" : "YYYY-MM-DD HH:mm:ss Z",
+        "env_development": {
+          "NODE_OPTIONS": "--max_old_space_size=12288"
+        },
+        "env_production": {
+          "NODE_OPTIONS": "--max_old_space_size=12288"
+        }
+      }
+    ]
+  }

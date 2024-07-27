@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { InlineButtons, Title } from '@telegram-apps/telegram-ui';
 import { useSelector } from 'react-redux';
-import { getUserCurrentDailyReward } from 'entities/User';
+import { getUserCurrentDailyReward } from '@/entities/User';
 import { useMemo } from 'react';
-import { DailyReward } from 'entities/DailyReward';
+import { DailyReward } from '@/entities/DailyReward';
 // import moment from 'moment';
 import cls from './DailyRewards.module.scss';
 import { DailyRewardItem } from '../DailyRewardItem/DailyRewardItem';

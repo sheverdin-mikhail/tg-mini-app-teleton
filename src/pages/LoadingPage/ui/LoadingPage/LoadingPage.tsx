@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { PageLoader } from 'widgets/PageLoader';
+import { PageLoader } from '@/widgets/PageLoader';
 import { useEffect, useState } from 'react';
-import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
+import { useTelegram } from '@/shared/lib/hooks/useTelegram/useTelegram';
 import { useNavigate } from 'react-router-dom';
-import { useUserData } from 'shared/lib/hooks/useUserData/useUserData';
+import { useUserData } from '@/shared/lib/hooks/useUserData/useUserData';
 import cls from './LoadingPage.module.scss';
 
 interface LoadingPageProps {

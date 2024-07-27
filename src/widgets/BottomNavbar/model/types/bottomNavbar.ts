@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { RoutePath } from 'shared/config/RouteConfig/appRouteConfig';
+import { RoutePath } from '@/shared/config/RouteConfig/appRouteConfig';
 
 export interface IBottomNavbarItem {
     text: string

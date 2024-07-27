@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
+import { USER_LOCALSTORAGE_TOKEN } from '@/shared/const/localStorage';
 
 // Define a service using a base URL and expected endpoints
 export const rtkApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_API_BASE_URL}`,
+    baseUrl: `${import.meta.env.VITE_API_BASE_URL}`,
     prepareHeaders: (headers) => {
       const token = localStorage.getItem(USER_LOCALSTORAGE_TOKEN) || '';
       if (token) {
@@ -15,6 +15,6 @@ export const rtkApi = createApi({
     },
   }),
   tagTypes: ['Quest', 'DailyReward', 'Boost', 'Stream'],
-  endpoints: (builder) => ({
+  endpoints: () => ({
   }),
 });

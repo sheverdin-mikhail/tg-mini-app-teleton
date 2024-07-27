@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { DynamicModuleLoader, ReducersList } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import {
   Game,
-} from 'features/Game';
-import { LevelUpModal } from 'features/LevelUpModal';
+} from '@/features/Game';
+import { LevelUpModal } from '@/features/LevelUpModal';
 import { mainPageReducer } from '../../model/slice/mainPageSlice';
 import cls from './MainPage.module.scss';
 

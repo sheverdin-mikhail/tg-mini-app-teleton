@@ -1,8 +1,8 @@
-import { Boost } from 'entities/Boost';
-import { DailyReward } from 'entities/DailyReward';
-import { Level } from 'entities/Level';
-import { Referal } from 'entities/Referal';
-import { Stream } from 'entities/Stream';
+import { Boost } from '@/entities/Boost';
+import { DailyReward } from '@/entities/DailyReward';
+import { Level } from '@/entities/Level';
+import { Referal } from '@/entities/Referal';
+import { Stream } from '@/entities/Stream';
 
 export interface JWTTokenData {
     token: string

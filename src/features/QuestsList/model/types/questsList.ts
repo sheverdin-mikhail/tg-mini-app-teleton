@@ -1,4 +1,4 @@
-import { Quest } from 'entities/Quest';
+import { Quest } from '@/entities/Quest';
 
 export interface QuestListResponse {
     data: Quest[];

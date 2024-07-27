@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
+import { USER_LOCALSTORAGE_TOKEN } from '@/shared/const/localStorage';
 
 export const $api = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -34,7 +34,7 @@ $api.interceptors.request.use(
 //     if (error.response.status === 401 && !originalRequest._retry) {
 //       originalRequest._retry = true;
 //       try {
-//         // const response = await axios.post<JWTTokenData>(`${process.env.REACT_APP_API_BASE_URL}/api/auth/`, { refresh: token });
+//         // const response = await axios.post<JWTTokenData>(`${import.meta.env.VITE_API_BASE_URL}/api/auth/`, { refresh: token });
 //         // const token = response.data;
 //         // if (token) {
 //         // const newToken: JWTTokenData = token

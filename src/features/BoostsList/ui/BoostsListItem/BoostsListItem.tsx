@@ -1,12 +1,12 @@
-import { Boost } from 'entities/Boost';
+import { Boost } from '@/entities/Boost';
 import clsx from 'clsx';
 import {
   Button, Text, Title,
 } from '@telegram-apps/telegram-ui';
 import { useCallback } from 'react';
-import { ReactComponent as ViewsIcon } from 'shared/assets/icons/views-icon.svg';
-import { ReactComponent as CheckIcon } from 'shared/assets/icons/check-icon.svg';
-import { formatNumber } from 'shared/lib/utils/formatNumber';
+import ViewsIcon from '@/shared/assets/icons/views-icon.svg';
+import CheckIcon from '@/shared/assets/icons/check-icon.svg';
+import { formatNumber } from '@/shared/lib/utils/formatNumber';
 import cls from './BoostsListItem.module.scss';
 import { useBuyBoost } from '../../api/boostsListApi';
 
@@ -33,8 +33,8 @@ export const BoostsListItem: React.FC<BoostsListItemProps> = (props) => {
       <Button loading={isLoading} className={cls.button} size="m" disabled={alreadyHave || isLoading} onClick={onClickHandler}>
         {
           alreadyHave
-            ? <CheckIcon className={cls.icon} />
-            : <span className={cls.buttonText}><ViewsIcon className={cls.icon} />{formatNumber(String(item.cost))}</span>
+            ? <img src={CheckIcon} className={cls.icon} />
+            : <span className={cls.buttonText}><img src={ViewsIcon} className={cls.icon} />{formatNumber(String(item.cost))}</span>
         }
       </Button>
     </div>

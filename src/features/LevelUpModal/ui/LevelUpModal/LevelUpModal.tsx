@@ -2,11 +2,11 @@ import {
   useCallback, useEffect, useState,
 } from 'react';
 import { useSelector } from 'react-redux';
-import { getUserCurrentLevel, getUserTotalPoins } from 'entities/User';
-import { Modal } from 'shared/ui/Modal/Modal';
+import { getUserCurrentLevel, getUserTotalPoins } from '@/entities/User';
+import { Modal } from '@/shared/ui/Modal/Modal';
 import { Button, Title } from '@telegram-apps/telegram-ui';
-import { getGameIsStarted, useLevelUp } from 'features/Game';
-import { getLevels } from 'entities/Level';
+import { getGameIsStarted, useLevelUp } from '@/features/Game';
+import { getLevels } from '@/entities/Level';
 import cls from './LevelUpModal.module.scss';
 
 interface LevelUpModalProps {

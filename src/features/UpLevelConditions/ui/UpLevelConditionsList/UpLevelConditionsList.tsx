@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
-import { getUserCurrentLevel, getUserCurrentConditions } from 'entities/User';
+import { getUserCurrentLevel, getUserCurrentConditions } from '@/entities/User';
 import cls from './UpLevelConditionsList.module.scss';
 import { ConditionItem } from '../ConditionItem/ConditionItem';
 

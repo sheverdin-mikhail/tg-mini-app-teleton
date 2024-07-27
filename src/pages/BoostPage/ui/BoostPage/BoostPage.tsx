@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { PageContentHeader } from 'widgets/PageContentHeader';
-import { BoostsList } from 'features/BoostsList';
+import { PageContentHeader } from '@/widgets/PageContentHeader';
+import { BoostsList } from '@/features/BoostsList';
 import cls from './BoostPage.module.scss';
 
 interface BoostPageProps {

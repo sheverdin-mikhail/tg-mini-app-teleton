@@ -1,8 +1,8 @@
-import { getUserIsInit } from 'entities/User';
+import { getUserIsInit } from '@/entities/User';
 import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { $api } from 'shared/api/api';
-import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
+import { $api } from '@/shared/api/api';
+import { USER_LOCALSTORAGE_TOKEN } from '@/shared/const/localStorage';
 
 const localStorageToken = localStorage.getItem(USER_LOCALSTORAGE_TOKEN);
 

@@ -1,11 +1,11 @@
-import { Stream, StreamsList } from 'entities/Stream';
+import { Stream, StreamsList } from '@/entities/Stream';
 import clsx from 'clsx';
 import { useCallback, useState } from 'react';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSelector } from 'react-redux';
 import {
   getCurrentAvailableStreamsCount,
-} from 'entities/User';
+} from '@/entities/User';
 import cls from './GameStreams.module.scss';
 import { getGameIsStarted } from '../../model/selectors/gameSelector';
 import { GameStartModal } from '../GameStartModal/GameStartModal';

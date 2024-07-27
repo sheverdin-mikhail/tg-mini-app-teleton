@@ -1,18 +1,16 @@
 import {
-  initSettingsButton,
   mockTelegramEnv,
   parseInitData,
   retrieveLaunchParams,
 } from '@telegram-apps/sdk';
 import { TelegramWebApps } from 'app/types/global';
-import { useEffect } from 'react';
-import { copyToClipboard } from 'shared/lib/utils/clipboard';
 
 declare global {
     interface Window {
         Telegram: TelegramWebApps.SDK;
     }
 }
+
 
 // убрать на проде
 // eslint-disable-next-line max-len
@@ -45,8 +43,6 @@ export const useTelegram = () => {
 
   const { initData, initDataRaw } = retrieveLaunchParams();
 
-  const [settingsButton] = initSettingsButton();
-
   const tgUser = initData?.user;
 
   const closeTelegram = () => {
@@ -61,12 +57,6 @@ export const useTelegram = () => {
     }
   };
 
-  useEffect(() => { // убрать на проде
-    settingsButton.show();
-    settingsButton.on('click', () => {
-      copyToClipboard(initDataRaw!!);
-    });
-  }, [initDataRaw, settingsButton]);
 
   return ({
     tg,

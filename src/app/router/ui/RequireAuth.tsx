@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { USER_LOCALSTORAGE_TOKEN } from 'shared/const/localStorage';
+import { USER_LOCALSTORAGE_TOKEN } from '@/shared/const/localStorage';
 
 interface RequireAuthProps {
   children?: React.ReactNode;

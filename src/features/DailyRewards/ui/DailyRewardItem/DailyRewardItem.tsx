@@ -1,10 +1,10 @@
-import { DailyReward } from 'entities/DailyReward';
+import { DailyReward } from '@/entities/DailyReward';
 import clsx from 'clsx';
 import { InlineButtonsItem } from '@telegram-apps/telegram-ui/dist/components/Blocks/InlineButtons/components/InlineButtonsItem/InlineButtonsItem';
 import { Spinner, Text } from '@telegram-apps/telegram-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getUserAvailableToClaimDailyRewardDate, getUserCurrentDailyReward, getUserLastDailyRewardClaimDate } from 'entities/User';
+import { getUserAvailableToClaimDailyRewardDate, getUserCurrentDailyReward, getUserLastDailyRewardClaimDate } from '@/entities/User';
 import moment from 'moment';
 import cls from './DailyRewardItem.module.scss';
 import { useClaimDailyRewards } from '../../api/dailyRewardsApi';

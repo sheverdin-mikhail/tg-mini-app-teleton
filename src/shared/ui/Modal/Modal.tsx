@@ -1,8 +1,8 @@
 import {
   ReactNode, useCallback, useEffect, useRef, useState,
 } from 'react';
-import { Portal } from 'shared/ui/Portal/Portal';
-import { ReactComponent as CloseIcon } from 'shared/assets/icons/close-icon.svg';
+import { Portal } from '@/shared/ui/Portal/Portal';
+import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import clsx from 'clsx';
 import cls from './Modal.module.scss';
 
@@ -72,7 +72,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
         <div className={cls.overlay}>
           <div className={clsx(cls.content, {}, [className])}>
             <div className={cls.btn} onClick={overlayClickHandler} ref={closeBtnRef}>
-              <CloseIcon className={cls.icon} />
+              <img src={CloseIcon} className={cls.icon} />
             </div>
             {children}
           </div>

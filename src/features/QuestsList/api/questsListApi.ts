@@ -1,5 +1,5 @@
-import { Quest } from 'entities/Quest';
-import { rtkApi } from 'shared/api/rtkApi';
+import { Quest } from '@/entities/Quest';
+import { rtkApi } from '@/shared/api/rtkApi';
 import { QuestListResponse } from '../model/types/questsList';
 
 const questsListApi = rtkApi.injectEndpoints({

@@ -238,5 +238,5 @@ export declare namespace TelegramWebApps {
   }
 
 declare global {
-    const Telegram: TelegramWebApps.SDK;
+  const Telegram: any;
 }

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
-import { getUserBoosts } from 'entities/User';
+import { getUserBoosts } from '@/entities/User';
 import { Title } from '@telegram-apps/telegram-ui';
 import cls from './BoostsList.module.scss';
 import { useGetBoostsList } from '../../api/boostsListApi';

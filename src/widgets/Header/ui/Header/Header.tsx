@@ -1,10 +1,10 @@
-import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
+import { useTelegram } from '@/shared/lib/hooks/useTelegram/useTelegram';
 import clsx from 'clsx';
 import {
   Avatar, Caption, Text,
 } from '@telegram-apps/telegram-ui';
-import { GameLevelProgress } from 'features/Game';
-import { UpLevelConditionsModal } from 'features/UpLevelConditions';
+import { GameLevelProgress } from '@/features/Game';
+import { UpLevelConditionsModal } from '@/features/UpLevelConditions';
 import { useRef } from 'react';
 import cls from './Header.module.scss';
 

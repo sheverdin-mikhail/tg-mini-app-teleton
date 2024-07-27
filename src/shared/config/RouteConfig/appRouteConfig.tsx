@@ -1,9 +1,9 @@
-import { BoostPage } from 'pages/BoostPage';
-import { EarnPage } from 'pages/EarnPage';
-import { InvitePage } from 'pages/InvitePage';
-import { LoadingPage } from 'pages/LoadingPage';
-import { MainPage } from 'pages/MainPage';
 import { RouteProps } from 'react-router-dom';
+import { BoostPage } from '@/pages/BoostPage';
+import { EarnPage } from '@/pages/EarnPage';
+import { InvitePage } from '@/pages/InvitePage';
+import { LoadingPage } from '@/pages/LoadingPage';
+import { MainPage } from '@/pages/MainPage';
 
 export type AppRouteProps = RouteProps & {
   authOnly?: boolean;

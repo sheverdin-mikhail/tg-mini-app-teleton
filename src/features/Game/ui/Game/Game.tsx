@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { GameLevel } from '../GameLevel/GameLevel';
 import { GameTimer } from '../GameTimer/GameTimer';
 import { gameActions } from '../../model/slice/gameSlice';
@@ -11,7 +11,7 @@ interface GameProps {
   className?: string;
 }
 
-export const Game: React.FC<GameProps> = (props) => {
+export const Game: React.FC<GameProps> = () => {
   const isInit = useSelector(getGameIsInit);
   const dispatch = useAppDispatch();
 
