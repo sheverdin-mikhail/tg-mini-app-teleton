@@ -14,7 +14,7 @@ declare global {
 
 // убрать на проде
 // eslint-disable-next-line max-len
-const initDataRaw = 'query_id=AAHWD2IuAAAAANYPYi6tYVMd&user=%7B%22id%22%3A778178518%2C%22first_name%22%3A%22%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22sheverdin_mikhail%22%2C%22language_code%22%3A%22ru%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1721913090&hash=92daf10ccb319a34dc6d666340366089c460ee6481c481ae5944a7f2b0562a1b';
+const initDataRaw = 'query_id=AAHWD2IuAAAAANYPYi77LRWJ&user=%7B%22id%22%3A778178518%2C%22first_name%22%3A%22%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22sheverdin_mikhail%22%2C%22language_code%22%3A%22ru%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1722087600&hash=b4c61e4d952c628b77d08332f025470e9e23c5e8cc5c4c3a5ed53b7408f34aad';
 
 mockTelegramEnv({
   themeParams: {

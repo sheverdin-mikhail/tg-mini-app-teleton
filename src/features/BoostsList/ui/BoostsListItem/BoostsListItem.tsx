@@ -33,8 +33,8 @@ export const BoostsListItem: React.FC<BoostsListItemProps> = (props) => {
       <Button loading={isLoading} className={cls.button} size="m" disabled={alreadyHave || isLoading} onClick={onClickHandler}>
         {
           alreadyHave
-            ? <img src={CheckIcon} className={cls.icon} />
-            : <span className={cls.buttonText}><img src={ViewsIcon} className={cls.icon} />{formatNumber(String(item.cost))}</span>
+            ? <CheckIcon className={cls.icon} />
+            : <span className={cls.buttonText}><ViewsIcon className={cls.icon} />{formatNumber(String(item.cost))}</span>
         }
       </Button>
     </div>

@@ -44,7 +44,7 @@ export const GameFinishModal: React.FC<GameFinishModalProps> = (props) => {
         Stream is Finished!
       </Text>
       <Title caps className={cls.title} weight="1">
-        Your bonus {Math.trunc(bonus)} <img src={ViewsIcon} className={cls.icon} />
+        Your bonus {Math.trunc(bonus)} <ViewsIcon className={cls.icon} />
       </Title>
       <div className={cls.buttons}>
         <Button className={cls.button} onClick={onCloseHandler}>Cool!</Button>

@@ -28,7 +28,7 @@ export const GamePoints: React.FC<GamePointsProps> = (props) => {
       {(userIsLoading && userPoints === 0) ? <Spinner size="m" />
         : (
           <>
-            <img src={ViewsIcon} className={cls.icon} />
+            <ViewsIcon className={cls.icon} />
             <animated.div className={cls.points}>
               {
                 anime.points.to((value) => Math.trunc(value))

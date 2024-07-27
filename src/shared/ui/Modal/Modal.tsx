@@ -72,7 +72,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
         <div className={cls.overlay}>
           <div className={clsx(cls.content, {}, [className])}>
             <div className={cls.btn} onClick={overlayClickHandler} ref={closeBtnRef}>
-              <img src={CloseIcon} className={cls.icon} />
+              <CloseIcon className={cls.icon} />
             </div>
             {children}
           </div>
