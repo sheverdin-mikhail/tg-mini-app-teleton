@@ -37,7 +37,7 @@ export const LootBoxList: React.FC<LootBoxListProps> = (props) => {
             <Title weight="1" caps className={cls.title}>
                 Loot boxes
             </Title>
-            <div>
+            <div className={cls.items}>
                 {
                     lootBoxList?.map((lootBox) => (
                         lootBox.prices.map((price, index) => (

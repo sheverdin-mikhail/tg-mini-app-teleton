@@ -27,9 +27,17 @@ export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
         })
     }, [])
 
+    console.log(count)
+
     return (
         <div className={clsx(cls.lootBoxItem, {}, [className])}>
-            <LootBoxIcon className={cls.icon}/>
+            <div className={cls.lootBoxIcons}>
+                {
+                    [...Array(count)].map((id, index) => (
+                        <LootBoxIcon className={cls.lootBoxIcon} key={`${id}_${index}`}/>
+                    ))
+                }
+            </div>
             <Button className={cls.button} onClick={onBuyClickHandler}>
                 <span className={cls.buttonText}>
                     <ViewsIcon className={cls.viewsIcon}/>

@@ -13,7 +13,7 @@ import { LootBoxClaimModalPointsContent } from '../LootBoxClaimModalPointsConten
 interface LootBoxClaimModalProps {
   className?: string;
 }
-
+//TODO: Сделать корректное отображение и логику при покупке нескольких лутбоксов
 export const LootBoxClaimModal: React.FC<LootBoxClaimModalProps> = (props) => {
   const { className } = props;
   const isOpen = useSelector(getLootBoxIsOpen)

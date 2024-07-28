@@ -1,11 +1,17 @@
-.icon {
+.lootBoxIcon {
+    position: relative;
     flex-grow: 1;
-    align-self: center;
     width: 160px;
     height: 160px;
+
     path {
         fill: var(--tg-theme-text-color);
     }
+}
+
+.lootBoxIcons {
+    align-self: center;
+    position: relative;
 }
 
 .viewsIcon {
