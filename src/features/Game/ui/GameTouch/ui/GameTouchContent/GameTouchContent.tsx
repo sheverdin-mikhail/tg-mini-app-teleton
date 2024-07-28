@@ -1,10 +1,12 @@
 import clsx from 'clsx';
 import cls from './GameTouchContent.module.scss';
-import { GameTapEvent, GameTapEventType } from '@/features/Game/model/types/game';
+import { GameTapEvent, GameTapEventType } from '../../../../model/types/game';
 import { useEffect, useState } from 'react';
 import { useSpring, animated, SpringValue } from '@react-spring/web';
 import { Comment } from '@/shared/ui/Comment/Comment';
 import { Emoji } from '@/shared/ui/Emoji/Emoji';
+import moment from 'moment';
+import { gameActions } from '@/features/Game/model/slice/gameSlice';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 
 
@@ -61,15 +63,15 @@ const emojis = [
 let idCounter = 0; // Unique identifier for each tap
 
 export const GameTouchContent: React.FC<GameTouchContentProps> = ({ className, tapEvent, touch }) => {
-    const dispatch = useAppDispatch();
     const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
+    const dispatch = useAppDispatch();
 
     const id = idCounter++;
     const [anime, api] = useSpring(() => ({
         from: { translateY: 0, opacity: 1 },
         to: { translateY: -200, opacity: 0 },
-        config: { duration: 500 },
-        onRest: () => removeAnimatedElement(id), // Remove element after animation completes
+        config: { duration: 1500 },
+        onRest: () => removeAnimatedElement(moment().toString()), // Remove element after animation completes
     }));
 
 
@@ -79,29 +81,34 @@ export const GameTouchContent: React.FC<GameTouchContentProps> = ({ className, t
         // Generate unique ID for each tap event
         const randomContent = getRandomContent(tapEvent.type);
 
-        // if (tapEvent.type === GameTapEventType.BAN) {
-        //     dispatch(gameActions.getBun());
-        // }
+        if (tapEvent.type === GameTapEventType.BAN) {
+            dispatch(gameActions.getBun());
+            if (!tapEvent) return;
+        }
 
-        setAnimatedElements((prev) => [
-            ...prev,
-            {
-                id,
-                x: touch.clientX,
-                y: touch.clientY,
-                type: tapEvent.type,
-                content: randomContent,
-                anime,
-            },
-        ]);
-
+        if (randomContent) {
+            setAnimatedElements((prev) => [
+                ...prev,
+                {
+                    id,
+                    x: touch.clientX,
+                    y: touch.clientY,
+                    type: tapEvent.type,
+                    content: randomContent,
+                    anime,
+                },
+            ]);
+    
+        }
         api.start();
 
        
     }, [tapEvent, touch]);
 
-    const getRandomContent = (type: GameTapEventType): JSX.Element => {
+    const getRandomContent = (type: GameTapEventType): JSX.Element | null => {
         switch (type) {
+            case GameTapEventType.NOTHING:
+                return null
             case GameTapEventType.COMMENT:
                 const randomComment = comments[Math.floor(Math.random() * comments.length)];
                 return <Comment>{randomComment}</Comment>;
@@ -109,13 +116,13 @@ export const GameTouchContent: React.FC<GameTouchContentProps> = ({ className, t
                 const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
                 return <Emoji>{randomEmoji}</Emoji>;
             case GameTapEventType.BAN:
-                return <span style={{fontWeight: 'bold', fontSize: '32px'}} >Banned!</span>;
+                return null;
             default:
                 return <span>Unknown event</span>;
         }
     };
 
-    const removeAnimatedElement = (id: number) => {
+    const removeAnimatedElement = (id: any) => {
         setAnimatedElements((prev) => prev.filter(element => element.id !== id));
     };
 

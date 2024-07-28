@@ -9,7 +9,8 @@ export interface Game {
 export enum GameTapEventType {
     COMMENT = "comment",
     EMOJI = "emoji",
-    BAN = "ban"
+    BAN = "ban",
+    NOTHING = "nothing",
 }
 
 export interface GameTapEvent {
@@ -25,6 +26,7 @@ export interface GameSchema {
     isFinish: boolean;
     isPaused?: boolean;
     isAvailableToStart: boolean;
+    isBanned?: boolean;
 
     startedAt?: string;
     finishAt?: string;

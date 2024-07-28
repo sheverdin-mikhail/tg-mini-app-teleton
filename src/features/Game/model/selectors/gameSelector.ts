@@ -17,4 +17,6 @@ export const getGameTime = createSelector(getGame, (game) => ({
 }));
 export const getGameIsPaused = (state: StateSchema) => state.game?.isPaused;
 export const getGameTapEvents = (state: StateSchema) => state.game?.gameTapEvents;
+export const getGameIsBanned = (state: StateSchema) => state.game?.isBanned;
+
 

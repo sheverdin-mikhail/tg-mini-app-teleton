@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import cls from './LootBoxList.module.scss';
-import { Text, Title } from '@telegram-apps/telegram-ui';
+import { Title } from '@telegram-apps/telegram-ui';
 import { LootBoxItem } from '../LootBoxItem/LootBoxItem';
 import { useGetLootBoxList } from '../../api/lootBoxApi';
 import { DynamicModuleLoader, ReducersList } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -21,7 +21,7 @@ const reducers: ReducersList = {
 
 export const LootBoxList: React.FC<LootBoxListProps> = (props) => {
     const { className } = props;
-    const {data: lootBoxList, isLoading, isError, error } = useGetLootBoxList()
+    const {data: lootBoxList } = useGetLootBoxList()
     const dispatch = useAppDispatch();
 
     useEffect(() => {

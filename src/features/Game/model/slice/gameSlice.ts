@@ -14,11 +14,15 @@ const initialState: GameSchema = {
   farmedPoints: 0,
   gameTapEvents: [
     {
-      chance: 50,
+      chance: 500, 
+      type: GameTapEventType.NOTHING
+    },
+    {
+      chance: 245,
       type: GameTapEventType.COMMENT
     },
     {
-      chance: 45,
+      chance: 245,
       type: GameTapEventType.EMOJI
     },
     {
@@ -57,6 +61,7 @@ export const gameSlice = createSlice({
       const duration = stream.duration * (boost?.settings.durationMultiply ?? 1);
       state.finishAt = moment(state.startedAt).add(duration, 'minutes').toISOString();
       state.isDisabled = false;
+      state.isPaused = false;
       state.isStarted = true;
       state.isAvailableToStart = false;
       state.activeStream = stream;
@@ -80,12 +85,22 @@ export const gameSlice = createSlice({
       state.isDisabled = true;
       state.isStarted = false;
       state.isFinish = true;
+      state.isBanned = false;
+      state.isPaused = false;
     },
     pauseStream: (state) => {
       state.isPaused = true;
     },
     continueStream: (state) => {
       state.isPaused = true;
+    },
+    getBun: (state) => {
+      state.isBanned = true;
+      state.isPaused = true;
+    },
+    getUnbunned: (state) => {
+      state.isBanned = false;
+      state.isPaused = false;
     },
 
   },

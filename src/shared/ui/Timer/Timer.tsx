@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import cls from './Timer.module.scss';
 
@@ -20,20 +20,16 @@ export const Timer: React.FC<TimerProps> = (props) => {
   const [minutes, setMinutes] = useState(time.minutes);
   const [seconds, setSeconds] = useState(time.seconds);
   const [counted, setCounted] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null); // ref для хранения id интервала
 
   const minuteSpring = useSpring({ value: minutes, from: { value: minutes }, config: { tension: 120, friction: 14 } });
   const secondSpring = useSpring({ value: seconds, from: { value: seconds }, config: { tension: 120, friction: 14 } });
 
-  useEffect(() => {
-    // Sync component state with props
-    setMinutes(time.minutes);
-    setSeconds(time.seconds);
-  }, [time]);
+
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (isPaused) return; // Skip if paused
-
+    // Функция для обновления таймера
+    const updateTimer = () => {
       if (seconds > 0) {
         setSeconds((prev) => prev - 1);
         setCounted(true);
@@ -42,14 +38,24 @@ export const Timer: React.FC<TimerProps> = (props) => {
         setSeconds(59);
         setCounted(true);
       } else {
-        clearInterval(interval);
+        clearInterval(intervalRef.current as NodeJS.Timeout);
         if (counted) {
           onFinish?.();
         }
       }
-    }, 1000);
+    };
 
-    return () => clearInterval(interval); // Clear interval on component unmount
+    // Очищаем предыдущий интервал, если он существует
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    // Устанавливаем новый интервал, если таймер не на паузе
+    if (!isPaused) {
+      intervalRef.current = setInterval(updateTimer, 1000);
+    }
+
+    return () => clearInterval(intervalRef.current as NodeJS.Timeout); // Очистка интервала при размонтировании компонента
   }, [minutes, seconds, isPaused, onFinish, counted]);
 
   return (

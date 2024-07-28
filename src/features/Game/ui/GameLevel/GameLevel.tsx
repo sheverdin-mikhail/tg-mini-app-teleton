@@ -10,10 +10,11 @@ import { useUserData } from '@/shared/lib/hooks/useUserData/useUserData';
 import { GameTouch } from '../GameTouch';
 import cls from './GameLevel.module.scss';
 import { useSavePoints } from '../../api/gameApi';
-import { getGameIsDisabled, getGameIsInit, getGameStream } from '../../model/selectors/gameSelector';
+import { getGameIsDisabled, getGameIsInit, getGameIsPaused, getGameStream } from '../../model/selectors/gameSelector';
 import { GamePoints } from '../GamePoints/GamePoints';
 import { GameBackground } from '../GameBackground/GameBackground';
 import { gameActions } from '../../model/slice/gameSlice';
+import { GameBunModal } from '../GameBunModal/GameBunModal';
 
 interface GameLevelProps {
   className?: string;
@@ -30,14 +31,15 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const userLevel = useSelector(getUserCurrentLevel);
   const gameIsInit = useSelector(getGameIsInit);
   const stream = useSelector(getGameStream);
+  const isPaused = useSelector(getGameIsPaused);
 
   const handleTouchStart = useCallback((event: any) => {
-    if (!isDisabled && stream) {
+    if (!isDisabled && stream && !isPaused) {
       setTouches(event.touches);
       dispatch(userActions.increaseUserPoints(1));
       dispatch(gameActions.increaseFarmedPoints(1));
     }
-  }, [dispatch, isDisabled, stream]);
+  }, [dispatch, isDisabled, stream, isPaused]);
 
   // eslint-disable-next-line
   const savePoints = useCallback(debounce(() => {
@@ -65,6 +67,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
       {Array.from(touches).map((touch, index) => (
         <GameTouch key={`${index + touch.clientX}`} touch={touch} />
       ))}
+      <GameBunModal />
     </div>
   );
 };
