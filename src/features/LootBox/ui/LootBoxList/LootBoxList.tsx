@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import cls from './LootBoxList.module.scss';
-import { Title } from '@telegram-apps/telegram-ui';
+import { Text, Title } from '@telegram-apps/telegram-ui';
 import { LootBoxItem } from '../LootBoxItem/LootBoxItem';
 import { useGetLootBoxList } from '../../api/lootBoxApi';
 import { DynamicModuleLoader, ReducersList } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -30,6 +30,10 @@ export const LootBoxList: React.FC<LootBoxListProps> = (props) => {
             dispatch(lootBoxActions.openModal(lootBoxRewards))
         }
     }, [])
+
+    if (!lootBoxList?.length) {
+        return <Title className={cls.title} weight='1'>Список лутбоксов пуст</Title>
+    }
 
     return (
     <DynamicModuleLoader reducers={reducers}>
