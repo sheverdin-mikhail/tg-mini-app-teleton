@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { Stream } from '@/entities/Stream';
 import { Boost } from '@/entities/Boost';
-import { GameSchema } from '../types/game';
+import { GameSchema, GameTapEventType } from '../types/game';
 
 const initialState: GameSchema = {
   isInit: false,
@@ -12,6 +12,20 @@ const initialState: GameSchema = {
   isFinish: false,
   isAvailableToStart: false,
   farmedPoints: 0,
+  gameTapEvents: [
+    {
+      chance: 50,
+      type: GameTapEventType.COMMENT
+    },
+    {
+      chance: 45,
+      type: GameTapEventType.EMOJI
+    },
+    {
+      chance: 5,
+      type: GameTapEventType.BAN
+    },
+  ]
 };
 
 interface StartStreamProps {
@@ -67,6 +81,13 @@ export const gameSlice = createSlice({
       state.isStarted = false;
       state.isFinish = true;
     },
+    pauseStream: (state) => {
+      state.isPaused = true;
+    },
+    continueStream: (state) => {
+      state.isPaused = true;
+    },
+
   },
   extraReducers: (builder) => builder,
 });

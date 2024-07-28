@@ -4,18 +4,19 @@ import { useSpring, animated } from '@react-spring/web';
 import cls from './Timer.module.scss';
 
 interface TimeProps {
-    minutes: number;
-    seconds: number;
+  minutes: number;
+  seconds: number;
 }
 
 interface TimerProps {
-    className?: string;
-    time: TimeProps;
-    onFinish?: () => void;
+  className?: string;
+  time: TimeProps;
+  onFinish?: () => void;
+  isPaused?: boolean;
 }
 
 export const Timer: React.FC<TimerProps> = (props) => {
-  const { className, time, onFinish } = props;
+  const { className, time, onFinish, isPaused = false } = props;
   const [minutes, setMinutes] = useState(time.minutes);
   const [seconds, setSeconds] = useState(time.seconds);
   const [counted, setCounted] = useState(false);
@@ -31,11 +32,13 @@ export const Timer: React.FC<TimerProps> = (props) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      if (isPaused) return; // Skip if paused
+
       if (seconds > 0) {
-        setSeconds(seconds - 1);
+        setSeconds((prev) => prev - 1);
         setCounted(true);
       } else if (minutes > 0 && seconds === 0) {
-        setMinutes(minutes - 1);
+        setMinutes((prev) => prev - 1);
         setSeconds(59);
         setCounted(true);
       } else {
@@ -47,7 +50,7 @@ export const Timer: React.FC<TimerProps> = (props) => {
     }, 1000);
 
     return () => clearInterval(interval); // Clear interval on component unmount
-  }, [minutes, seconds, onFinish, counted]);
+  }, [minutes, seconds, isPaused, onFinish, counted]);
 
   return (
     <div className={clsx(cls.timer, {}, [className])}>

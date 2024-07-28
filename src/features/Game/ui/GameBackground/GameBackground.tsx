@@ -15,6 +15,7 @@ export const GameBackground: React.FC<GameBackgroundProps> = (props) => {
       // Изменение src и принудительное обновление видео
       videoRef.current.src = videoSrc;
       videoRef.current.load();
+      videoRef.current.playbackRate = 2.0;
     }
   }, [videoSrc]);
 

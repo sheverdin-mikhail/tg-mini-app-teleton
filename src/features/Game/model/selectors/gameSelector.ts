@@ -15,3 +15,6 @@ export const getGameTime = createSelector(getGame, (game) => ({
   startedAt: game?.startedAt,
   finishAt: game?.finishAt,
 }));
+export const getGameIsPaused = (state: StateSchema) => state.game?.isPaused;
+export const getGameTapEvents = (state: StateSchema) => state.game?.gameTapEvents;
+

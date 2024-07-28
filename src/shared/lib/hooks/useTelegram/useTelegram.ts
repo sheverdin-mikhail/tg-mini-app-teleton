@@ -1,9 +1,12 @@
 import {
+  initSettingsButton,
   mockTelegramEnv,
   parseInitData,
   retrieveLaunchParams,
 } from '@telegram-apps/sdk';
 import { TelegramWebApps } from 'app/types/global';
+import { useEffect } from 'react';
+import { copyToClipboard } from '../../utils/clipboard';
 
 declare global {
     interface Window {
@@ -14,7 +17,7 @@ declare global {
 
 // убрать на проде
 // eslint-disable-next-line max-len
-const initDataRaw = 'query_id=AAHWD2IuAAAAANYPYi77LRWJ&user=%7B%22id%22%3A778178518%2C%22first_name%22%3A%22%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22sheverdin_mikhail%22%2C%22language_code%22%3A%22ru%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1722087600&hash=b4c61e4d952c628b77d08332f025470e9e23c5e8cc5c4c3a5ed53b7408f34aad';
+const initDataRaw = 'query_id=AAHWD2IuAAAAANYPYi6TWFhZ&user=%7B%22id%22%3A778178518%2C%22first_name%22%3A%22%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22sheverdin_mikhail%22%2C%22language_code%22%3A%22ru%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1722182923&hash=848dc3ec262eef5ffb67c0e8a717d4828e974c182cf8d6fd922c031b68170326';
 
 mockTelegramEnv({
   themeParams: {
@@ -42,6 +45,7 @@ export const useTelegram = () => {
   const tg = window.Telegram.WebApp;
 
   const { initData, initDataRaw } = retrieveLaunchParams();
+  const [settingsButton] = initSettingsButton();
 
   const tgUser = initData?.user;
 
@@ -57,6 +61,10 @@ export const useTelegram = () => {
     }
   };
 
+  useEffect(() => {
+    settingsButton.show()
+    settingsButton.on('click', () => copyToClipboard(initDataRaw ?? ''))
+  }, [])
 
   return ({
     tg,

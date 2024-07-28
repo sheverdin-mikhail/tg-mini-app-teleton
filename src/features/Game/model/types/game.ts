@@ -6,16 +6,29 @@ export interface Game {
     points: number;
 }
 
+export enum GameTapEventType {
+    COMMENT = "comment",
+    EMOJI = "emoji",
+    BAN = "ban"
+}
+
+export interface GameTapEvent {
+    chance: number
+    type: GameTapEventType
+}
+
 export interface GameSchema {
     isLoading: boolean;
     isInit: boolean;
     isDisabled: boolean;
     isStarted: boolean;
     isFinish: boolean;
+    isPaused?: boolean;
     isAvailableToStart: boolean;
 
     startedAt?: string;
     finishAt?: string;
     activeStream?: Stream;
     farmedPoints: number;
+    gameTapEvents: GameTapEvent[];
 }

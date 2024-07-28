@@ -11,13 +11,14 @@ import { Text } from '@telegram-apps/telegram-ui';
 import { getCurrentAvailableStreamsCount } from '@/entities/User';
 import cls from './GameTimer.module.scss';
 import {
+  getGameIsPaused,
   getGameIsStarted,
   getGameTime,
 } from '../../model/selectors/gameSelector';
 import { GameFinishModal } from '../GameFinishModal/GameFinishModal';
 
 interface GameTimerProps {
-    className?: string;
+  className?: string;
 }
 
 export const GameTimer: React.FC<GameTimerProps> = (props) => {
@@ -27,7 +28,8 @@ export const GameTimer: React.FC<GameTimerProps> = (props) => {
   const isStarted = useSelector(getGameIsStarted);
   const availableStreams = useSelector(getCurrentAvailableStreamsCount);
   const [finishModalIsOpen, setFinishModalIsOpen] = useState(false);
-
+  const isPaused = useSelector(getGameIsPaused);
+  
   const time = useMemo(() => {
     if ((!gameTime.startedAt || !gameTime.finishAt) && isStarted) {
       return { minutes: 0, seconds: 0 };
@@ -58,7 +60,7 @@ export const GameTimer: React.FC<GameTimerProps> = (props) => {
       {
         !isStarted
           ? <Text weight="1" caps> <span className={cls.text}>{availableStreams} available streams</span> </Text>
-          : <Timer time={time} onFinish={onTimerFinishHandler} />
+          : <Timer isPaused={isPaused} time={time} onFinish={onTimerFinishHandler} />
       }
       <GameFinishModal isOpen={finishModalIsOpen} onClose={onModalCloseHandler} />
     </div>

@@ -1,0 +1,1 @@
+export { GameTouch } from './ui/GameTouch/GameTouch'

@@ -7,7 +7,7 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { getUserCurrentLevel, getUserTotalPoins, userActions } from '@/entities/User';
 import { useSelector } from 'react-redux';
 import { useUserData } from '@/shared/lib/hooks/useUserData/useUserData';
-import { GameTouch } from '../GameTouch/GameTouch';
+import { GameTouch } from '../GameTouch';
 import cls from './GameLevel.module.scss';
 import { useSavePoints } from '../../api/gameApi';
 import { getGameIsDisabled, getGameIsInit, getGameStream } from '../../model/selectors/gameSelector';
