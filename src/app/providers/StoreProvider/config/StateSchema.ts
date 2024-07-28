@@ -8,6 +8,7 @@ import { UserSchema } from '@/entities/User';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { LevelsSchema } from '@/entities/Level';
 import { GameSchema } from '@/features/Game';
+import { LootBoxSchema } from '@/features/LootBox';
 
 export interface StateSchema {
     user: UserSchema
@@ -22,6 +23,7 @@ export interface StateSchema {
     // widgets
 
     // features
+    lootBox: LootBoxSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;

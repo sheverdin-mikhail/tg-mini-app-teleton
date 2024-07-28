@@ -8,6 +8,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import { $api } from '@/shared/api/api';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './ReducerManager';
+import { lootBoxReducer } from '@/features/LootBox';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -19,6 +20,7 @@ export function createReduxStore(
     levels: levelsReducer,
     game: gameReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
+    lootBox: lootBoxReducer 
   };
 
   const reducerManager = createReducerManager(rootReducers);

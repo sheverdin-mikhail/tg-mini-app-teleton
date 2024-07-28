@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { getUserBoosts } from '@/entities/User';
 import { Title } from '@telegram-apps/telegram-ui';
 import cls from './BoostsList.module.scss';
-import { useGetBoostsList } from '../../api/boostsListApi';
+import { useGetBoostsList } from '@/entities/Boost';
 import { BoostsListItem } from '../BoostsListItem/BoostsListItem';
 import { BoostsListLoading } from '../BoostsListLoading/BoostsListLoading';
 

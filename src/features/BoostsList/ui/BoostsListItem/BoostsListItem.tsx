@@ -8,7 +8,7 @@ import ViewsIcon from '@/shared/assets/icons/views-icon.svg';
 import CheckIcon from '@/shared/assets/icons/check-icon.svg';
 import { formatNumber } from '@/shared/lib/utils/formatNumber';
 import cls from './BoostsListItem.module.scss';
-import { useBuyBoost } from '../../api/boostsListApi';
+import { useBuyBoost } from '@/entities/Boost';
 
 interface BoostsListItemProps {
   className?: string;
@@ -21,7 +21,7 @@ export const BoostsListItem: React.FC<BoostsListItemProps> = (props) => {
   const [buyBoostsMudation, { isLoading }] = useBuyBoost();
 
   const onClickHandler = useCallback(() => {
-    buyBoostsMudation({ id: item.id });
+    buyBoostsMudation(item.id);
   }, [buyBoostsMudation, item.id]);
 
   return (
