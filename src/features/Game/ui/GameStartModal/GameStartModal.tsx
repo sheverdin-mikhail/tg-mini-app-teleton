@@ -34,7 +34,7 @@ export const GameStartModal: React.FC<GameStartModalProps> = (props) => {
 
   const onStartHandler = useCallback(() => {
     if (stream) {
-      if (energyBoost) {
+      if (energyBoost?.user_boost.isPurchased) {
         startGameMutation({ stream, boost: energyBoost });
         dispatch(gameActions.startStream({
           stream,
@@ -58,7 +58,7 @@ export const GameStartModal: React.FC<GameStartModalProps> = (props) => {
       </Title>
       <div className={cls.buttons}>
         <Button className={cls.button} onClick={onCloseHandler}>No, Thanks</Button>
-        <Button className={cls.button} onClick={onStartHandler}>Yes { energyBoost && <span className={cls.energy}>(<FlashIcon className={cls.icon} />boost )</span> }</Button>
+        <Button className={cls.button} onClick={onStartHandler}>Yes { energyBoost?.user_boost.isPurchased && <span className={cls.energy}>(<FlashIcon className={cls.icon} />boost )</span> }</Button>
       </div>
     </Modal>
   );

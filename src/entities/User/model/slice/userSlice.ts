@@ -8,6 +8,8 @@ const initialState: UserSchema = {
   isLoading: false,
   error: '',
   user: {
+    id: 0,
+    firstName: '',
     totalPoints: 0,
     daily_reward: undefined,
     level: undefined,

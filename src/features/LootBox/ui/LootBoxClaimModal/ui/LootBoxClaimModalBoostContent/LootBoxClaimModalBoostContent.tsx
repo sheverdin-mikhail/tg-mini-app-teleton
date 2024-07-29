@@ -20,7 +20,6 @@ export const LootBoxClaimModalBoostContent: React.FC<LootBoxClaimModalBoostConte
     const onClickHandler = useCallback(() => {
         claimBoostMutation(boost.id)
         dispatch(lootBoxActions.closeModal())
-        console.log(boost.id)
     }, [boost])
 
     return (

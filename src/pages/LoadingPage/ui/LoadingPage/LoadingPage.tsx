@@ -28,7 +28,7 @@ export const LoadingPage: React.FC<LoadingPageProps> = (props) => {
             }
           });
         } catch (e) {
-          // console.log(e);
+          console.error(e);
         }
       } else if (token) {
         navigate('/');

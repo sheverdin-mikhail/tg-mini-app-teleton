@@ -14,19 +14,19 @@ const initialState: GameSchema = {
   farmedPoints: 0,
   gameTapEvents: [
     {
-      chance: 500, 
+      chance: 9500, 
       type: GameTapEventType.NOTHING
     },
     {
-      chance: 245,
+      chance: 244.5,
       type: GameTapEventType.COMMENT
     },
     {
-      chance: 245,
+      chance: 244.5,
       type: GameTapEventType.EMOJI
     },
     {
-      chance: 5,
+      chance: 1,
       type: GameTapEventType.BAN
     },
   ]

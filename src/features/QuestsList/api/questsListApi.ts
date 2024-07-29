@@ -1,6 +1,13 @@
 import { Quest } from '@/entities/Quest';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { QuestListResponse } from '../model/types/questsList';
+import { User, userActions } from '@/entities/User';
+
+interface ClaimResponse {
+  success: boolean
+  user: User
+  quest: Quest
+}
 
 const questsListApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
@@ -17,13 +24,22 @@ const questsListApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: ['Quest'],
     }),
-    claimQuest: build.mutation<Quest, string>({
+    claimQuest: build.mutation<ClaimResponse, string>({
       query: (questId) => ({
         url: `/earn/quests/${questId}/claim/`,
         method: 'POST',
       }),
       invalidatesTags: ['Quest'],
-    }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          const { user } = data;
+          dispatch(userActions.setUser(user));
+        } catch (e) {
+          console.error(e);
+        }
+      },
+    }),    
   }),
 });
 

@@ -23,6 +23,9 @@ export const QuestItem: React.FC<QuestItemProps> = (props) => {
   const buttonClickHandler = (item: Quest) => () => {
     if (item.status === QuestStatus.START) {
       questVerifyMutation(item.id);
+      if (item.settings.link) {
+        window.open(item?.settings.link, "blank");
+      }
     } else if (item.status === QuestStatus.CLAIM) {
       questClaimMutation(item.id);
     }
@@ -43,7 +46,7 @@ export const QuestItem: React.FC<QuestItemProps> = (props) => {
         {item.settings.header}
       </Headline>
       {
-        item.settings.link && (
+        item.settings.buttonTitle && (
           <Button
             size="s"
             className={cls.button}

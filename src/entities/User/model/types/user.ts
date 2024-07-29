@@ -14,6 +14,16 @@ export interface UserDailyReward {
     rewardDate: Date;
 }
 
+export interface UserBoost{
+    isPurchased?: boolean;
+    totalUseCount?: number;
+    dailyUseCount?: number;
+}
+
+export interface BoostWithUserBoost extends Boost {
+    user_boost: UserBoost;
+}
+
 export interface User extends TGUser {
     totalPoints: number;
     referrals?: Referral[];
@@ -22,7 +32,7 @@ export interface User extends TGUser {
     lastClaimDailyReward: Date | undefined;
     availableToClaimDailyRewardDate: Date | undefined;
     level: Level | undefined;
-    boosts?: Boost[];
+    boosts?: BoostWithUserBoost[];
     currentAvailableStreamsCount?: number;
     maxAvailableStreamsCount?: number;
 

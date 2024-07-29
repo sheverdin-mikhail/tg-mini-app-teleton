@@ -27,7 +27,6 @@ export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
         })
     }, [])
 
-    console.log(count)
 
     return (
         <div className={clsx(cls.lootBoxItem, {}, [className])}>

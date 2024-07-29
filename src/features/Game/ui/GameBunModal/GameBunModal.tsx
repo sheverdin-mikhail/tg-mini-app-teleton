@@ -24,11 +24,10 @@ export const GameBunModal: React.FC<GameBunModalProps> = (props) => {
 
     const onCancelHandler = () => {
         dispatch(gameActions.finishStream())
-        console.log('finish stream')
     }
 
     const onUseBunDefence = () => {
-        if (banDefence) {
+        if (banDefence?.user_boost.isPurchased) {
             dispatch(gameActions.getUnbunned())
             dispatch(applyUserBoost(banDefence))
         }
@@ -55,7 +54,7 @@ export const GameBunModal: React.FC<GameBunModalProps> = (props) => {
             <div className={cls.buttons}>
                 <Button onClick={onCancelHandler} className={cls.button} disabled={disabled}>finish stream</Button>
                 {
-                    banDefence && <Button onClick={onUseBunDefence} className={cls.button} disabled={disabled}>Use ban defence</Button>
+                    banDefence?.user_boost.isPurchased && <Button onClick={onUseBunDefence} className={cls.button} disabled={disabled}>Use ban defence</Button>
                 }
             </div>
         </Modal>

@@ -18,10 +18,9 @@ export const ReferralLink: React.FC<ReferralLinkProps> = (props) => {
 
     const onClickHandler = useCallback(() => {
         if(referralLink) {
-            console.log(referralLink)
             copyToClipboard(referralLink)
         }
-    }, []);
+    }, [referralLink]);
 
     if (isLoading) {
         return <ReferralLinkLoading />

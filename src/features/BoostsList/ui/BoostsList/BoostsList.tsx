@@ -30,7 +30,7 @@ export const BoostsList: React.FC<BoostsListProps> = (props) => {
             <div className={clsx(cls.boosts, {}, [className])}>
               {
                 boosts?.map((boost) => (
-                  <BoostsListItem item={boost} key={boost.id} alreadyHave={!!userBoosts?.find((userBoost) => userBoost.id === boost.id)} />
+                  <BoostsListItem item={boost} key={boost.id} alreadyHave={!!userBoosts?.find((userBoost) => userBoost.id === boost.id)?.user_boost.isPurchased} />
                 ))
               }
             </div>
