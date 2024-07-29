@@ -1,0 +1,22 @@
+.referralLink {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    padding: 20px;
+    background: var(--tg-theme-bg-color);
+    border-radius: 16px;
+    margin: 20px 0 0 0;
+}
+
+
+.link {
+    max-width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: var(--tgui--font-family);
+    font-weight: bold;
+    font-size: var(--text-base);
+}
+

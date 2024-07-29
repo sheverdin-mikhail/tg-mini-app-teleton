@@ -1,8 +1,9 @@
 import { Boost } from '@/entities/Boost';
 import { DailyReward } from '@/entities/DailyReward';
 import { Level } from '@/entities/Level';
-import { Referal } from '@/entities/Referal';
+import { Referral } from '@/entities/Referral';
 import { Stream } from '@/entities/Stream';
+import { User as TGUser } from '@telegram-apps/sdk';
 
 export interface JWTTokenData {
     token: string
@@ -13,10 +14,9 @@ export interface UserDailyReward {
     rewardDate: Date;
 }
 
-export interface User {
-    id?: number;
+export interface User extends TGUser {
     totalPoints: number;
-    referrals?: Referal[];
+    referrals?: Referral[];
     referalCode?: string;
     daily_reward: DailyReward | undefined;
     lastClaimDailyReward: Date | undefined;
