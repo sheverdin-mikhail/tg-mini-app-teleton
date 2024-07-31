@@ -34,7 +34,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const isPaused = useSelector(getGameIsPaused);
 
   // Устанавливаем максимальное количество хранимых тапов
-  const MAX_TOUCHES = 5;
+  const MAX_TOUCHES = 50;
 
   const handleTouchStart = useCallback((event: any) => {
     if (!isDisabled && stream && !isPaused) {

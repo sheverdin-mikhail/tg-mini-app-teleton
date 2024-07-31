@@ -26,7 +26,7 @@ export const ViewsIcon: React.FC<ViewsIconProps> = (props) => {
             xmlSpace="preserve"
         >
              <defs>
-                <linearGradient id="views-gradient" x1="0%" y1="0%" x2="50%" y2="100%">
+                <linearGradient id={`views-gradient_${className}`} x1="0%" y1="0%" x2="50%" y2="100%">
                     <stop offset="0%" style={{
                         stopColor:"rgba(1,86,143,1)", 
                         stopOpacity:"1"
@@ -49,7 +49,7 @@ export const ViewsIcon: React.FC<ViewsIconProps> = (props) => {
                     C130.725,190.866,128,205.613,128,221c0,70.691,57.308,128,128,128c70.691,0,128-57.309,128-128
                     c0-15.387-2.725-30.134-7.703-43.799C378.285,178.39,380.266,179.602,382.225,180.852z M256,205c0,26.51-21.49,48-48,48
                     s-48-21.49-48-48s21.49-48,48-48S256,178.49,256,205z"
-                    fill={gradient ? 'url(#views-gradient)' : 'var(--tg-theme-button-text-color)'}
+                    fill={gradient ? `url(#$views-gradient_${className})` : 'var(--tg-theme-button-text-color)'}
                 />
             </g>
         </svg>
