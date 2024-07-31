@@ -16,6 +16,7 @@ interface ConditionItemProps {
     levelName?: string;
     level?: Level;
     unavailable?: boolean;
+    pointsToNextLevel?: number;
 }
 
 const LevelImages = [
@@ -36,6 +37,7 @@ export const ConditionItem: React.FC<ConditionItemProps> = (props) => {
     levelName, 
     passed,
     unavailable,
+    pointsToNextLevel
   } = props;
 
   const theme = useMemo(() => {
@@ -70,7 +72,7 @@ export const ConditionItem: React.FC<ConditionItemProps> = (props) => {
                     unavailable 
                     ? (
                       <span className={cls.text}>
-                        get {level?.pointToNextLevel} <ViewsIcon />
+                        get {pointsToNextLevel} <ViewsIcon />
                       </span>
                     )
                     : <span className={cls.text}>

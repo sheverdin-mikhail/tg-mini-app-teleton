@@ -24,13 +24,14 @@ export const UpLevelConditionsList: React.FC<UpLevelConditionsListProps> = (prop
   return (
     <div className={clsx(cls.upLevelConditionsList, {}, [className])}>
       {
-        levels.map((level) => (
+        levels.map((level, index) => (
           <ConditionItem 
           curValue={Math.trunc(currentConditions.totalPoints)} 
           levelName={
             LEVELS[level.level - 1]
           } 
           level={level}
+          pointsToNextLevel={levels[index-1]?.pointToNextLevel}
           passed={(currentLevel?.level ?? 0) > level.level} 
           unavailable={(currentLevel?.level ?? 0) < level.level}
         />
