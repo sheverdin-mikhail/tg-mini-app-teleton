@@ -19,7 +19,6 @@ interface GameLevelProps {
   className?: string;
 }
 
-
 export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const { className } = props;
   const [touches, setTouches] = useState<any[]>([]);
@@ -32,11 +31,13 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const gameIsInit = useSelector(getGameIsInit);
   const stream = useSelector(getGameStream);
   const isPaused = useSelector(getGameIsPaused);
+  const [touchCount, setTouchCount] = useState(0);
 
 
   const handleTouchStart = useCallback((event: any) => {
     if (!isDisabled && stream && !isPaused) {
       setTouches(prev => [...prev, ...event.touches]);
+      setTouchCount(prev => prev++);
       dispatch(userActions.increaseUserPoints(1));
       dispatch(gameActions.increaseFarmedPoints(1));
     }
@@ -60,12 +61,18 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   }, [savePoints, userIsInit, gameIsInit]);
 
   useEffect(() => {
-    const interval = setInterval(() => setTouches([]), 10000)
-
+    const interval = setInterval(() => setTouches(prev => prev.splice(0, touches.length - touchCount)), 500)
     return () => {
       return clearInterval(interval)
     }
-  }, [])
+  }, [touches, touchCount])
+
+  useEffect(() => {
+    const interval = setInterval(() => setTouchCount(touches.length), 1000)
+    return () => {
+      return clearInterval(interval)
+    }
+  }, [touches])
 
   return (
     <div
