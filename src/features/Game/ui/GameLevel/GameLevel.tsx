@@ -48,10 +48,11 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   }, [dispatch, isDisabled, stream, isPaused]);
 
   // Удаляем тапы из состояния по окончанию анимации
-  const handleAnimationEnd = (touch: any) => {
+  const handleAnimationEnd = useCallback((touch: any) => {
+    console.log('remove touch', touch)
     setTouches((prev) => prev.filter(t => t.identifier !== touch.identifier));
     touchesRef.current = touchesRef.current.filter(t => t.identifier !== touch.identifier);
-  };
+  },[])
 
   // eslint-disable-next-line
   const savePoints = useCallback(debounce(() => {

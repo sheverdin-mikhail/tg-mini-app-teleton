@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getRandomGameTapEvent } from '../../../../model/services/getRandomGameTapEvent';
 import { useSelector } from 'react-redux';
 import { getGameFinishAt, getGameStartedAt, getGameTapEvents } from '../../../../model/selectors/gameSelector';
@@ -13,7 +13,7 @@ interface GameTouchProps {
   onRemove?: (touch: any) => void
 }
 
-export const GameTouch: React.FC<GameTouchProps> = (props) => {
+export const GameTouch: React.FC<GameTouchProps> = React.memo((props) => {
   const { touch, onRemove } = props;
   const gameTapEvents = useSelector(getGameTapEvents)
   const gameStartedAt = useSelector(getGameStartedAt)
@@ -58,4 +58,4 @@ export const GameTouch: React.FC<GameTouchProps> = (props) => {
       <GameTouchContent onRemove={onRemove} touch={touch} tapEvent={tapEvent} />
     </>
   );
-};
+});

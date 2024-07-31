@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import cls from './GameTouchContent.module.scss';
 import { GameTapEvent, GameTapEventType } from '../../../../model/types/game';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import { Comment } from '@/shared/ui/Comment/Comment';
 import { Emoji } from '@/shared/ui/Emoji/Emoji';
@@ -50,9 +50,10 @@ const emojis = [
 ]
 
 
-export const GameTouchContent: React.FC<GameTouchContentProps> = ({ className, tapEvent, touch, onRemove }) => {
+export const GameTouchContent: React.FC<GameTouchContentProps> = React.memo(({ tapEvent, touch, onRemove }) => {
     const dispatch = useAppDispatch();
     const [content, setContent] = useState<JSX.Element | null>(null)
+    const ref = useRef<any>(null);
 
     const [anime, api] = useSpring(() => ({
         
@@ -61,7 +62,6 @@ export const GameTouchContent: React.FC<GameTouchContentProps> = ({ className, t
         config: { duration: 1500 },
         onRest: () => {
             onRemove?.(touch)
-            console.log(touch)
         }, // Remove element after animation completes
     }));
 
@@ -101,18 +101,17 @@ export const GameTouchContent: React.FC<GameTouchContentProps> = ({ className, t
 
 
     return (
-        <div className={clsx(cls.gameTouchContentContainer, className)}>
-            <animated.div
-                style={{
-                    left: touch.clientX,
-                    top: touch.clientY,
-                    transform: anime.translateY.to(y => `translate(-50%, ${y}px)`),
-                    opacity: anime.opacity,
-                }}
-                className={clsx(cls.gameTouchContent)}
-            >
-                {content}
-            </animated.div>
-        </div>
+        <animated.div
+            ref={ref}
+            style={{
+                left: touch.clientX,
+                top: touch.clientY,
+                transform: anime.translateY.to(y => `translate(-50%, ${y}px)`),
+                opacity: anime.opacity,
+            }}
+            className={clsx(cls.gameTouchContent)}
+        >
+            {content}
+        </animated.div>
     );
-};
+});
