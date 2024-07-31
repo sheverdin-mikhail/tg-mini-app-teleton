@@ -64,6 +64,8 @@ export const useTelegram = () => {
   useEffect(() => {
     // @ts-ignore
     tg.disableVerticalSwipes()
+    // @ts-ignore
+    tg.isVerticalSwipesEnabled = false
     settingsButton.show()
     settingsButton.on('click', () => copyToClipboard(initDataRaw ?? ''))
   }, [])

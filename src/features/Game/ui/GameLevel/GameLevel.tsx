@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {
-  useEffect, useCallback, useRef,
+  useState, useEffect, useCallback, useRef,
 } from 'react';
 import debounce from 'lodash.debounce';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
@@ -21,6 +21,7 @@ interface GameLevelProps {
 
 export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const { className } = props;
+  const [touches, setTouches] = useState<any[]>([]);
   const touchesRef = useRef<any[]>([]);
   const dispatch = useAppDispatch();
   const [savePointsMutation] = useSavePoints();
@@ -33,11 +34,12 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const isPaused = useSelector(getGameIsPaused);
 
   // Устанавливаем максимальное количество хранимых тапов
-  const MAX_TOUCHES = 50;
+  const MAX_TOUCHES = 5;
 
   const handleTouchStart = useCallback((event: any) => {
     if (!isDisabled && stream && !isPaused) {
       const newTouches = [...event.touches].slice(0, MAX_TOUCHES);
+      setTouches((prev) => [...prev.slice(-MAX_TOUCHES + newTouches.length), ...newTouches]);
       touchesRef.current = [...touchesRef.current.slice(-MAX_TOUCHES + newTouches.length), ...newTouches];
 
       dispatch(userActions.increaseUserPoints(1));
@@ -47,12 +49,10 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
 
   // Удаляем тапы из состояния по окончанию анимации
   const handleAnimationEnd = (touch: any) => {
+    setTouches((prev) => prev.filter(t => t.identifier !== touch.identifier));
     touchesRef.current = touchesRef.current.filter(t => t.identifier !== touch.identifier);
   };
 
-  // useEffect(() => {
-  //   console.log(touches)
-  // },[touches])
   // eslint-disable-next-line
   const savePoints = useCallback(debounce(() => {
     if (userIsInit) {
@@ -75,7 +75,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
       onTouchStart={handleTouchStart}
     >
       <GameBackground level={userLevel?.level} />
-      {touchesRef.current.map((touch, index) => (
+      {touches.map((touch, index) => (
         <GameTouch
           touch={touch}
           key={`${touch.identifier}_${index}`}
