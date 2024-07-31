@@ -1,0 +1,12 @@
+.list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.upgradesList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}

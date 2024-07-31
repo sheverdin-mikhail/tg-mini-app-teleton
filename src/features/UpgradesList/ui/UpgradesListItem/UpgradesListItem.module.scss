@@ -1,0 +1,41 @@
+.upgradesListItem {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--tg-theme-bg-color);
+    padding: 16px 8px;
+    border-radius: 16px;
+    text-align: center;
+    gap: 24px;
+}
+
+.title {
+    font-size: var(--text-base);
+}
+
+.text {
+    font-size: var(--text-sm);
+}
+
+.button {
+    margin-top: auto;
+}
+.buttonContent {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+}
+
+.badge {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(30%, -50%);
+
+}

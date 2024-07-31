@@ -3,6 +3,7 @@ import { PageContentHeader } from '@/widgets/PageContentHeader';
 import { BoostsList } from '@/features/BoostsList';
 import cls from './BoostPage.module.scss';
 import { LootBoxList } from '@/features/LootBox/ui/LootBoxList/LootBoxList';
+import { UpgradesList } from '@/features/UpgradesList/ui/UpgradesList/UpgradesList';
 
 interface BoostPageProps {
   className?: string;
@@ -17,6 +18,7 @@ export const BoostPage: React.FC<BoostPageProps> = (props) => {
         <PageContentHeader title="Networking and view opportunites" description="Make a choise to boost or ..." />
         <BoostsList />
         <LootBoxList />
+        <UpgradesList />
       </div>
   );
 };
