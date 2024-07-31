@@ -61,7 +61,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   }, [savePoints, userIsInit, gameIsInit]);
 
   useEffect(() => {
-    const interval = setInterval(() => setTouches(prev => prev.splice(0, touches.length - touchCount)), 500)
+    const interval = setInterval(() => setTouches(prev => prev.splice(0, touches.length - touchCount)), 100)
     return () => {
       return clearInterval(interval)
     }

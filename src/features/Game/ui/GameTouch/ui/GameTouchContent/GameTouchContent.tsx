@@ -112,7 +112,7 @@ export const GameTouchContent: React.FC<GameTouchContentProps> = ({ className, t
     const getRandomContent = (type: GameTapEventType): JSX.Element | null => {
         switch (type) {
             case GameTapEventType.VIEW:
-                return <Text className={cls.row}> +1 <ViewsIcon /> </Text>
+                return <Text className={cls.row}> <span className={cls.points}>+1</span> <ViewsIcon /> </Text>
             case GameTapEventType.COMMENT:
                 const randomComment = comments[Math.floor(Math.random() * comments.length)];
                 return <Comment>{randomComment}</Comment>;
