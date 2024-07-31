@@ -1,6 +1,6 @@
 import { LootBox } from '@/entities/LootBox';
 import cls from './LootBoxItem.module.scss';
-import LootBoxIcon from '@/shared/assets/icons/lootbox-icon.svg';
+import LootBoxImage from '@/shared/assets/img/lootbox.png';
 import ViewsIcon from '@/shared/assets/icons/views-icon.svg';
 
 import clsx from 'clsx';
@@ -33,7 +33,7 @@ export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
             <div className={cls.lootBoxIcons}>
                 {
                     [...Array(count)].map((id, index) => (
-                        <LootBoxIcon className={cls.lootBoxIcon} key={`${id}_${index}`}/>
+                        <img src={LootBoxImage} className={cls.lootBoxIcon} key={`${id}_${index}`}/>
                     ))
                 }
             </div>
