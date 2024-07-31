@@ -10,15 +10,15 @@ import { GameTouchContent } from '../GameTouchContent/GameTouchContent';
 interface GameTouchProps {
   className?: string;
   touch: any;
+  onRemove?: (touch: any) => void
 }
 
 export const GameTouch: React.FC<GameTouchProps> = (props) => {
-  const { touch } = props;
+  const { touch, onRemove } = props;
   const gameTapEvents = useSelector(getGameTapEvents)
   const gameStartedAt = useSelector(getGameStartedAt)
   const gameFinishAt = useSelector(getGameFinishAt)
-  // const [tapEvent, setTapEvent] = useState<GameTapEvent | null>(null) 
-  const [touchElements, setTouchElements] = useState<GameTapEvent[]>([])
+  const [tapEvent, setTapEvent] = useState<GameTapEvent | null>(null) 
 
 
   const handleTouchEvent = () => {
@@ -31,7 +31,7 @@ export const GameTouch: React.FC<GameTouchProps> = (props) => {
       const first20Seconds = gameStart.clone().add(20, 'seconds');
       const last20Seconds = gameFinish.clone().subtract(20, 'seconds');
 
-      let randomEvent: GameTapEvent;
+      let randomEvent;
 
       if (
         (now.isBefore(first20Seconds) || now.isAfter(last20Seconds)) &&
@@ -40,26 +40,22 @@ export const GameTouch: React.FC<GameTouchProps> = (props) => {
         // Если сейчас в первые или последние 20 секунд и есть BAN, то пропускаем BAN
         let filteredEvents = gameTapEvents.filter(event => event.type !== GameTapEventType.BAN);
         randomEvent = getRandomGameTapEvent(filteredEvents);
-        setTouchElements(prev => [...prev, randomEvent])
       } else {
         randomEvent = getRandomGameTapEvent(gameTapEvents);
       }
+
+      setTapEvent(randomEvent)
     }
   }
 
   useEffect(() => {
     handleTouchEvent()
-    console.log(touchElements)
   }, [touch])
 
   return (
     <>
       <GameTouchCircle touch={touch} />
-      {
-        touchElements.map((tapEvent, index) => (
-          <GameTouchContent touch={touch} tapEvent={tapEvent} key={`${tapEvent.type}_touch${touch.clientX}_${index}`}/>
-        ))
-      }
+      <GameTouchContent onRemove={onRemove} touch={touch} tapEvent={tapEvent} />
     </>
   );
 };

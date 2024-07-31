@@ -19,6 +19,7 @@ interface GameLevelProps {
   className?: string;
 }
 
+
 export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const { className } = props;
   const [touches, setTouches] = useState<any[]>([]);
@@ -32,13 +33,15 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const stream = useSelector(getGameStream);
   const isPaused = useSelector(getGameIsPaused);
 
+
   const handleTouchStart = useCallback((event: any) => {
     if (!isDisabled && stream && !isPaused) {
-      setTouches(event.touches);
+      setTouches(prev => [...prev, ...event.touches]);
       dispatch(userActions.increaseUserPoints(1));
       dispatch(gameActions.increaseFarmedPoints(1));
     }
   }, [dispatch, isDisabled, stream, isPaused]);
+
 
   // eslint-disable-next-line
   const savePoints = useCallback(debounce(() => {
@@ -56,6 +59,14 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
     };
   }, [savePoints, userIsInit, gameIsInit]);
 
+  useEffect(() => {
+    const interval = setInterval(() => setTouches([]), 10000)
+
+    return () => {
+      return clearInterval(interval)
+    }
+  }, [])
+
   return (
     <div
       className={clsx(cls.level, {}, [className])}
@@ -63,7 +74,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
     >
       <GameBackground level={userLevel?.level} />
       {Array.from(touches).map((touch, index) => (
-        <GameTouch key={`${index + touch.clientX}`} touch={touch} />
+        <GameTouch touch={touch} key={`${touch.identifier}_${index}`}/>
       ))}
       <GameBunModal />
     </div>
