@@ -24,7 +24,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
           <Avatar src={tgUser?.photoUrl ?? AvatarImage} className={cls.avatar} />
           <div className={clsx(cls.userLabel, cls.col)}>
             <Caption weight="2" caps>Streamers Producer</Caption>
-            <Text weight="2" caps className={cls.name}>{tgUser?.firstName}</Text>
+            <Text weight="2" caps className={cls.name}>{tgUser?.firstName} qdqwd qwd </Text>
           </div>
         </div>
         <UpLevelConditionsModal trigger={(

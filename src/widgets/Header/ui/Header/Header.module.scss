@@ -16,14 +16,13 @@
 .col {
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 
 .block {
     display: flex;
     align-items: center;
     &:first-child {
-        max-width: 50%;
+        max-width: 70%;
     }
 }
 
@@ -31,4 +30,5 @@
     overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    max-width: 80%;
 }

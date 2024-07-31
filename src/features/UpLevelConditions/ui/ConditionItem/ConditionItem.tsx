@@ -1,39 +1,87 @@
 import clsx from 'clsx';
-import { Progress, Text } from '@telegram-apps/telegram-ui';
-import { useMemo } from 'react';
 import cls from './ConditionItem.module.scss';
+import { Level } from '@/entities/Level';
+import LevelImage1 from '@/shared/assets/img/game/level_1.png';
+import LevelImage2 from '@/shared/assets/img/game/level_2.jpg';
+import LevelImage3 from '@/shared/assets/img/game/level_3.png';
+import { Text, Title } from '@telegram-apps/telegram-ui';
+import { useMemo } from 'react';
+import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
+
 
 interface ConditionItemProps {
     className?: string;
-    curValue?: string | boolean | number;
-    needValue?: string | boolean | number;
-    description: string;
+    passed?: boolean;
+    curValue?: number;
+    levelName?: string;
+    level?: Level;
+    unavailable?: boolean;
 }
+
+const LevelImages = [
+  LevelImage1, LevelImage2, LevelImage3
+]
+
+export enum ConditionItemTheme {
+  PASSED = 'passed',
+  UNAVAILABLE = 'unavailable',
+  CURRENT = 'curren'
+} 
 
 export const ConditionItem: React.FC<ConditionItemProps> = (props) => {
   const {
-    className, curValue = 0, needValue = 0, description,
+    className, 
+    curValue = 0, 
+    level, 
+    levelName, 
+    passed,
+    unavailable,
   } = props;
 
-  const percents = useMemo(() => {
-    if (!needValue) {
-      return 100;
+  const theme = useMemo(() => {
+    if (passed) {
+      return ConditionItemTheme.PASSED
     }
-
-    return +curValue / +needValue * 100;
-  }, [curValue, needValue]);
+    else if (unavailable) {
+      return ConditionItemTheme.UNAVAILABLE
+    }
+    else {
+      return ConditionItemTheme.CURRENT
+    }
+  }, [passed, unavailable])
 
   return (
     <div className={clsx(cls.conditionItem, {}, [className])}>
-      <div className={cls.text}>
-        <Text className={cls.description} caps weight="1">{description}</Text>
-        <Text className={cls.conditions} weight="2">
-          <span className={cls.currentValue}>{curValue}</span>
-          <span>/</span>
-          <span className={cls.needValue}>{needValue}</span>
-        </Text>
+      <div className={cls.levelBlock}>
+        <img className={clsx(cls.img, cls[theme])} src={LevelImages[(level?.level ?? 0) - 1]} alt="" />
+        <div className={cls.textBlock}>
+          <Text className={cls.levelName}>
+            {levelName}
+          </Text>
+          <Title className={cls.title} >
+            {
+              passed ? "Location passed" : unavailable ? 'Location unavailable' : 'Current location'
+            }
+          </Title>
+          {
+            !passed && (
+              <Text>
+                  {
+                    unavailable 
+                    ? (
+                      <span className={cls.text}>
+                        get {level?.pointToNextLevel} <ViewsIcon />
+                      </span>
+                    )
+                    : <span className={cls.text}>
+                      {curValue} <ViewsIcon />
+                    </span>
+                  }
+              </Text>
+            )
+          }
+        </div>
       </div>
-      <Progress value={percents} />
     </div>
   );
 };
