@@ -2,10 +2,9 @@ import clsx from 'clsx';
 import cls from './GameTouchContent.module.scss';
 import { GameTapEvent, GameTapEventType } from '../../../../model/types/game';
 import { useEffect, useState } from 'react';
-import { useSpring, animated, SpringValue } from '@react-spring/web';
+import { useSpring, animated } from '@react-spring/web';
 import { Comment } from '@/shared/ui/Comment/Comment';
 import { Emoji } from '@/shared/ui/Emoji/Emoji';
-import moment from 'moment';
 import { gameActions } from '@/features/Game/model/slice/gameSlice';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { Text } from '@telegram-apps/telegram-ui';
@@ -17,19 +16,6 @@ interface GameTouchContentProps {
     tapEvent: GameTapEvent | null;
     touch: any;
 }
-
-interface AnimatedElement {
-    id: number;
-    x: number;
-    y: number;
-    type: GameTapEventType;
-    content: JSX.Element;
-    anime: {
-        translateY: SpringValue<number>;
-        opacity: SpringValue<number>;
-    };
-}
-
 
 
 const comments = [

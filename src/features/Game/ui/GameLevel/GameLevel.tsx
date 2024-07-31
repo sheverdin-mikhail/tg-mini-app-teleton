@@ -11,7 +11,6 @@ import { GameTouch } from '../GameTouch';
 import cls from './GameLevel.module.scss';
 import { useSavePoints } from '../../api/gameApi';
 import { getGameIsDisabled, getGameIsInit, getGameIsPaused, getGameStream } from '../../model/selectors/gameSelector';
-import { GamePoints } from '../GamePoints/GamePoints';
 import { GameBackground } from '../GameBackground/GameBackground';
 import { gameActions } from '../../model/slice/gameSlice';
 import { GameBunModal } from '../GameBunModal/GameBunModal';
