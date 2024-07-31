@@ -68,7 +68,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   }, [touches, touchCount])
 
   useEffect(() => {
-    const interval = setInterval(() => setTouchCount(touches.length), 1000)
+    const interval = setInterval(() => setTouchCount(touches.length), 500)
     return () => {
       return clearInterval(interval)
     }
