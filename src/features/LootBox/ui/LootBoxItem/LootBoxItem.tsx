@@ -1,12 +1,12 @@
 import { LootBox } from '@/entities/LootBox';
 import cls from './LootBoxItem.module.scss';
 import LootBoxImage from '@/shared/assets/img/lootbox.png';
-import ViewsIcon from '@/shared/assets/icons/views-icon.svg';
 
 import clsx from 'clsx';
 import { Button } from '@telegram-apps/telegram-ui';
 import { useBuyLootBox } from '../../api/lootBoxApi';
 import { useCallback } from 'react';
+import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
 
 interface LootBoxItemProps {
     className?: string;
@@ -39,8 +39,7 @@ export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
             </div>
             <Button className={cls.button} onClick={onBuyClickHandler}>
                 <span className={cls.buttonText}>
-                    <ViewsIcon className={cls.viewsIcon}/>
-                    { price }
+                    Open for { price } <ViewsIcon />
                 </span>
             </Button>
         </div>
