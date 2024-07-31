@@ -17,7 +17,8 @@ export const GameTouch: React.FC<GameTouchProps> = (props) => {
   const gameTapEvents = useSelector(getGameTapEvents)
   const gameStartedAt = useSelector(getGameStartedAt)
   const gameFinishAt = useSelector(getGameFinishAt)
-  const [tapEvent, setTapEvent] = useState<GameTapEvent | null>(null) 
+  // const [tapEvent, setTapEvent] = useState<GameTapEvent | null>(null) 
+  const [touchElements, setTouchElements] = useState<GameTapEvent[]>([])
 
 
   const handleTouchEvent = () => {
@@ -30,7 +31,7 @@ export const GameTouch: React.FC<GameTouchProps> = (props) => {
       const first20Seconds = gameStart.clone().add(20, 'seconds');
       const last20Seconds = gameFinish.clone().subtract(20, 'seconds');
 
-      let randomEvent;
+      let randomEvent: GameTapEvent;
 
       if (
         (now.isBefore(first20Seconds) || now.isAfter(last20Seconds)) &&
@@ -39,23 +40,26 @@ export const GameTouch: React.FC<GameTouchProps> = (props) => {
         // Если сейчас в первые или последние 20 секунд и есть BAN, то пропускаем BAN
         let filteredEvents = gameTapEvents.filter(event => event.type !== GameTapEventType.BAN);
         randomEvent = getRandomGameTapEvent(filteredEvents);
+        setTouchElements(prev => [...prev, randomEvent])
       } else {
         randomEvent = getRandomGameTapEvent(gameTapEvents);
       }
-
-      setTapEvent(randomEvent)
     }
   }
 
   useEffect(() => {
     handleTouchEvent()
-    // window.navigator.vibrate(200);
+    console.log(touchElements)
   }, [touch])
 
   return (
     <>
       <GameTouchCircle touch={touch} />
-      <GameTouchContent touch={touch} tapEvent={tapEvent} />
+      {
+        touchElements.map((tapEvent, index) => (
+          <GameTouchContent touch={touch} tapEvent={tapEvent} key={`${tapEvent.type}_touch${touch.clientX}_${index}`}/>
+        ))
+      }
     </>
   );
 };

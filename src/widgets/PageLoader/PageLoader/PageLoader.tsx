@@ -1,6 +1,8 @@
 import clsx from 'clsx';
-import { Spinner } from '@telegram-apps/telegram-ui';
+import LogoImage from '@/shared/assets/img/logo.jpg';
 import cls from './PageLoader.module.scss';
+import { Title } from '@telegram-apps/telegram-ui';
+import { AwesomeIcon } from '@/shared/ui/AwesomeIcon/AwesomeIcon';
 
 interface PageLoaderProps {
     className?: string;
@@ -11,7 +13,16 @@ export const PageLoader: React.FC<PageLoaderProps> = (props) => {
 
   return (
     <div className={clsx(cls.pageLoader, {}, [className ?? ''])}>
-      <Spinner size="l" />
+      <div className={cls.block}>
+        <img src={LogoImage} className={cls.logo} />
+        <Title weight='1' className={cls.title}>
+          TeleTON
+        </Title>
+      </div>
+     <div className={cls.icons}>
+      <AwesomeIcon logo='fa-brands fa-telegram' color='var(--white-color)'/>
+      <AwesomeIcon logo='fa-brands fa-square-x-twitter' color='var(--white-color)'/>
+     </div>
     </div>
   );
 };

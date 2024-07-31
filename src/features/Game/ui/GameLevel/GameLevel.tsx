@@ -62,7 +62,6 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
       className={clsx(cls.level, {}, [className])}
       onTouchStart={handleTouchStart}
     >
-      <GamePoints className={cls.gamePoints} />
       <GameBackground level={userLevel?.level} />
       {Array.from(touches).map((touch, index) => (
         <GameTouch key={`${index + touch.clientX}`} touch={touch} />

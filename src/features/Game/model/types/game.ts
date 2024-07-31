@@ -10,7 +10,7 @@ export enum GameTapEventType {
     COMMENT = "comment",
     EMOJI = "emoji",
     BAN = "ban",
-    NOTHING = "nothing",
+    VIEW = "view",
 }
 
 export interface GameTapEvent {

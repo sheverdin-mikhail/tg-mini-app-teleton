@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { getUserIsLoading, getUserTotalPoins } from '@/entities/User';
 import { useSpring, animated } from '@react-spring/web';
-import ViewsIcon from '@/shared/assets/icons/views-icon.svg';
 import cls from './GamePoints.module.scss';
+import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
 
 interface GamePointsProps {
   className?: string;
@@ -28,8 +28,8 @@ export const GamePoints: React.FC<GamePointsProps> = (props) => {
       {(userIsLoading && userPoints === 0) ? <Spinner size="m" />
         : (
           <>
-            <ViewsIcon className={cls.icon} />
-            <animated.div className={cls.points}>
+            <ViewsIcon className={cls.icon} gradient/>
+            <animated.div className={cls.numbers}>
               {
                 anime.points.to((value) => Math.trunc(value))
               }

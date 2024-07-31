@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getUserAvailableToClaimDailyRewardDate, getUserCurrentDailyReward, getUserLastDailyRewardClaimDate } from '@/entities/User';
 import moment from 'moment';
+import { getDateTime } from '@/shared/utils/getUTCDateTime'
 import cls from './DailyRewardItem.module.scss';
 import { useClaimDailyRewards } from '../../api/dailyRewardsApi';
 
@@ -32,21 +33,24 @@ export const DailyRewardItem: React.FC<DailyRewardItemProps> = (props) => {
   }, [reward, claimDailyRewardMutation]);
 
   useEffect(() => {
+   const checkClaimAvailable = async () => {
     if (userLastDailyRewardDate) {
-    // Получаем текущее время и дату доступности для получения награды
-      const today = moment();
-      const availableToClaimDate = moment(userAvailableToClaimDailyRewardDate);
+      // Получаем текущее время и дату доступности для получения награды
+        const today = await getDateTime();
+        const availableToClaimDate = moment(userAvailableToClaimDailyRewardDate);
+  
+        // Проверяем, является ли дата доступности для получения награды сегодняшним днем или более поздней датой
+        const isAvailableToday = today?.isSameOrBefore(availableToClaimDate);
+        // Определяем, доступна ли награда для получения
+        const isRewardAvailable = isAvailableToday && (Number(userCurrentReward?.order ?? 0) + 1 === reward.order);
+        setIsAvailabelToClaim(isRewardAvailable ?? false);
+      } else {
+      // Если дата последнего получения награды отсутствует, делаем награду доступной
+        setIsAvailabelToClaim(true);
+      }
+   } 
 
-      // Проверяем, является ли дата доступности для получения награды сегодняшним днем или более поздней датой
-      const isAvailableToday = availableToClaimDate.isSameOrBefore(today);
-
-      // Определяем, доступна ли награда для получения
-      const isRewardAvailable = isAvailableToday && (Number(userCurrentReward?.order ?? 0) + 1 === reward.order);
-      setIsAvailabelToClaim(isRewardAvailable);
-    } else {
-    // Если дата последнего получения награды отсутствует, делаем награду доступной
-      setIsAvailabelToClaim(true);
-    }
+   checkClaimAvailable()
   }, [userLastDailyRewardDate, userAvailableToClaimDailyRewardDate, reward.order, userCurrentReward?.order]);
 
   return (

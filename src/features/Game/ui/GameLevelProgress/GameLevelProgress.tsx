@@ -29,7 +29,7 @@ export const GameLevelProgress: React.FC<GameLevelProgressProps> = (props) => {
 
   return (
     <div className={clsx(cls.gameLevelProgress, className)} onClick={(e) => onClick?.(e)} {...otherProps}>
-      <Text className={cls.textLevel} caps weight="1">lvl</Text>
+      <Text weight="1"><span className={cls.textLevel} >Location</span></Text>
       <CircularProgress size="large" progress={progress + 1}>
         <div className={cls.level}>
           <span className={cls.curLevel}>{user.level?.level ?? 1}</span>

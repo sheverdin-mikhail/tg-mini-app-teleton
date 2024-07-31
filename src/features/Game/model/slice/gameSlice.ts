@@ -15,7 +15,7 @@ const initialState: GameSchema = {
   gameTapEvents: [
     {
       chance: 9500, 
-      type: GameTapEventType.NOTHING
+      type: GameTapEventType.VIEW
     },
     {
       chance: 244.5,
