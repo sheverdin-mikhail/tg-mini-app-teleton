@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {
-  useState, useEffect, useCallback,
+  useState, useEffect, useCallback, useRef,
 } from 'react';
 import debounce from 'lodash.debounce';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
@@ -22,6 +22,7 @@ interface GameLevelProps {
 export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const { className } = props;
   const [touches, setTouches] = useState<any[]>([]);
+  const touchesRef = useRef<any[]>([]);
   const dispatch = useAppDispatch();
   const [savePointsMutation] = useSavePoints();
   const totalPoints = useSelector(getUserTotalPoins);
@@ -31,18 +32,26 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const gameIsInit = useSelector(getGameIsInit);
   const stream = useSelector(getGameStream);
   const isPaused = useSelector(getGameIsPaused);
-  const [touchCount, setTouchCount] = useState(0);
 
+  // Устанавливаем максимальное количество хранимых тапов
+  const MAX_TOUCHES = 5;
 
   const handleTouchStart = useCallback((event: any) => {
     if (!isDisabled && stream && !isPaused) {
-      setTouches(prev => [...prev, ...event.touches]);
-      setTouchCount(prev => prev++);
+      const newTouches = [...event.touches].slice(0, MAX_TOUCHES);
+      setTouches((prev) => [...prev.slice(-MAX_TOUCHES + newTouches.length), ...newTouches]);
+      touchesRef.current = [...touchesRef.current.slice(-MAX_TOUCHES + newTouches.length), ...newTouches];
+
       dispatch(userActions.increaseUserPoints(1));
       dispatch(gameActions.increaseFarmedPoints(1));
     }
   }, [dispatch, isDisabled, stream, isPaused]);
 
+  // Удаляем тапы из состояния по окончанию анимации
+  const handleAnimationEnd = (touch: any) => {
+    setTouches((prev) => prev.filter(t => t.identifier !== touch.identifier));
+    touchesRef.current = touchesRef.current.filter(t => t.identifier !== touch.identifier);
+  };
 
   // eslint-disable-next-line
   const savePoints = useCallback(debounce(() => {
@@ -60,28 +69,18 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
     };
   }, [savePoints, userIsInit, gameIsInit]);
 
-  useEffect(() => {
-    const interval = setInterval(() => setTouches(prev => prev.splice(0, touches.length - touchCount)), 100)
-    return () => {
-      return clearInterval(interval)
-    }
-  }, [touches, touchCount])
-
-  useEffect(() => {
-    const interval = setInterval(() => setTouchCount(touches.length), 500)
-    return () => {
-      return clearInterval(interval)
-    }
-  }, [touches])
-
   return (
     <div
       className={clsx(cls.level, {}, [className])}
       onTouchStart={handleTouchStart}
     >
       <GameBackground level={userLevel?.level} />
-      {Array.from(touches).map((touch, index) => (
-        <GameTouch touch={touch} key={`${touch.identifier}_${index}`}/>
+      {touchesRef.current.map((touch, index) => (
+        <GameTouch
+          touch={touch}
+          key={`${touch.identifier}_${index}`}
+          onRemove={() => handleAnimationEnd(touch)}
+        />
       ))}
       <GameBunModal />
     </div>
