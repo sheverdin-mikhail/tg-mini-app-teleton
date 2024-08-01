@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import cls from './Comment.module.scss';
 import { Text } from '@telegram-apps/telegram-ui';
+import cls from './Comment.module.scss';
 
 interface CommentProps {
     className?: string;

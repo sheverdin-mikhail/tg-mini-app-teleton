@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import cls from './GameTouchContent.module.scss';
 import { GameTapEventType } from '../../model/types/game';
 import React, { useMemo } from 'react';
 import { animated } from '@react-spring/web';
@@ -11,6 +10,8 @@ import { getGameFinishAt, getGameStartedAt, getGameTapEvents } from '../../model
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { getRandomGameTapEvent } from '../../model/services/getRandomGameTapEvent';
+import cls from './GameTouchContent.module.scss';
+
 
 
 interface GameTouchContentProps {
@@ -62,7 +63,7 @@ export const GameTouchContent: React.FC<GameTouchContentProps> = React.memo(({ t
     const getRandomContent = (type: GameTapEventType): JSX.Element | null => {
         switch (type) {
             case GameTapEventType.VIEW:
-                return <Text className={cls.row}> <span className={cls.points}>+1</span> <ViewsIcon /> </Text>
+                return <Text className={cls.row}> <span className={cls.points}>+1</span> <ViewsIcon className={cls.viewIcon}/> </Text>
             case GameTapEventType.COMMENT:
                 const randomComment = comments[Math.floor(Math.random() * comments.length)];
                 return <Comment>{randomComment}</Comment>;

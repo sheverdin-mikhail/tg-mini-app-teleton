@@ -46,19 +46,22 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
     ref: transitionRef,
     key: (item: any) => item.identifier,
     from: { translateY: 0, opacity: 1 },
-    enter: { translateY: -150, opacity: 0.3 },
-    leave: { translateY: -160, opacity: 0 },
+    enter: { translateY: -260, opacity: 0 },
+    leave: { translateY: -260, opacity: 0 },
+    config: {
+      easing: (t: any) => 1 - Math.pow(1 - t, 4),
+      duration: 1500,
+    },
     onRest: (_style: any, _: any, item: any) => {
       handleAnimationEnd(item)
     } 
   })
   
 
-
   const handleTouchStart = useCallback((event: any) => {
     if (!isDisabled && stream && !isPaused) {
-      const newTouches = event.touches;
-      setTouches((prev) => [...prev, ...newTouches]);
+      const newTouches = Array.from(event.touches);
+      setTouches(newTouches);
 
       dispatch(userActions.increaseUserPoints(1));
       dispatch(gameActions.increaseFarmedPoints(1));
@@ -111,7 +114,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
       ))} */}
       <div>
           {
-            transitions((anime, touch) => (<GameTouchContent touch={touch} anime={anime} />))
+            transitions((anime, touch) => (<GameTouchContent touch={touch} anime={anime} key={touch.identifier} />))
           }
       </div>
       <GameBunModal />
