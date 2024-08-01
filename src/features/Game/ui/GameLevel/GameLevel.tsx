@@ -7,14 +7,21 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { getUserCurrentLevel, getUserTotalPoins, userActions } from '@/entities/User';
 import { useSelector } from 'react-redux';
 import { useUserData } from '@/shared/lib/hooks/useUserData/useUserData';
-import { GameTouch } from '../GameTouch';
 import cls from './GameLevel.module.scss';
 import { useSavePoints } from '../../api/gameApi';
-import { getGameIsDisabled, getGameIsInit, getGameIsPaused, getGameIsStarted, getGameStream } from '../../model/selectors/gameSelector';
+import { 
+  getGameIsDisabled, 
+  getGameIsInit, 
+  getGameIsPaused, 
+  getGameIsStarted, 
+  getGameStream 
+} from '../../model/selectors/gameSelector';
 import { GameBackground } from '../GameBackground/GameBackground';
 import { gameActions } from '../../model/slice/gameSlice';
 import { GameBunModal } from '../GameBunModal/GameBunModal';
 import { LiveLablel } from '@/shared/ui/LiveLablel/LiveLablel';
+import { GameTouchContent } from '../GameTouchContent/GameTouchContent';
+import { useSpringRef, useTransition } from '@react-spring/web';
 
 interface GameLevelProps {
   className?: string;
@@ -34,15 +41,24 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const stream = useSelector(getGameStream);
   const isPaused = useSelector(getGameIsPaused);
   const gameIsStarted = useSelector(getGameIsStarted);
+  const transitionRef = useSpringRef();
+  const transitions = useTransition(touches, {
+    ref: transitionRef,
+    key: (item: any) => item.identifier,
+    from: { translateY: 0, opacity: 1 },
+    enter: { translateY: -150, opacity: 0.3 },
+    leave: { translateY: -160, opacity: 0 },
+    onRest: (_style: any, _: any, item: any) => {
+      handleAnimationEnd(item)
+    } 
+  })
+  
 
-  // Устанавливаем максимальное количество хранимых тапов
-  const MAX_TOUCHES = 50;
 
   const handleTouchStart = useCallback((event: any) => {
     if (!isDisabled && stream && !isPaused) {
-      const newTouches = [...event.touches].slice(0, MAX_TOUCHES);
-      setTouches((prev) => [...prev.slice(-MAX_TOUCHES + newTouches.length), ...newTouches]);
-      touchesRef.current = [...touchesRef.current.slice(-MAX_TOUCHES + newTouches.length), ...newTouches];
+      const newTouches = event.touches;
+      setTouches((prev) => [...prev, ...newTouches]);
 
       dispatch(userActions.increaseUserPoints(1));
       dispatch(gameActions.increaseFarmedPoints(1));
@@ -51,7 +67,6 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
 
   // Удаляем тапы из состояния по окончанию анимации
   const handleAnimationEnd = useCallback((touch: any) => {
-    console.log('remove touch', touch)
     setTouches((prev) => prev.filter(t => t.identifier !== touch.identifier));
     touchesRef.current = touchesRef.current.filter(t => t.identifier !== touch.identifier);
   },[])
@@ -72,6 +87,12 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
     };
   }, [savePoints, userIsInit, gameIsInit]);
 
+ 
+
+  useEffect(() => {
+    transitionRef.start()
+  }, [touches])
+
   return (
     <div
       className={clsx(cls.level, {}, [className])}
@@ -81,13 +102,18 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
         gameIsStarted && <LiveLablel className={cls.live} />
       }
       <GameBackground level={userLevel?.level} />
-      {touches.map((touch, index) => (
+      {/* {touches.map((touch, index) => (
         <GameTouch
           touch={touch}
           key={`${touch.identifier}_${index}`}
           onRemove={() => handleAnimationEnd(touch)}
         />
-      ))}
+      ))} */}
+      <div>
+          {
+            transitions((anime, touch) => (<GameTouchContent touch={touch} anime={anime} />))
+          }
+      </div>
       <GameBunModal />
     </div>
   );
