@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import cls from '../steps.module.scss';
-import StepImage from '@/shared/assets/img/unboarding/step.jpg';
+import StepImage from '@/shared/assets/img/unboarding/step-1.png';
 import { Text } from '@telegram-apps/telegram-ui';
 
 interface UnboardingFirstStepProps {

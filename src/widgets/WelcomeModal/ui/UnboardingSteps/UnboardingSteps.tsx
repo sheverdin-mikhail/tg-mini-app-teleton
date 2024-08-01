@@ -65,7 +65,11 @@ export const UnboardingSteps: React.FC<UnboardingStepsProps> = (props) => {
                 }
             </CompactPagination>
             <Button onClick={() => nextStepHandler()} className={cls.button}>
-                Next
+                {
+                    step === STEPS 
+                    ? 'Start streaming'
+                    : 'Next'
+                }
             </Button>
         </div>
     );
