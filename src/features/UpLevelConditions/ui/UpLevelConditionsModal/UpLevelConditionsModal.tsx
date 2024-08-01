@@ -1,10 +1,10 @@
 import { Modal } from '@telegram-apps/telegram-ui';
 import clsx from 'clsx';
 import { ModalHeader } from '@telegram-apps/telegram-ui/dist/components/Overlays/Modal/components/ModalHeader/ModalHeader';
-import cls from './UpLevelConditionsModal.module.scss';
 import { UpLevelConditionsList } from '../UpLevelConditionsList/UpLevelConditionsList';
 import { ModalClose } from '@telegram-apps/telegram-ui/dist/components/Overlays/Modal/components/ModalClose/ModalClose';
 import { AwesomeIcon } from '@/shared/ui/AwesomeIcon/AwesomeIcon';
+import cls from './UpLevelConditionsModal.module.scss';
 
 interface UpLevelConditionsModalProps {
   className?: string;
@@ -27,7 +27,7 @@ export const UpLevelConditionsModal: React.FC<UpLevelConditionsModalProps> = (pr
       className={clsx(cls.upLevelConditionsModal, {}, [className])}
       header={<ModalHeader 
         after={<div onClick={onCloseHandler}>
-          <ModalClose><AwesomeIcon icon='fa-solid fa-xmark' /></ModalClose>
+          <ModalClose><AwesomeIcon icon='fa-solid fa-xmark' className={cls.closeIcon} /></ModalClose>
         </div>}
       />}
       
