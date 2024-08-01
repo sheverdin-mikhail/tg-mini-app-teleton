@@ -1,9 +1,9 @@
+import './styles/index.scss';
 import { WelcomeModal } from '@/widgets/WelcomeModal';
 import { PageLoader } from '@/widgets/PageLoader';
 
 import { useInitApp } from '@/shared/lib/hooks/useInitApp/useInitApp';
 import { AppRouter } from './router';
-import './styles/index.scss';
 
 const App = () => {
   const { isInit, welcomeModalIsOpen, setWelcomeModalIsOpen } = useInitApp();
