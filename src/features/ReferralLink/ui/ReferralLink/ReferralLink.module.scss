@@ -1,4 +1,6 @@
 .referralLink {
+    position: fixed;
+    width: calc(100% - 28px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -6,7 +8,7 @@
     padding: 20px;
     background: var(--tg-theme-secondary-bg-color);
     border-radius: 16px;
-    margin: 20px 0 0 0;
+    bottom: calc(var(--bottom-navbar-height) + 20px);
 }
 
 
@@ -20,3 +22,16 @@
     font-size: var(--text-base);
 }
 
+
+.shareIcon {
+    font-size: var(--text-base);
+    margin-left: 6px;
+}
+
+.copyIcon {
+    font-size: var(--text-lg);
+}
+
+.button {
+    flex-grow: 1;
+}
