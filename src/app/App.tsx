@@ -14,7 +14,7 @@ const App = () => {
           ? (
             <>
               <AppRouter />
-              <WelcomeModal isOpen={welcomeModalIsOpen ?? false} setIsOpen={setWelcomeModalIsOpen} />
+              <WelcomeModal isOpen={welcomeModalIsOpen} setIsOpen={setWelcomeModalIsOpen} />
             </>
           )
           : <PageLoader />

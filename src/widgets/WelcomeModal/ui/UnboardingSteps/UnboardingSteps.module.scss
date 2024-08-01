@@ -1,0 +1,17 @@
+.unboardingSteps {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.button {
+    display: block;
+    margin-top: auto;
+    align-self: center;
+    min-width: 50%;
+}
+
+.pagination {
+    align-self: center;
+}

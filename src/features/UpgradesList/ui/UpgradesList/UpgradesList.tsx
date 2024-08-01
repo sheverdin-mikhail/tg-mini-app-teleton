@@ -21,7 +21,7 @@ export const UpgradesList: React.FC<UpgradesListProps> = (props) => {
             <div className={cls.list}>
                 {
                     upgradesList?.map((upgrade) => (
-                        <UpgradesListItem className={cls.item} item={upgrade} />
+                        <UpgradesListItem className={cls.item} item={upgrade} key={upgrade.id} />
                     ))
                 }
             </div>

@@ -27,7 +27,7 @@ export const UpLevelConditionsModal: React.FC<UpLevelConditionsModalProps> = (pr
       className={clsx(cls.upLevelConditionsModal, {}, [className])}
       header={<ModalHeader 
         after={<div onClick={onCloseHandler}>
-          <ModalClose><AwesomeIcon logo='fa-solid fa-xmark' /></ModalClose>
+          <ModalClose><AwesomeIcon icon='fa-solid fa-xmark' /></ModalClose>
         </div>}
       />}
       

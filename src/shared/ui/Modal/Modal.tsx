@@ -2,9 +2,9 @@ import {
   ReactNode, useCallback, useEffect, useRef, useState,
 } from 'react';
 import { Portal } from '@/shared/ui/Portal/Portal';
-import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import clsx from 'clsx';
 import cls from './Modal.module.scss';
+import { AwesomeIcon } from '../AwesomeIcon/AwesomeIcon';
 
 interface ModalProps {
   className?: string;
@@ -72,7 +72,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
         <div className={cls.overlay}>
           <div className={clsx(cls.content, {}, [className])}>
             <div className={cls.btn} onClick={overlayClickHandler} ref={closeBtnRef}>
-              <CloseIcon className={cls.icon} />
+              <AwesomeIcon className={cls.icon} icon='fa-solid fa-xmark' />
             </div>
             {children}
           </div>

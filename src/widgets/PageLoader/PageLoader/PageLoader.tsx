@@ -20,8 +20,8 @@ export const PageLoader: React.FC<PageLoaderProps> = (props) => {
         </Title>
       </div>
      <div className={cls.icons}>
-      <AwesomeIcon logo='fa-brands fa-telegram' color='var(--white-color)'/>
-      <AwesomeIcon logo='fa-brands fa-square-x-twitter' color='var(--white-color)'/>
+      <AwesomeIcon icon='fa-brands fa-telegram' color='var(--white-color)'/>
+      <AwesomeIcon icon='fa-brands fa-square-x-twitter' color='var(--white-color)'/>
      </div>
     </div>
   );
