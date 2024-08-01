@@ -13,7 +13,7 @@ export const InvitePage: React.FC<InvitePageProps> = (props) => {
   
   return (
     <div className={clsx(cls.invitePage, {}, [className])}>
-      <PageContentHeader title="Invite new streamers" description="Earn more points" />
+      <PageContentHeader title="Invite new streamers" description="Get additional streams and views together" />
       <ReferralLink />
       <FriendsList />
     </div>

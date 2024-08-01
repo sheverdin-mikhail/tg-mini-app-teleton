@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import cls from './UpgradesListItem.module.scss';
 import { Upgrade } from '@/entities/Upgrade';
-import { Badge, Button, Text, Title } from '@telegram-apps/telegram-ui';
-import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
+import { Badge, Title } from '@telegram-apps/telegram-ui';
+// import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
 
 interface UpgradesListItemProps {
     className?: string;
@@ -22,13 +22,13 @@ export const UpgradesListItem: React.FC<UpgradesListItemProps> = (props) => {
                 <Title className={cls.title} weight='1'>
                     {upgrade.title}
                 </Title>
-                <Text className={cls.text}>+ {upgrade.incomePerDayDelta} / day </Text>
+                {/* <Text className={cls.text}>+ {upgrade.incomePerDayDelta} / day </Text> */}
             </div>
-            <Button className={cls.button} disabled>
+            {/* <Button className={cls.button} disabled>
                 <span className={cls.buttonContent}>
                     {upgrade.cost} <ViewsIcon />
                 </span>
-            </Button>
+            </Button> */}
         </div>
     );
 }

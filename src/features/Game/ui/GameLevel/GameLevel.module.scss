@@ -18,3 +18,10 @@
     top: 15px;
     pointer-events: none;
 }
+
+.live {
+    position: absolute;
+    z-index: 1000;
+    top: 20px;
+    right: 20px;
+}

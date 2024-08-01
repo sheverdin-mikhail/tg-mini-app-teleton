@@ -16,3 +16,11 @@
 .title {
     text-align: center;
 }
+
+.timer {
+    justify-content: center;
+    div,
+    span {
+        font-size: var(--text-base);
+    }
+}

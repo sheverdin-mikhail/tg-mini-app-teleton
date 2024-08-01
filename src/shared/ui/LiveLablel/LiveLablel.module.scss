@@ -1,0 +1,18 @@
+.liveLablel {
+    display: block;
+    padding-right: 16px;
+    color: var(--red-color);
+    font-size: var(--text-lg);
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--red-color);
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+    }
+}

@@ -11,6 +11,12 @@ interface StreamsListProps {
     disabled?: boolean;
 }
 
+const StreamIcons = [
+  'fa-solid fa-gamepad',
+  'fa-solid fa-comments',
+  'fa-solid fa-person-running',
+]
+
 export const StreamsList: React.FC<StreamsListProps> = (props) => {
   const { className, onClick, disabled } = props;
   const { data: streams, isLoading } = useGetStreamsList();
@@ -24,7 +30,7 @@ export const StreamsList: React.FC<StreamsListProps> = (props) => {
     <InlineButtons className={clsx(cls.streamsList, {}, [className])}>
       {
         streams?.map((stream) => (
-          <StreamsListItem key={stream.id} stream={stream} onClick={onClick} disabled={disabled} />
+          <StreamsListItem key={stream.id} stream={stream} onClick={onClick} disabled={disabled} icon={StreamIcons[Number(stream.id) - 1]} />
         ))
       }
     </InlineButtons>

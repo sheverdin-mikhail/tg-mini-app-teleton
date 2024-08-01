@@ -8,7 +8,7 @@ export async function getDateTime() {
         const utcDateTime = response.data.datetime;
         
         // Используем moment.js для работы с полученным временем
-        const momentDate = moment(utcDateTime);
+        const momentDate = moment.utc(utcDateTime);
         return momentDate
     } catch (error) {
         console.error('Ошибка получения времени:', error);

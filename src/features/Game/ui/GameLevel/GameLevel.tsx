@@ -10,10 +10,11 @@ import { useUserData } from '@/shared/lib/hooks/useUserData/useUserData';
 import { GameTouch } from '../GameTouch';
 import cls from './GameLevel.module.scss';
 import { useSavePoints } from '../../api/gameApi';
-import { getGameIsDisabled, getGameIsInit, getGameIsPaused, getGameStream } from '../../model/selectors/gameSelector';
+import { getGameIsDisabled, getGameIsInit, getGameIsPaused, getGameIsStarted, getGameStream } from '../../model/selectors/gameSelector';
 import { GameBackground } from '../GameBackground/GameBackground';
 import { gameActions } from '../../model/slice/gameSlice';
 import { GameBunModal } from '../GameBunModal/GameBunModal';
+import { LiveLablel } from '@/shared/ui/LiveLablel/LiveLablel';
 
 interface GameLevelProps {
   className?: string;
@@ -32,6 +33,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const gameIsInit = useSelector(getGameIsInit);
   const stream = useSelector(getGameStream);
   const isPaused = useSelector(getGameIsPaused);
+  const gameIsStarted = useSelector(getGameIsStarted);
 
   // Устанавливаем максимальное количество хранимых тапов
   const MAX_TOUCHES = 50;
@@ -75,6 +77,9 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
       className={clsx(cls.level, {}, [className])}
       onTouchStart={handleTouchStart}
     >
+      {
+        gameIsStarted && <LiveLablel className={cls.live} />
+      }
       <GameBackground level={userLevel?.level} />
       {touches.map((touch, index) => (
         <GameTouch
