@@ -4,7 +4,7 @@ import { useGetReferralData } from '@/entities/Referral';
 import { Button } from '@telegram-apps/telegram-ui';
 import { ReferralLinkLoading } from '../ReferralLinkLoading/ReferralLinkLoading';
 import { useCallback, useMemo } from 'react';
-import { copyToClipboard } from '@/shared/lib/utils/clipboard';
+import { initUtils } from '@telegram-apps/sdk';
 
 interface ReferralLinkProps {
     className?: string;
@@ -13,12 +13,13 @@ interface ReferralLinkProps {
 export const ReferralLink: React.FC<ReferralLinkProps> = (props) => {
     const { className } = props;
     const {data: referralData, isLoading} = useGetReferralData()
+    const utils = initUtils()
 
     const referralLink = useMemo(() => `${import.meta.env.VITE_APP_URL}/?startapp=ref-${referralData?.code}`, [referralData])
 
     const onClickHandler = useCallback(() => {
         if(referralLink) {
-            copyToClipboard(referralLink)
+            utils.shareURL(referralLink)
         }
     }, [referralLink]);
 
@@ -29,7 +30,7 @@ export const ReferralLink: React.FC<ReferralLinkProps> = (props) => {
     return (
         <div className={clsx(cls.referralLink, {}, [className])}>
             <p className={cls.link}>{referralLink}</p>
-            <Button onClick={onClickHandler} disabled={!referralData?.code}>Copy</Button>
+            <Button onClick={onClickHandler} disabled={!referralData?.code}>Share</Button>
         </div>
     );
 }

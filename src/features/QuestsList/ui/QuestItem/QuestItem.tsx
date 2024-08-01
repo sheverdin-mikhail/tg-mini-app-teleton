@@ -8,6 +8,7 @@ import {
 } from '@telegram-apps/telegram-ui';
 import cls from './QuestItem.module.scss';
 import { useQuestClaim, useQuestVerify } from '../../api/questsListApi';
+import { initUtils } from '@telegram-apps/sdk';
 
 interface QuestItemProps {
     className?: string;
@@ -19,13 +20,12 @@ export const QuestItem: React.FC<QuestItemProps> = (props) => {
 
   const [questVerifyMutation, { isLoading }] = useQuestVerify();
   const [questClaimMutation] = useQuestClaim();
+  const utils = initUtils()
 
   const buttonClickHandler = (item: Quest) => () => {
     if (item.status === QuestStatus.START) {
+      item.settings.link && utils.openLink(item.settings.link)
       questVerifyMutation(item.id);
-      if (item.settings.link) {
-        window.open(item?.settings.link, "blank");
-      }
     } else if (item.status === QuestStatus.CLAIM) {
       questClaimMutation(item.id);
     }
