@@ -8,7 +8,6 @@ import { getUserAvailableToClaimDailyRewardDate, getUserCurrentDailyReward, getU
 import moment from 'moment';
 import cls from './DailyRewardItem.module.scss';
 import { useClaimDailyRewards } from '../../api/dailyRewardsApi';
-import { getDateTime } from '@/shared/utils/getUTCDateTime';
 
 interface DailyRewardItemProps {
   className?: string;
@@ -16,8 +15,6 @@ interface DailyRewardItemProps {
   disabled?: boolean;
   claimed?: boolean;
 }
-
-const TODAY = await getDateTime();
 
 export const DailyRewardItem: React.FC<DailyRewardItemProps> = (props) => {
   const {
@@ -37,11 +34,12 @@ export const DailyRewardItem: React.FC<DailyRewardItemProps> = (props) => {
   useEffect(() => {
    const checkClaimAvailable = async () => {
     if (userLastDailyRewardDate) {
+      const today = moment();
       // Получаем текущее время и дату доступности для получения награды
         const availableToClaimDate = moment(userAvailableToClaimDailyRewardDate);
   
         // Проверяем, является ли дата доступности для получения награды сегодняшним днем или более поздней датой
-        const isAvailableToday = TODAY?.isSameOrAfter(availableToClaimDate);
+        const isAvailableToday = today?.isSameOrAfter(availableToClaimDate);
   
         // Определяем, доступна ли награда для получения
         const isRewardAvailable = isAvailableToday && (Number(userCurrentReward?.order ?? 0) + 1 === reward.order);
