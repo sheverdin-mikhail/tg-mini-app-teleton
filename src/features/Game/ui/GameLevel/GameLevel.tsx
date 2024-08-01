@@ -46,10 +46,12 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
     ref: transitionRef,
     key: (item: any) => item.identifier,
     from: { translateY: 0, opacity: 1 },
-    enter: { translateY: -260, opacity: 0 },
-    leave: { translateY: -260, opacity: 0 },
+    enter: { translateY: -200, opacity: 0 },
+    leave: { translateY: -200, opacity: 0 },
     config: {
-      easing: (t: any) => 1 - Math.pow(1 - t, 4),
+      easing: (x: any) => {
+        return  Math.sqrt(1 - Math.pow(x - 1, 2));
+      },
       duration: 1500,
     },
     onRest: (_style: any, _: any, item: any) => {
