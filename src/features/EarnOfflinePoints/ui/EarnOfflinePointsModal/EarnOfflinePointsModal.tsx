@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { earnIncomePerSeconds, getLastSyncAt, getUserTotalPoins, userActions } from '@/entities/User';
 import moment from 'moment';
