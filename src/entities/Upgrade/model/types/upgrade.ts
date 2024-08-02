@@ -6,4 +6,5 @@ export interface Upgrade {
     currentIncomePerDay: number
     incomePerDayDelta: number
     isAvailable: boolean
+    maxLevel: number
 }

@@ -14,6 +14,9 @@ export {
   getUserGameTime,
   getUserActiveStream,
   getCurrentAvailableStreamsCount,
+  getEarnIncomePerDay,
+  getLastSyncAt,
+  earnIncomePerSeconds
 } from './model/selectors/userSelector';
 export { CreateToken } from './model/services/UserAuth';
 export { getUserInfo } from './model/services/getUserInfo';

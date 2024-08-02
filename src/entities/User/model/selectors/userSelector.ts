@@ -13,6 +13,19 @@ export const getUserTotalPoins = (state: StateSchema) => state.user.user.totalPo
 export const getUserBoosts = (state: StateSchema) => state.user.user.boosts;
 export const getUserActiveStream = (state: StateSchema) => state.user.user.activeStream;
 export const getCurrentAvailableStreamsCount = (state: StateSchema) => state.user.user.currentAvailableStreamsCount;
+export const getLastSyncAt = (state: StateSchema) => state.user.user.lastSyncAt;
+export const getEarnIncomePerDay = (state: StateSchema) => state.user.user.earnIncomePerDay;
+
+
+export const earnIncomePerSeconds = createSelector(getEarnIncomePerDay, (incomePerDay) => {
+  if (incomePerDay) {
+    return incomePerDay / 86400
+  }
+
+  return null
+});
+
+
 
 export const getUserGameTime = createSelector(getUser, (user) => {
   const {

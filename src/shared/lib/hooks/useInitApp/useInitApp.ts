@@ -9,7 +9,7 @@ import { USER_LOCALSTORAGE_TOKEN } from '@/shared/const/localStorage';
 
 export const useInitApp = () => {
   const { tg, tgDataRow } = useTelegram();
-  const [welcomeModalIsOpen, setWelcomeModalIsOpen] = useState(true);
+  const [welcomeModalIsOpen, setWelcomeModalIsOpen] = useState(false);
   const [isInit, setIsInit] = useState(false);
   const [tokenIsInit, setTokenIsInit] = useState(false);
   const userIsInit = useSelector(getUserIsInit);

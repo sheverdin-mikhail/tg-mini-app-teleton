@@ -1,0 +1,15 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 60%;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-grow: 1;
+    font-size: var(--text-xl);
+}

@@ -35,7 +35,10 @@ export interface User extends TGUser {
     boosts?: BoostWithUserBoost[];
     currentAvailableStreamsCount?: number;
     maxAvailableStreamsCount?: number;
+    earnIncomePerDay?: number;
+    
 
+    lastSyncAt?: string;
     gameStartedAt?: string;
     gameFinishAt?: string;
     activeStream?: Stream;
