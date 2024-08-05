@@ -7,6 +7,8 @@ import { Button } from '@telegram-apps/telegram-ui';
 import { useBuyLootBox } from '../../api/lootBoxApi';
 import { useCallback } from 'react';
 import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
+import { useSelector } from 'react-redux';
+import { getUserTotalPoins } from '@/entities/User';
 
 interface LootBoxItemProps {
     className?: string;
@@ -18,6 +20,7 @@ interface LootBoxItemProps {
 export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
     const { className, price, lootBox, count } = props;
     const [buyLootBoxMutation] = useBuyLootBox();
+    const totalPoints = useSelector(getUserTotalPoins)
 
 
     const onBuyClickHandler = useCallback(() => {
@@ -37,7 +40,7 @@ export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
                     ))
                 }
             </div>
-            <Button className={cls.button} onClick={onBuyClickHandler}>
+            <Button className={cls.button} onClick={onBuyClickHandler} disabled={totalPoints < price}>
                 <span className={cls.buttonText}>
                     Open for { price } <ViewsIcon />
                 </span>
