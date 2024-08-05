@@ -12,6 +12,6 @@
     width: 100svw;
     display: flex;
     flex-direction: column;
-    padding-bottom: var(--bottom-navbar-height);
+    padding-bottom: calc(var(--bottom-navbar-height) + 10px);
     overflow-y: auto;
 }
