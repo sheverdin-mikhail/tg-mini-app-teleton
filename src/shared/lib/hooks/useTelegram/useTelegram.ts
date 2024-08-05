@@ -1,7 +1,7 @@
 import {
   initSettingsButton,
-  mockTelegramEnv,
-  parseInitData,
+  // mockTelegramEnv,
+  // parseInitData,
   retrieveLaunchParams,
 } from '@telegram-apps/sdk';
 import { TelegramWebApps } from 'app/types/global';

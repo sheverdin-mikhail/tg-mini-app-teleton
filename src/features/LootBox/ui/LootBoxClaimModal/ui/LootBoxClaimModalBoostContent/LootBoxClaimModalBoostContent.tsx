@@ -21,15 +21,21 @@ export const LootBoxClaimModalBoostContent: React.FC<LootBoxClaimModalBoostConte
         dispatch(lootBoxActions.closeModal())
     }, [boost])
 
-    if (!boost) {
-        return <span>something went wrong</span>
-    }
-
     return (
         <div className={clsx(cls.content, {}, [className])}>
-            <Title weight="1" className={cls.text}>Your reward is {boost.title}</Title>
+            {
+                boost 
+                    ? <Title weight="1" className={cls.text}>Your reward is {boost.title}</Title>
+                    : <Title weight="1" className={cls.text}>Sorry, we can't get data about your reward</Title>
+            }
                 
-            <Button onClick={onClickHandler}>Cool!</Button>
+            <Button onClick={onClickHandler}>
+                {
+                    boost
+                    ? "Cool!"
+                    : "Close"
+                }
+            </Button>
         </div>
     );
 }
