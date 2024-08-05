@@ -105,13 +105,6 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
         gameIsStarted && <LiveLablel className={cls.live} />
       }
       <GameBackground level={userLevel?.level} />
-      {/* {touches.map((touch, index) => (
-        <GameTouch
-          touch={touch}
-          key={`${touch.identifier}_${index}`}
-          onRemove={() => handleAnimationEnd(touch)}
-        />
-      ))} */}
       <div>
           {
             transitions((anime, touch) => (<GameTouchContent touch={touch} anime={anime} key={touch.identifier} />))

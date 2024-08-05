@@ -1,5 +1,6 @@
 .level {
     position: relative;
+    z-index: 1;
     width: 100%;
     height: 70%;
     border-radius: 16px;
@@ -13,15 +14,10 @@
 
 }
 
-.gamePoints {
-    position: absolute;
-    top: 15px;
-    pointer-events: none;
-}
 
 .live {
     position: absolute;
-    z-index: 1000;
+    z-index: 15000;
     top: 20px;
     right: 20px;
 }

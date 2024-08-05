@@ -10,7 +10,7 @@
     text-transform: uppercase;
 }
 
-.icon {
+.viewsIcon {
     width: 20px;
     height: 20px;
     fill: var(--tg-theme-text-color);
@@ -23,16 +23,19 @@
 }
 
 .title {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     font-size: var(--text-2xl);
+    text-align: center;
 }
 
 .text {
+    display: block;
     text-align: center;
+}
+
+.points {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .textRow {
@@ -42,8 +45,19 @@
 }
 
 .gameFinishModal {
-    height: 40%;
+    min-height: 40%;
+    gap: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.icon {
+    color: var(--tg-theme-text-color);
+    text-align: center;
+    font-size: 50px;
+}
+
+.text {
+    text-align: center;
 }
