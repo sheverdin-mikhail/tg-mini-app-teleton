@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import cls from './GameBackground.module.scss';
 
 interface GameBackgroundProps {
@@ -9,25 +9,33 @@ export const GameBackground: React.FC<GameBackgroundProps> = (props) => {
   const { level } = props;
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoSrc = `/animations/level_${level ?? 1}.mp4`;
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 2.0;
-      videoRef.current.play();
+      videoRef.current.onloadeddata = () => {
+        setIsVideoLoaded(true);
+        videoRef.current?.play();
+      };
     }
   }, [videoSrc]);
 
   return (
-    <video
-      ref={videoRef}
-      preload="auto"
-      autoPlay
-      loop
-      muted
-      playsInline
-      className={cls.video}
-    >
-      <source src={videoSrc} type="video/mp4" />
-    </video>
+    <div className={cls.videoContainer}>
+      { !isVideoLoaded && <img src={`/levels/level_${level ?? 1}.png`} alt="Loading..." className={cls.placeholderImage} />}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className={cls.video}
+        preload="auto"
+        style={{ display: isVideoLoaded ? 'block' : 'none' }}
+      >
+        <source src={videoSrc} type="video/mp4" />
+      </video>
+    </div>
   );
 };

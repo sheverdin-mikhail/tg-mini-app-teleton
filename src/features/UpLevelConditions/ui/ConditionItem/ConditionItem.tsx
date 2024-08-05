@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import cls from './ConditionItem.module.scss';
 import { Level } from '@/entities/Level';
 import LevelImage1 from '@/shared/assets/img/game/level_1.png';
-import LevelImage2 from '@/shared/assets/img/game/level_2.jpg';
+import LevelImage2 from '@/shared/assets/img/game/level_2.png';
 import LevelImage3 from '@/shared/assets/img/game/level_3.png';
 import { Text, Title } from '@telegram-apps/telegram-ui';
 import { useMemo } from 'react';
