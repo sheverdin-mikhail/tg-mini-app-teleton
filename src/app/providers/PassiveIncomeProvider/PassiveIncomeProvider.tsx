@@ -1,4 +1,4 @@
-import { getEarnIncomePerDay, getUserTotalPoins, userActions } from "@/entities/User";
+import { earnIncomePerSeconds, getUserTotalPoins, userActions } from "@/entities/User";
 import { useSavePoints } from "@/features/Game";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
 import { ReactElement, useEffect } from "react";
@@ -11,22 +11,21 @@ interface PassiveIncomeProviderProps {
 export const PassiveIncomeProvider: React.FC<PassiveIncomeProviderProps> = ({children}) => {
 
     const totalPoints = useSelector(getUserTotalPoins);
-    const earnIncomePerDay = useSelector(getEarnIncomePerDay)
+    const incomePerSeconds = useSelector(earnIncomePerSeconds);
     const dispatch = useAppDispatch();
     const [savePointsMutation] = useSavePoints()
     
     useEffect(() => {
         const interval = setInterval(() => {
-            let earnIncomePerSeconds = Number(earnIncomePerDay) / 86400;
-            if (earnIncomePerSeconds) {
-                dispatch(userActions.increaseUserPoints(earnIncomePerSeconds))
+            if (incomePerSeconds) {
+                dispatch(userActions.increaseUserPoints(incomePerSeconds))
             }
         }, 1000)
 
         return () => {
             clearInterval(interval)
         }
-    }, [earnIncomePerDay])
+    }, [incomePerSeconds])
 
     useEffect(() => {
         const onExit = () => {

@@ -35,15 +35,15 @@ export const EarnOfflinePointsModal: React.FC<EarnOfflinePointsModalProps> = (pr
         if (earnSum >= 1 && !isInit) {
             setIsOpen(true)
             setPassiveIncome(earnSum)
-            dispatch(userActions.increaseUserPoints(Number(incomePerSeconds)))
         }
         setIsInit(true)
     }, [setIsOpen, lastSyncAt, isInit, totalPoints])
 
     const onCloseHandler = useCallback(() => {
         setIsOpen(false)
-        savePointsMutation(totalPoints + Number(incomePerSeconds))
-    }, [totalPoints, setIsOpen, incomePerSeconds])
+        dispatch(userActions.increaseUserPoints(Number(passiveIncome)))
+        savePointsMutation(Number(passiveIncome) + totalPoints)
+    }, [totalPoints, setIsOpen, passiveIncome])
 
     return (
         <Modal 

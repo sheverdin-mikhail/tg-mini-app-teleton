@@ -11,7 +11,6 @@ import cls from './GameLevel.module.scss';
 import { useSavePoints } from '../../api/gameApi';
 import { 
   getGameIsDisabled, 
-  getGameIsInit, 
   getGameIsPaused, 
   getGameIsStarted, 
   getGameStream 
@@ -37,7 +36,6 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const isDisabled = useSelector(getGameIsDisabled);
   const { isInit: userIsInit } = useUserData();
   const userLevel = useSelector(getUserCurrentLevel);
-  const gameIsInit = useSelector(getGameIsInit);
   const stream = useSelector(getGameStream);
   const isPaused = useSelector(getGameIsPaused);
   const gameIsStarted = useSelector(getGameIsStarted);
@@ -78,19 +76,19 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
 
   // eslint-disable-next-line
   const savePoints = useCallback(debounce(() => {
-    if (userIsInit) {
+    if (userIsInit && gameIsStarted) {
       savePointsMutation(totalPoints);
     }
   }, 2000), [userIsInit, totalPoints]);
 
   useEffect(() => {
-    if (gameIsInit && userIsInit) {
+    if (gameIsStarted && userIsInit) {
       savePoints();
     }
     return () => {
       savePoints.cancel();
     };
-  }, [savePoints, userIsInit, gameIsInit]);
+  }, [savePoints, userIsInit, gameIsStarted]);
 
  
 
