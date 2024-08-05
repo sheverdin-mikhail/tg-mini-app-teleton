@@ -26,7 +26,7 @@ export const LootBoxClaimModalPointsContent: React.FC<LootBoxClaimModalPointsCon
 
     return (
         <div className={clsx(cls.content, {}, [className])}>
-            <Title weight="1" className={cls.text}>Your reward is {points} <ViewsIcon className={cls.icon} /></Title>
+            <Title weight="1" className={cls.text}>Your reward is <br/><span className={cls.points}>{points} <ViewsIcon className={cls.icon} /></span> </Title>
 
             <Button onClick={onClickHandler}>Cool!</Button>
         </div>

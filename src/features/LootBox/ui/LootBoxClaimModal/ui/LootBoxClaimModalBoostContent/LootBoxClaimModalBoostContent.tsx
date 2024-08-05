@@ -13,7 +13,6 @@ interface LootBoxClaimModalBoostContentProps {
 
 export const LootBoxClaimModalBoostContent: React.FC<LootBoxClaimModalBoostContentProps> = (props) => {
     const { className, boost } = props;
-    // const [savePointsMutation] = use();
     const dispatch = useAppDispatch();
     const [claimBoostMutation] = useClaimBoost()
 
@@ -21,6 +20,10 @@ export const LootBoxClaimModalBoostContent: React.FC<LootBoxClaimModalBoostConte
         claimBoostMutation(boost.id)
         dispatch(lootBoxActions.closeModal())
     }, [boost])
+
+    if (!boost) {
+        return <span>something went wrong</span>
+    }
 
     return (
         <div className={clsx(cls.content, {}, [className])}>

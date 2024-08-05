@@ -7,7 +7,6 @@ import { useCallback } from 'react';
 import { LootBoxReward } from '@/entities/LootBox';
 import { LootBoxClaimModalBoostContent } from '../LootBoxClaimModalBoostContent/LootBoxClaimModalBoostContent';
 import { LootBoxClaimModalEmptyContent } from '../LootBoxClaimModalEmptyContent/LootBoxClaimModalEmptyContent';
-import { Boost } from '@/entities/Boost';
 import { LootBoxClaimModalPointsContent } from '../LootBoxClaimModalPointsContent/LootBoxClaimModalPointsContent';
 
 interface LootBoxClaimModalProps {
@@ -20,16 +19,16 @@ export const LootBoxClaimModal: React.FC<LootBoxClaimModalProps> = (props) => {
   const rewards = useSelector(getLootBoxItems)
 
   const getModalContent = useCallback((reward: LootBoxReward) => {
-    switch(reward.type) {
-      case 'boost':
-        return <LootBoxClaimModalBoostContent key={reward.id} boost={reward.value as Boost} /> 
-      case 'points':
-        return <LootBoxClaimModalPointsContent key={reward.id} points={reward.value as number}/> 
-      case 'empty':
-        return <LootBoxClaimModalEmptyContent key={reward.id} /> 
-      default:
-        return <LootBoxClaimModalEmptyContent key={reward.id} /> 
-    }
+      switch(reward.type) {
+        case 'boost':
+          return <LootBoxClaimModalBoostContent key={reward.id} boost={reward as any} />
+        case 'points':
+          return <LootBoxClaimModalPointsContent key={reward.id} points={reward.value as number}/> 
+        case 'empty':
+          return <LootBoxClaimModalEmptyContent key={reward.id} /> 
+        default:
+          return <LootBoxClaimModalEmptyContent key={reward.id} /> 
+      }
   }, [])
 
   return (

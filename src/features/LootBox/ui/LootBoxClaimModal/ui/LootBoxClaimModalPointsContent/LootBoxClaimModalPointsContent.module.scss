@@ -1,12 +1,13 @@
 .icon {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     fill: var(--tg-theme-text-color);
     margin-left: 6px;
 }
 
 .text {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -19,4 +20,9 @@
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 1;
+}
+
+.points {
+    display: flex;
+    align-items: center;
 }
