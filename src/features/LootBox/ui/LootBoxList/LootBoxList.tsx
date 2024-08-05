@@ -8,7 +8,6 @@ import { lootBoxActions, lootBoxReducer } from '../../model/slice/lootBox';
 import { useEffect } from 'react';
 import { LOOTBOX_REWARDS_LOCALSTORAGE } from '@/shared/const/localStorage';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { LootBoxReward } from '@/entities/LootBox';
 import { LootBoxClaimModal } from '../LootBoxClaimModal/ui/LootBoxClaimModal/LootBoxClaimModal';
 
 interface LootBoxListProps {
@@ -25,9 +24,13 @@ export const LootBoxList: React.FC<LootBoxListProps> = (props) => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        const lootBoxRewards: LootBoxReward[] | null = JSON.parse(localStorage.getItem(LOOTBOX_REWARDS_LOCALSTORAGE) ?? '0')
+        const lootBoxRewardsSting: 'undefined' | string | null = localStorage.getItem(LOOTBOX_REWARDS_LOCALSTORAGE)
+        const lootBoxRewards = lootBoxRewardsSting !== 'undefined' ? JSON.parse(lootBoxRewardsSting ?? '0') : null
+
         if (lootBoxRewards) {
             dispatch(lootBoxActions.openModal(lootBoxRewards))
+        } else {
+            localStorage.removeItem(LOOTBOX_REWARDS_LOCALSTORAGE)
         }
     }, [])
 

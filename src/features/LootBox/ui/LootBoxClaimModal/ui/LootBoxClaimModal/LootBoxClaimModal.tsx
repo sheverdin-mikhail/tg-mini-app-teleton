@@ -18,6 +18,7 @@ export const LootBoxClaimModal: React.FC<LootBoxClaimModalProps> = (props) => {
   const isOpen = useSelector(getLootBoxIsOpen)
   const rewards = useSelector(getLootBoxItems)
 
+
   const getModalContent = useCallback((reward: LootBoxReward) => {
       switch(reward.type) {
         case 'boost':
