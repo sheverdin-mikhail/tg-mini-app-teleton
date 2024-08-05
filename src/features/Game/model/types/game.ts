@@ -27,6 +27,7 @@ export interface GameSchema {
     isPaused?: boolean;
     isAvailableToStart: boolean;
     isBanned?: boolean;
+    hasBanned?: boolean;
 
     startedAt?: string;
     finishAt?: string;

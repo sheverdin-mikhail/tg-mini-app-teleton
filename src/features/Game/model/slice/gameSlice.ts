@@ -66,6 +66,7 @@ export const gameSlice = createSlice({
       state.isAvailableToStart = false;
       state.activeStream = stream;
       state.farmedPoints = 0;
+      state.hasBanned = false;
     },
     increaseFarmedPoints: (state, action: PayloadAction<number>) => {
       state.farmedPoints = Number(state.farmedPoints) + Number(action.payload);
@@ -87,6 +88,7 @@ export const gameSlice = createSlice({
       state.isFinish = true;
       state.isBanned = false;
       state.isPaused = false;
+      state.hasBanned = false;
     },
     pauseStream: (state) => {
       state.isPaused = true;
@@ -97,6 +99,7 @@ export const gameSlice = createSlice({
     getBun: (state) => {
       state.isBanned = true;
       state.isPaused = true;
+      state.hasBanned = true;
     },
     getUnbunned: (state) => {
       state.isBanned = false;

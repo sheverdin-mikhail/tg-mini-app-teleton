@@ -6,11 +6,13 @@ import { Comment } from '@/shared/ui/Comment/Comment';
 import { Emoji } from '@/shared/ui/Emoji/Emoji';
 import { Text } from '@telegram-apps/telegram-ui';
 import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
-import { getGameFinishAt, getGameStartedAt, getGameTapEvents } from '../../model/selectors/gameSelector';
+import { getGameFinishAt, getGameHasBanned, getGameStartedAt, getGameTapEvents } from '../../model/selectors/gameSelector';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { getRandomGameTapEvent } from '../../model/services/getRandomGameTapEvent';
 import cls from './GameTouchContent.module.scss';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { gameActions } from '../../model/slice/gameSlice';
 
 
 
@@ -59,6 +61,8 @@ export const GameTouchContent: React.FC<GameTouchContentProps> = React.memo(({ t
     const gameTapEvents = useSelector(getGameTapEvents)
     const gameStartedAt = useSelector(getGameStartedAt)
     const gameFinishAt = useSelector(getGameFinishAt)
+    const hasBanned = useSelector(getGameHasBanned)
+    const dispatch = useAppDispatch()
 
     const getRandomContent = (type: GameTapEventType): JSX.Element | null => {
         switch (type) {
@@ -71,6 +75,7 @@ export const GameTouchContent: React.FC<GameTouchContentProps> = React.memo(({ t
                 const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
                 return <Emoji>{randomEmoji}</Emoji>;
             case GameTapEventType.BAN:
+                dispatch(gameActions.getBun())
                 return null;
             default:
                 return <span>Unknown event</span>;
@@ -91,7 +96,7 @@ export const GameTouchContent: React.FC<GameTouchContentProps> = React.memo(({ t
           let randomEvent;
     
           if (
-            (now.isBefore(first20Seconds) || now.isAfter(last20Seconds)) &&
+            (now.isBefore(first20Seconds) || now.isAfter(last20Seconds) || hasBanned) &&
             gameTapEvents.some(event => event.type === GameTapEventType.BAN)
           ) {
             // Если сейчас в первые или последние 20 секунд и есть BAN, то пропускаем BAN
@@ -100,7 +105,7 @@ export const GameTouchContent: React.FC<GameTouchContentProps> = React.memo(({ t
           } else {
             randomEvent = getRandomGameTapEvent(gameTapEvents);
           }
-    
+          
           return getRandomContent(randomEvent.type);
         }
       }
