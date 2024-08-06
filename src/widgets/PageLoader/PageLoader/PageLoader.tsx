@@ -16,7 +16,7 @@ export const PageLoader: React.FC<PageLoaderProps> = (props) => {
       <div className={cls.block}>
         <img src={LogoImage} className={cls.logo} />
         <Title weight='1' className={cls.title}>
-          TeleTON
+          Teleton
         </Title>
       </div>
      <div className={cls.icons}>
