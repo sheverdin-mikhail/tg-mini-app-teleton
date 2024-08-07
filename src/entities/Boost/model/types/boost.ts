@@ -1,5 +1,5 @@
 export interface Boost {
-    id: number;
+    id: string;
     title: string;
     description: string;
     cost: number;

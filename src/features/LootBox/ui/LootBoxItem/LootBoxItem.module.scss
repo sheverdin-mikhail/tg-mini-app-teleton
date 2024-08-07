@@ -35,11 +35,21 @@
 
 .lootBoxItem {
     display: flex;
-    height: 80svw;
+    min-height: 80svw;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
     background: var(--tg-theme-secondary-bg-color);
     padding: 20px 10px;
     border-radius: 16px;
+}
+
+.title {
+    text-align: center;
+}
+
+
+.text {
+    text-decoration: underline;
+    text-align: center;
 }

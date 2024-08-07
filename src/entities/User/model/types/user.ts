@@ -36,6 +36,7 @@ export interface User extends TGUser {
     currentAvailableStreamsCount?: number;
     maxAvailableStreamsCount?: number;
     earnIncomePerDay?: number;
+    dailyStreamsCount?: string;
     
 
     lastSyncAt?: string;

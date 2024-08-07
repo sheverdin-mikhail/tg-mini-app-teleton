@@ -3,6 +3,7 @@ import { Boost } from "@/entities/Boost";
 export interface LootBox {
     id: string;
     prices: number[];
+    lootBoxRewards: LootBoxReward[];
 }
 
 export interface LootBoxRewardSettings {

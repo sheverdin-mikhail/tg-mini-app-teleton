@@ -12,6 +12,8 @@ export interface QuestSettings extends Record<string, any> {
     buttonTitle: string;
     description: string;
     skipChecking: boolean;
+    count?: number;
+    boostId?: string;
 }
 
 export interface Quest {

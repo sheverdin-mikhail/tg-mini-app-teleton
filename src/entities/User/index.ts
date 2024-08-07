@@ -16,7 +16,9 @@ export {
   getCurrentAvailableStreamsCount,
   getEarnIncomePerDay,
   getLastSyncAt,
-  earnIncomePerSeconds
+  earnIncomePerSeconds,
+  getUserDailyStreamsCount,
+  makeGetUserBoost
 } from './model/selectors/userSelector';
 export { CreateToken } from './model/services/UserAuth';
 export { getUserInfo } from './model/services/getUserInfo';

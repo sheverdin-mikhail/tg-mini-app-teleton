@@ -1,0 +1,23 @@
+.rewardsList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 10px;
+    
+}
+
+.block {
+    &:not(&:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.title {
+    margin-bottom: 15px;
+}

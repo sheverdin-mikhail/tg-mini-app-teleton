@@ -1,6 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { StateSchema } from 'app/providers';
 import moment from 'moment';
+import { Boost } from '@/entities/Boost';
 
 export const getUser = (state: StateSchema) => state.user.user;
 export const getUserCurrentLevel = (state: StateSchema) => state.user.user.level;
@@ -15,6 +16,8 @@ export const getUserActiveStream = (state: StateSchema) => state.user.user.activ
 export const getCurrentAvailableStreamsCount = (state: StateSchema) => state.user.user.currentAvailableStreamsCount;
 export const getLastSyncAt = (state: StateSchema) => state.user.user.lastSyncAt;
 export const getEarnIncomePerDay = (state: StateSchema) => state.user.user.earnIncomePerDay;
+export const getUserDailyStreamsCount= (state: StateSchema) => state.user.user.dailyStreamsCount;
+
 
 
 export const earnIncomePerSeconds = createSelector(getEarnIncomePerDay, (incomePerDay) => {
@@ -50,3 +53,13 @@ export const getUserCurrentConditions = createSelector(getUser, (user) => {
     referrals,
   };
 });
+
+
+export const makeGetUserBoost = (_state?: StateSchema, _p0?: number) => createSelector(
+  [getUserBoosts, (_: StateSchema, boostId: Boost['id']) => boostId],
+  (boosts, boostId) => {
+    console.log(boosts)
+    console.log(boosts?.find(boost => boost.id === boostId)?.user_boost?.dailyUseCount)
+    return boosts?.find(boost => boost.id === boostId)?.user_boost?.dailyUseCount
+  }
+);

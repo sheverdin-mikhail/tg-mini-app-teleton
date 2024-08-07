@@ -9,6 +9,9 @@ import {
 import cls from './QuestItem.module.scss';
 import { useQuestClaim, useQuestVerify } from '../../api/questsListApi';
 import { initUtils } from '@telegram-apps/sdk';
+import { useSelector } from 'react-redux';
+import { getUserDailyStreamsCount, makeGetUserBoost } from '@/entities/User';
+import { StateSchema } from '@/app/providers';
 
 interface QuestItemProps {
     className?: string;
@@ -21,6 +24,9 @@ export const QuestItem: React.FC<QuestItemProps> = (props) => {
   const [questVerifyMutation, { isLoading }] = useQuestVerify();
   const [questClaimMutation] = useQuestClaim();
   const utils = initUtils()
+  const userDailyStreams = useSelector(getUserDailyStreamsCount)
+  const getUserBoost = makeGetUserBoost();
+  const boostCount = useSelector((state: StateSchema) => getUserBoost(state, item.settings.boostId ?? ''));
 
   const buttonClickHandler = (item: Quest) => () => {
     if (item.status === QuestStatus.START) {
@@ -42,6 +48,17 @@ export const QuestItem: React.FC<QuestItemProps> = (props) => {
       <Text className={cls.description} weight="3">
         {item.settings.description}
       </Text>
+      {
+        (item.settings.action === 'boosts' || item.settings.action === 'streams') && (
+          <Text className={cls.description} weight="3">
+            {
+              item.settings.action === 'streams'
+              ? <span>{userDailyStreams ?? 0} / {item.settings.count ?? 0}</span>
+              : <span>{boostCount ?? 0} / {item.settings.count ?? 0}</span>
+            } 
+          </Text>
+        )
+      }
       <Headline className={cls.header} caps weight="1">
         {item.settings.header}
       </Headline>

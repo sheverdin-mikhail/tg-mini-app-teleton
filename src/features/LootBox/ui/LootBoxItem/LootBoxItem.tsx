@@ -1,26 +1,29 @@
-import { LootBox } from '@/entities/LootBox';
+import { LootBox, LootBoxReward } from '@/entities/LootBox';
 import cls from './LootBoxItem.module.scss';
 import LootBoxImage from '@/shared/assets/img/lootbox.png';
 
 import clsx from 'clsx';
-import { Button } from '@telegram-apps/telegram-ui';
+import { Button, Text, Title } from '@telegram-apps/telegram-ui';
 import { useBuyLootBox } from '../../api/lootBoxApi';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
 import { useSelector } from 'react-redux';
 import { getUserTotalPoins } from '@/entities/User';
+import { LootBoxRewardsListModal } from '../LootBoxRewardsListModal/LootBoxRewardsListModal';
 
 interface LootBoxItemProps {
     className?: string;
     lootBox: LootBox;
     price: number;
     count: number;
+    rewards?: LootBoxReward[];
 }
 
 export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
-    const { className, price, lootBox, count } = props;
+    const { className, price, lootBox, count, rewards } = props;
     const [buyLootBoxMutation] = useBuyLootBox();
     const totalPoints = useSelector(getUserTotalPoins)
+    const [lootBoxRewardsListIsOpen, setLootBoxRewardsListIsOpen] = useState(false)
 
 
     const onBuyClickHandler = useCallback(() => {
@@ -40,11 +43,24 @@ export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
                     ))
                 }
             </div>
+            <Title weight='2' className={cls.title}>
+                Open loot boxes and win bonuses!
+            </Title>
+            <Text className={cls.text} onClick={() => setLootBoxRewardsListIsOpen(true)}>
+                What's inside?
+            </Text>
             <Button className={cls.button} onClick={onBuyClickHandler} disabled={totalPoints < price}>
                 <span className={cls.buttonText}>
                     Open for { price } <ViewsIcon />
                 </span>
             </Button>
+            {
+                rewards?.length && <LootBoxRewardsListModal
+                    rewards={rewards} 
+                    isOpen={lootBoxRewardsListIsOpen} 
+                    setIsOpen={setLootBoxRewardsListIsOpen}
+                 />
+            }
         </div>
     );
 }

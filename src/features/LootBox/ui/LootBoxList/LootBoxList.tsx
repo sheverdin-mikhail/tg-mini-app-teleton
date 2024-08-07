@@ -48,7 +48,7 @@ export const LootBoxList: React.FC<LootBoxListProps> = (props) => {
                 {
                     lootBoxList?.map((lootBox) => (
                         lootBox.prices.map((price, index) => (
-                            <LootBoxItem price={price} count={index+1} lootBox={lootBox} key={`${lootBox.id}_${price}`}/>
+                            <LootBoxItem price={price} count={index+1} lootBox={lootBox} rewards={lootBox.lootBoxRewards} key={`${lootBox.id}_${price}`}/>
                         ))
                     ))
                 }
