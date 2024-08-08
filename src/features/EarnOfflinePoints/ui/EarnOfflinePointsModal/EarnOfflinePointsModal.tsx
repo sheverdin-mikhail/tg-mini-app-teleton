@@ -53,7 +53,7 @@ export const EarnOfflinePointsModal: React.FC<EarnOfflinePointsModalProps> = (pr
         >
             <Title className={cls.title}>The recordings of your streams have been watched.</Title>
 
-            <Text weight='1' className={cls.text}>{Math.trunc(passiveIncome)} <ViewsIcon className={cls.icon}/></Text>
+            <Text weight='1' className={cls.text}>You recieved {Math.trunc(passiveIncome)} <ViewsIcon className={cls.icon}/></Text>
             <Button className={cls.button} onClick={onCloseHandler}>
                 Thank you
             </Button>

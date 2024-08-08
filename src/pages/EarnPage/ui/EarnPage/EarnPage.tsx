@@ -9,7 +9,7 @@ interface EarnPageProps {
 
 export const EarnPage: React.FC<EarnPageProps> = () => (
   <>
-    <PageContentHeader title="Get more views" />
+    <PageContentHeader title="Get extra views for daily streaming”" />
     <DailyRewards />
     <QuestsList className={cls.questsList} />
   </>

@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import cls from './ReferralLink.module.scss';
 import { useGetReferralData } from '@/entities/Referral';
-import { Button } from '@telegram-apps/telegram-ui';
+import { Button, Snackbar } from '@telegram-apps/telegram-ui';
 import { ReferralLinkLoading } from '../ReferralLinkLoading/ReferralLinkLoading';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { initUtils } from '@telegram-apps/sdk';
 import { AwesomeIcon } from '@/shared/ui/AwesomeIcon/AwesomeIcon';
 import { copyToClipboard } from '@/shared/lib/utils/clipboard';
@@ -16,6 +16,7 @@ export const ReferralLink: React.FC<ReferralLinkProps> = (props) => {
     const { className } = props;
     const {data: referralData, isLoading} = useGetReferralData()
     const utils = initUtils()
+    const [snakbarIsOpen, setSnakBarIsOpen] = useState(false)
 
     const referralLink = useMemo(() => `${import.meta.env.VITE_APP_URL}/?startapp=ref-${referralData?.code}`, [referralData])
 
@@ -28,6 +29,7 @@ export const ReferralLink: React.FC<ReferralLinkProps> = (props) => {
     const onClickCopyHandler = () => {
         if(referralLink) {
             copyToClipboard(referralLink)
+            setSnakBarIsOpen(true)
         }
     }
 
@@ -46,10 +48,15 @@ export const ReferralLink: React.FC<ReferralLinkProps> = (props) => {
             </Button>
             <Button 
                 onClick={onClickCopyHandler} 
-                disabled={!referralData?.code}
+                disabled={!referralData?.code || snakbarIsOpen}
             >
                 <AwesomeIcon icon='fa-solid fa-copy' className={cls.copyIcon} />
             </Button>
+            {
+                snakbarIsOpen && <Snackbar  onClose={() => setSnakBarIsOpen(false)} duration={1500}>
+                                    The link has been successfully copied
+                                </Snackbar>
+            }
         </div>
     );
 }

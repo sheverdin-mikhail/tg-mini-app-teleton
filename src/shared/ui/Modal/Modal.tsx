@@ -3,8 +3,8 @@ import {
 } from 'react';
 import { Portal } from '@/shared/ui/Portal/Portal';
 import clsx from 'clsx';
-import cls from './Modal.module.scss';
 import { AwesomeIcon } from '../AwesomeIcon/AwesomeIcon';
+import cls from './Modal.module.scss';
 
 interface ModalProps {
   className?: string;

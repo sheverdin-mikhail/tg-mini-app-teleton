@@ -33,14 +33,14 @@ export const LootBoxRewardsListModal: React.FC<LootBoxRewardsListModalProps> = (
             {
                 Object.keys(rewards).map((key) => (
                     <div key={key} className={cls.block}>
-                        <Title className={cls.title} caps>{key}</Title>
+                        <Title className={cls.title} caps weight='1'>{key}</Title>
                         {
                             <ul className={cls.rewardsList}>
                                 {rewards[key].map((reward) => (
                                     <li className={cls.rewardItem} key={reward.id}>
                                         {
                                             key === 'points'
-                                            ? <Text className={cls.text}>{reward.settings?.amount} <ViewsIcon /></Text>
+                                            ? <Text className={cls.text}>{reward.settings?.amount} <ViewsIcon className={cls.icon} /></Text>
                                             : <Text className={cls.text}>{reward.title}</Text>
                                         }
                                     </li>

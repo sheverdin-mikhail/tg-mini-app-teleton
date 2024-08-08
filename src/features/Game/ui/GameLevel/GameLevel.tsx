@@ -49,67 +49,65 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
     leave: { translateY: -200, opacity: 0 },
     config: {
       easing: (x: any) => {
-        return  Math.sqrt(1 - Math.pow(x - 1, 2));
+        return Math.sqrt(1 - Math.pow(x - 1, 2));
       },
       duration: 1500,
     },
     onRest: (_style: any, _: any, item: any) => {
-      handleAnimationEnd(item)
-    } 
-  })
-  
+      handleAnimationEnd(item);
+    },
+  });
 
-  const handleTouchStart = useCallback((event: any) => {
-    if (!isDisabled && stream && !isPaused) {
-      const newTouches = Array.from(event.touches);
-      setTouches(newTouches);
+  // Дебаунс для сохранения очков
+  const debouncedSavePoints = useRef(
+    debounce(() => {
+      if (userIsInit && gameIsStarted) {
+        console.log('save points');
+        savePointsMutation(totalPoints);
+      }
+    }, 2000)
+  ).current;
 
-      dispatch(userActions.increaseUserPoints(1));
-      dispatch(gameActions.increaseFarmedPoints(1));
-    }
-  }, [dispatch, isDisabled, stream, isPaused]);
+  const handleTouchStart = useCallback(
+    (event: any) => {
+      if (!isDisabled && stream && !isPaused) {
+        const newTouches = Array.from(event.touches);
+        setTouches(newTouches);
 
-  // Удаляем тапы из состояния по окончанию анимации
+        dispatch(userActions.increaseUserPoints(1));
+        dispatch(gameActions.increaseFarmedPoints(1));
+
+        // Сброс дебаунса при каждом тапе
+        debouncedSavePoints();
+      }
+    },
+    [dispatch, isDisabled, stream, isPaused, debouncedSavePoints]
+  );
+
   const handleAnimationEnd = useCallback((touch: any) => {
-    setTouches((prev) => prev.filter(t => t.identifier !== touch.identifier));
-    touchesRef.current = touchesRef.current.filter(t => t.identifier !== touch.identifier);
-  },[])
-
-  // eslint-disable-next-line
-  const savePoints = useCallback(debounce(() => {
-    if (userIsInit && gameIsStarted) {
-      savePointsMutation(totalPoints);
-    }
-  }, 2000), [userIsInit, totalPoints]);
+    setTouches((prev) => prev.filter((t) => t.identifier !== touch.identifier));
+    touchesRef.current = touchesRef.current.filter((t) => t.identifier !== touch.identifier);
+  }, []);
 
   useEffect(() => {
-    if (gameIsStarted && userIsInit) {
-      savePoints();
-    }
     return () => {
-      savePoints.cancel();
+      // Очистка таймера при размонтировании компонента
+      debouncedSavePoints.cancel();
     };
-  }, [savePoints, userIsInit, gameIsStarted]);
-
- 
+  }, [debouncedSavePoints]);
 
   useEffect(() => {
-    transitionRef.start()
-  }, [touches])
+    transitionRef.start();
+  }, [touches]);
 
   return (
-    <div
-      className={clsx(cls.level, {}, [className])}
-      onTouchStart={handleTouchStart}
-    >
-      {
-        gameIsStarted && <LiveLablel className={cls.live} />
-      }
+    <div className={clsx(cls.level, {}, [className])} onTouchStart={handleTouchStart}>
+      {gameIsStarted && <LiveLablel className={cls.live} />}
       <GameBackground level={userLevel?.level} />
       <div>
-          {
-            transitions((anime, touch) => (<GameTouchContent touch={touch} anime={anime} key={touch.identifier} />))
-          }
+        {transitions((anime, touch) => (
+          <GameTouchContent touch={touch} anime={anime} key={touch.identifier} />
+        ))}
       </div>
       <GameBunModal />
       <TapHelper />
