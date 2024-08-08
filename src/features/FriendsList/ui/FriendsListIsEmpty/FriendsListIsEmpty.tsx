@@ -8,6 +8,6 @@ interface FriendsListIsEmptyProps {
 export const FriendsListIsEmpty: React.FC<FriendsListIsEmptyProps> = () => {
 
     return (
-        <Text className={cls.text}>Here is epmty</Text>
+        <Text className={cls.text}>Friends list is empty</Text>
     );
 }

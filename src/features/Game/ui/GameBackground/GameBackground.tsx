@@ -8,7 +8,7 @@ interface GameBackgroundProps {
 export const GameBackground: React.FC<GameBackgroundProps> = (props) => {
   const { level } = props;
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const gifSrc = `/animations/level_${level ?? 1}.gif`;
+  const gifSrc = `https://tap-cdn.teleton.app/animations/level_${level ?? 1}.gif`;
   const placeholderSrc = `/levels/level_${level ?? 1}.png`;
 
   const handleImageLoad = () => {

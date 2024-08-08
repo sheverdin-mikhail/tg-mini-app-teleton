@@ -13,7 +13,9 @@ interface QuestsListProps {
 export const QuestsList: React.FC<QuestsListProps> = (props) => {
   const { className } = props;
 
-  const { data: questsData, isLoading } = useQuestsList(null);
+  const { data: questsData, isLoading, isError } = useQuestsList(null, {
+    refetchOnReconnect: true
+  });
 
   const sections: Record<string, Quest[]> | undefined = useMemo(() => questsData?.data?.reduce((acc: Record<string, Quest[]>, item: Quest) => {
     if (acc[item.section]) {
@@ -42,10 +44,13 @@ export const QuestsList: React.FC<QuestsListProps> = (props) => {
         </div>
       ));
     }
+    
+    if (isError) {
+      return <Text>Error! Can't load Quests list, check your connection.</Text>;
+    }
+
     return (
-      <div>
-        <Text>Список задач пуст</Text>
-      </div>
+      <Text>Quests list is empty</Text>
     );
   }, [sections]);
 

@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { getUserCurrentLevel, getUserCurrentConditions } from '@/entities/User';
 import cls from './UpLevelConditionsList.module.scss';
 import { ConditionItem } from '../ConditionItem/ConditionItem';
-import { getLevels } from '@/entities/Level';
+import { getLevels, getLevelsIsError } from '@/entities/Level';
+import { Text } from '@telegram-apps/telegram-ui';
 
 interface UpLevelConditionsListProps {
     className?: string;
@@ -20,6 +21,13 @@ export const UpLevelConditionsList: React.FC<UpLevelConditionsListProps> = (prop
   const currentLevel = useSelector(getUserCurrentLevel);
   const currentConditions = useSelector(getUserCurrentConditions);
   const levels = useSelector(getLevels);
+  const isError = useSelector(getLevelsIsError)
+
+  if (isError) {
+    return <Text>
+      Error! Can't load levels, check your connection.
+    </Text>
+  }
 
   return (
     <div className={clsx(cls.upLevelConditionsList, {}, [className])}>

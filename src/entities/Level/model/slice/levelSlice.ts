@@ -24,15 +24,20 @@ export const levelsSlice = createSlice({
     .addCase(fetchLevelsList.pending, (state) => {
       state.error = '';
       state.isLoading = true;
+
     })
     .addCase(fetchLevelsList.fulfilled, (state, action: PayloadAction<Level[]>) => {
       state.isLoading = false;
       state.isInit = true;
       state.levels = action.payload;
+      state.isError = false;
+      state.isInit = true;
     })
     .addCase(fetchLevelsList.rejected, (state, action: PayloadAction<string | undefined>) => {
       state.isLoading = false;
       state.error = action.payload ?? '';
+      state.isError = true;
+      state.isInit = true;
     }),
 });
 

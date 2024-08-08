@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { getUserBoosts } from '@/entities/User';
-import { Title } from '@telegram-apps/telegram-ui';
+import { Text, Title } from '@telegram-apps/telegram-ui';
 import cls from './BoostsList.module.scss';
 import { useGetBoostsList } from '@/entities/Boost';
 import { BoostsListItem } from '../BoostsListItem/BoostsListItem';
@@ -38,9 +38,9 @@ export const BoostsList: React.FC<BoostsListProps> = (props) => {
       }
       {
         isError && (
-          <span>
-            Не удалось загрузить список бустов
-          </span>
+          <Text>
+            Error! Can't load Boosts list, check your connection.
+          </Text>
         )
       }
 

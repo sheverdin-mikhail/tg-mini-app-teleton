@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { InlineButtons, Spinner } from '@telegram-apps/telegram-ui';
+import { InlineButtons, Spinner, Text } from '@telegram-apps/telegram-ui';
 import cls from './StreamsList.module.scss';
 import { Stream } from '../../model/types/stream';
 import { StreamsListItem } from '../StreamsListItem/StreamsListItem';
@@ -19,10 +19,16 @@ const StreamIcons = [
 
 export const StreamsList: React.FC<StreamsListProps> = (props) => {
   const { className, onClick, disabled } = props;
-  const { data: streams, isLoading } = useGetStreamsList();
+  const { data: streams, isLoading, isError } = useGetStreamsList();
 
   if (isLoading) {
     return <Spinner size="l" />;
+  }
+
+  if (isError) {
+    return <Text>
+      Error! Can't load stream types, check your connection.
+    </Text>
   }
 
   return (

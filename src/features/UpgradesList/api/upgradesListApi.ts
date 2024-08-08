@@ -15,7 +15,7 @@ interface BuyUpgradeResponse {
 
 const upgradesApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    getUpgradesList: build.query<Upgrade[], void>({
+    getUpgradesList: build.query<Upgrade[], null>({
       query: () => ({
         url: '/boosts/upgrades/upgrades-for-buy/',
       }),

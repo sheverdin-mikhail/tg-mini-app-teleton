@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import cls from './LootBoxList.module.scss';
-import { Title } from '@telegram-apps/telegram-ui';
+import { Text, Title } from '@telegram-apps/telegram-ui';
 import { LootBoxItem } from '../LootBoxItem/LootBoxItem';
 import { useGetLootBoxList } from '../../api/lootBoxApi';
 import { DynamicModuleLoader, ReducersList } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -20,7 +20,7 @@ const reducers: ReducersList = {
 
 export const LootBoxList: React.FC<LootBoxListProps> = (props) => {
     const { className } = props;
-    const {data: lootBoxList } = useGetLootBoxList()
+    const {data: lootBoxList, isError } = useGetLootBoxList()
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -34,9 +34,25 @@ export const LootBoxList: React.FC<LootBoxListProps> = (props) => {
         }
     }, [])
 
-    if (!lootBoxList?.length) {
-        return <Title className={cls.title} weight='1'>Список лутбоксов пуст</Title>
+
+    if (isError) {
+        return <>
+            <Title weight="1" caps className={cls.title}>
+                Loot boxes
+            </Title>
+            <Text >Error! Can't load Lootboxes list, check your connection.</Text>
+        </>
     }
+
+    if (!lootBoxList?.length) {
+        return <>
+            <Title weight="1" caps className={cls.title}>
+                Loot boxes
+            </Title>
+            <Text >Lootboxes list is empty</Text>
+        </>
+    }
+    
 
     return (
     <DynamicModuleLoader reducers={reducers}>

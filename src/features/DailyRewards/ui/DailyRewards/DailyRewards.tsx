@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { InlineButtons, Title } from '@telegram-apps/telegram-ui';
+import { InlineButtons, Text, Title } from '@telegram-apps/telegram-ui';
 import { useSelector } from 'react-redux';
 import { getUserCurrentDailyReward } from '@/entities/User';
 import { useMemo  } from 'react';
@@ -16,7 +16,9 @@ interface DailyRewardsProps {
 
 export const DailyRewards: React.FC<DailyRewardsProps> = (props) => {
   const { className } = props;
-  const { isError, isLoading, data: dailyRewardsList } = useGetDailyRewardsList();
+  const { isError, isLoading, data: dailyRewardsList } = useGetDailyRewardsList(null, {
+    refetchOnReconnect: true,
+  });
   const lastDailyReward = useSelector(getUserCurrentDailyReward);
 
 
@@ -39,11 +41,11 @@ export const DailyRewards: React.FC<DailyRewardsProps> = (props) => {
   }, [lastDailyReward]);
 
   if (isError) {
-    return <div>Неудалось загрузить ежедневные награды</div>;
+    return <Text>Error! Can't load Daily rewards list, check your connection.</Text>;
   }
 
   if (!dailyRewards && !isError && !isLoading) {
-    return <div>Список ежедневных наград пуст</div>;
+    return <div>Daily rewards list is empty</div>;
   }
 
   return (

@@ -4,7 +4,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 
 const dailyRewardsApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    getDailyRewardsList: build.query<DailyReward[], void>({
+    getDailyRewardsList: build.query<DailyReward[], null>({
       query: () => ({
         url: '/earn/daily-rewards/',
         method: 'GET',

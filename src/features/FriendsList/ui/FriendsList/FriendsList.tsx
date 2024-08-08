@@ -4,7 +4,7 @@ import { useGetFriendsList } from '@/entities/Referral';
 import { FriendsListItem } from '../FriendsListItem/FriendsListItem';
 import { FriendsListLoading } from '../FriendsListLoading/FriendsListLoading';
 import { FriendsListIsEmpty } from '../FriendsListIsEmpty/FriendsListIsEmpty';
-import { Title } from '@telegram-apps/telegram-ui';
+import { Text, Title } from '@telegram-apps/telegram-ui';
 
 interface FriendsListProps {
     className?: string;
@@ -12,7 +12,7 @@ interface FriendsListProps {
 
 export const FriendsList: React.FC<FriendsListProps> = (props) => {
     const { className } = props;
-    const { data: friendsList, isLoading } = useGetFriendsList()
+    const { data: friendsList, isLoading, isError } = useGetFriendsList()
 
     if (isLoading) {
         return (
@@ -20,6 +20,15 @@ export const FriendsList: React.FC<FriendsListProps> = (props) => {
                 <FriendsListLoading />
             </div>
         )
+    }
+
+    if (isError) {
+        return <>
+        <Title weight="1" caps className={cls.title}>
+            Friends
+        </Title>
+        <Text >Error! Can't load Upgrades list, check your connection.</Text>
+        </>
     }
 
     return (
