@@ -16,10 +16,10 @@ export const BottomNavbar: React.FC<BottomNavbarProps> = (props) => {
 
   return (
     <div className={clsx(cls.bottomNavbar, {}, [className])}>
-      <SegmentedControl>
+      <SegmentedControl className={cls.tabList}>
         {
           navbarItems.map((item) => (
-            <BottomNavbarItem item={item} key={item.path} selected={pathname === item.path} />
+            <BottomNavbarItem className={cls.item} item={item} key={item.path} selected={pathname === item.path} />
           ))
         }
       </SegmentedControl>

@@ -10,7 +10,7 @@ interface BottomNavbarItemProps {
 }
 
 export const BottomNavbarItem: React.FC<BottomNavbarItemProps> = (props) => {
-  const { selected = false, item } = props;
+  const { selected = false, item, className } = props;
 
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export const BottomNavbarItem: React.FC<BottomNavbarItemProps> = (props) => {
   }, [navigate, item.path]);
 
   return (
-    <SegmentedControlItem onClick={onClickHandler} selected={selected}>
+    <SegmentedControlItem className={className} onClick={onClickHandler} selected={selected}>
       {item.text}
     </SegmentedControlItem>
   );

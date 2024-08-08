@@ -5,3 +5,10 @@
     bottom: 10px;
     padding: 0 14px;
 }
+
+.tabList {
+    background: var(--tg-theme-section-bg-color);
+    div > div {
+        background: var(--tg-theme-section-separator-color);
+    }
+}
