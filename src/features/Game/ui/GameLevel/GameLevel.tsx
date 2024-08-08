@@ -21,6 +21,7 @@ import { GameBunModal } from '../GameBunModal/GameBunModal';
 import { LiveLablel } from '@/shared/ui/LiveLablel/LiveLablel';
 import { GameTouchContent } from '../GameTouchContent/GameTouchContent';
 import { useSpringRef, useTransition } from '@react-spring/web';
+import { TapHelper } from '../TapHelper/TapHelper';
 
 interface GameLevelProps {
   className?: string;
@@ -111,6 +112,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
           }
       </div>
       <GameBunModal />
+      <TapHelper />
     </div>
   );
 };
