@@ -21,7 +21,7 @@ interface LootBoxItemProps {
 
 export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
     const { className, price, lootBox, count, rewards } = props;
-    const [buyLootBoxMutation] = useBuyLootBox();
+    const [buyLootBoxMutation, {isLoading}] = useBuyLootBox();
     const totalPoints = useSelector(getUserTotalPoins)
     const [lootBoxRewardsListIsOpen, setLootBoxRewardsListIsOpen] = useState(false)
 
@@ -49,7 +49,7 @@ export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
             <Text className={cls.text} onClick={() => setLootBoxRewardsListIsOpen(true)}>
                 What's inside?
             </Text>
-            <Button className={cls.button} onClick={onBuyClickHandler} disabled={totalPoints < price}>
+            <Button className={cls.button} onClick={onBuyClickHandler} disabled={totalPoints < price || isLoading} loading={isLoading}>
                 <span className={cls.buttonText}>
                     Open for { price } <ViewsIcon />
                 </span>
