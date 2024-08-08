@@ -13,6 +13,7 @@ import cls from './GameStartModal.module.scss';
 interface GameStartModalProps {
     className?: string;
     onClose?: () => void;
+    onStartStream?: () => void;
     isOpen: boolean;
 }
 
@@ -20,6 +21,7 @@ export const GameStartModal: React.FC<GameStartModalProps> = (props) => {
   const {
     isOpen,
     onClose,
+    onStartStream
   } = props;
   const dispatch = useAppDispatch();
   const userBoosts = useSelector(getUserBoosts);
@@ -47,7 +49,7 @@ export const GameStartModal: React.FC<GameStartModalProps> = (props) => {
           stream,
         }));
       }
-      onCloseHandler();
+      onStartStream?.();
     }
   }, [dispatch, startGameMutation, stream, energyBoost, onCloseHandler]);
 

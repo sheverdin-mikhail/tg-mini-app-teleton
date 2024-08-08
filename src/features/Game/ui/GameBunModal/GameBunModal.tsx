@@ -54,6 +54,10 @@ export const GameBunModal: React.FC<GameBunModalProps> = (props) => {
             </Title>
             <AwesomeIcon icon='fa-solid fa-ban' className={cls.icon} />
             <Text className={cls.text}>You got a strike. It looks like the stream has come to an end</Text>
+            {
+
+                !banDefence?.user_boost.isPurchased && <Text className={cls.text}>Use the Ban defence next time!</Text>
+            }
             <div className={cls.buttons}>
                 <Button onClick={onCancelHandler} className={cls.button} disabled={disabled}>finish stream</Button>
                 {
