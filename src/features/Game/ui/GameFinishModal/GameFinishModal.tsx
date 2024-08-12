@@ -24,7 +24,7 @@ export const GameFinishModal: React.FC<GameFinishModalProps> = (props) => {
   } = props;
   const stream = useSelector(getGameStream);
   const farmedPoints = useSelector(getGameFarmedPoints);
-  const [savePointsMutation] = useSavePoints();
+  const [savePointsMutation, {isLoading}] = useSavePoints();
   const totalPoints = useSelector(getUserTotalPoins);
   const dispatch = useAppDispatch();
 
@@ -53,7 +53,7 @@ export const GameFinishModal: React.FC<GameFinishModalProps> = (props) => {
       </Text>
       
       <div className={cls.buttons}>
-        <Button className={cls.button} onClick={onCloseHandler}>Cool!</Button>
+        <Button className={cls.button} onClick={onCloseHandler} disabled={isLoading} loading={isLoading}>Cool!</Button>
       </div>
     </Modal>
   );

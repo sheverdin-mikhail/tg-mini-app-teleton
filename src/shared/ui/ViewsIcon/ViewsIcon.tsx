@@ -13,7 +13,9 @@ export const ViewsIcon: React.FC<ViewsIconProps> = (props) => {
 
     return (
         <svg 
-            className={clsx(cls.icon, className)} 
+            className={clsx(cls.icon, {
+                [cls.fill]: !gradient 
+            }, className)} 
             width={width} 
             height={height}
             version="1.1"

@@ -18,7 +18,7 @@ export const LevelUpModal: React.FC<LevelUpModalProps> = (props) => {
   const {
     onClose,
   } = props;
-  const [levelUpMutation] = useLevelUp();
+  const [levelUpMutation, {isLoading}] = useLevelUp();
   const [isOpen, setIsOpen] = useState(false);
   const totalPoints = useSelector(getUserTotalPoins);
   const gameIsStart = useSelector(getGameIsStarted);
@@ -46,7 +46,7 @@ export const LevelUpModal: React.FC<LevelUpModalProps> = (props) => {
         Your lvl is UP!
       </Title>
       <div className={cls.buttons}>
-        <Button className={cls.button} onClick={onCloseHandler}>Cool!</Button>
+        <Button disabled={isLoading} loading={isLoading} className={cls.button} onClick={onCloseHandler}>Cool!</Button>
       </div>
     </Modal>
   );

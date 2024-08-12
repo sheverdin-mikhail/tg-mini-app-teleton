@@ -62,7 +62,6 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const debouncedSavePoints = useRef(
     debounce(() => {
       if (userIsInit && gameIsStarted) {
-        console.log('save points');
         savePointsMutation(totalPoints);
       }
     }, 2000)
@@ -79,6 +78,8 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
 
         // Сброс дебаунса при каждом тапе
         debouncedSavePoints();
+      } else {
+        dispatch(gameActions.openStreamsModal())
       }
     },
     [dispatch, isDisabled, stream, isPaused, debouncedSavePoints]

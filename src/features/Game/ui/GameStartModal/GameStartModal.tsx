@@ -25,7 +25,7 @@ export const GameStartModal: React.FC<GameStartModalProps> = (props) => {
   } = props;
   const dispatch = useAppDispatch();
   const userBoosts = useSelector(getUserBoosts);
-  const [startGameMutation] = useStartGame();
+  const [startGameMutation, {isLoading}] = useStartGame();
   const stream = useSelector(getGameStream);
 
   const energyBoost = useMemo(() => userBoosts?.find((boost) => Object.keys((boost?.settings ?? {})).includes('durationMultiply')), [userBoosts]);
@@ -70,7 +70,12 @@ export const GameStartModal: React.FC<GameStartModalProps> = (props) => {
       }
       <div className={cls.buttons}>
         <Button className={cls.button} onClick={onCloseHandler}>Not now</Button>
-        <Button className={cls.button} onClick={onStartHandler}>Go live { energyBoost?.user_boost.isPurchased && <span className={cls.energy}><FlashIcon className={cls.icon} />Energy boost</span> }</Button>
+        <Button 
+          disabled={isLoading} 
+          loading={isLoading} 
+          className={cls.button} 
+          onClick={onStartHandler}
+        >Go live { energyBoost?.user_boost.isPurchased && <span className={cls.energy}><FlashIcon className={cls.icon} />Energy boost</span> }</Button>
       </div>
     </Modal>
   );

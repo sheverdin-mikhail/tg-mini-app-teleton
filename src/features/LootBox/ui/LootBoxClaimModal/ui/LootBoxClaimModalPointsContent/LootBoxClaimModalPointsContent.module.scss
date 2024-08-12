@@ -1,8 +1,10 @@
 .icon {
     width: 30px;
     height: 30px;
-    fill: var(--tg-theme-text-color);
     margin-left: 6px;
+    path {
+        fill: var(--tg-theme-text-color);
+    }
 }
 
 .text {

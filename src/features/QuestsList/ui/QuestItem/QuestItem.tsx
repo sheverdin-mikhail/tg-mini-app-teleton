@@ -26,7 +26,7 @@ export const QuestItem: React.FC<QuestItemProps> = (props) => {
   const utils = initUtils()
   const userDailyStreams = useSelector(getUserDailyStreamsCount)
   const getUserBoost = makeGetUserBoost();
-  const boostCount = useSelector((state: StateSchema) => getUserBoost(state, item.settings.boostId ?? ''));
+  const boostCount = useSelector((state: StateSchema) => getUserBoost(state, item.settings.boostId ?? ''))?.dailyUseCount;
 
   const buttonClickHandler = (item: Quest) => () => {
     if (item.status === QuestStatus.START) {

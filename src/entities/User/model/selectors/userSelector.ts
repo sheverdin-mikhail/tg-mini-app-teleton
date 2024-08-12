@@ -58,6 +58,6 @@ export const getUserCurrentConditions = createSelector(getUser, (user) => {
 export const makeGetUserBoost = (_state?: StateSchema, _p0?: number) => createSelector(
   [getUserBoosts, (_: StateSchema, boostId: Boost['id']) => boostId],
   (boosts, boostId) => {
-    return boosts?.find(boost => boost.id === boostId)?.user_boost?.dailyUseCount
+    return boosts?.find(boost => boost.id === boostId)?.user_boost
   }
 );

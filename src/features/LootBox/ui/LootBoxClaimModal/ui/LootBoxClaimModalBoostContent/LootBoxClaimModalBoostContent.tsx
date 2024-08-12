@@ -14,7 +14,7 @@ interface LootBoxClaimModalBoostContentProps {
 export const LootBoxClaimModalBoostContent: React.FC<LootBoxClaimModalBoostContentProps> = (props) => {
     const { className, boost } = props;
     const dispatch = useAppDispatch();
-    const [claimBoostMutation] = useClaimBoost()
+    const [claimBoostMutation, {isLoading}] = useClaimBoost()
 
     const onClickHandler = useCallback(() => {
         claimBoostMutation(boost.id)
@@ -29,7 +29,7 @@ export const LootBoxClaimModalBoostContent: React.FC<LootBoxClaimModalBoostConte
                     : <Title weight="1" className={cls.text}>Sorry, we can't get data about your reward</Title>
             }
                 
-            <Button onClick={onClickHandler}>
+            <Button onClick={onClickHandler} disabled={isLoading} loading={isLoading}>
                 {
                     boost
                     ? "Cool!"

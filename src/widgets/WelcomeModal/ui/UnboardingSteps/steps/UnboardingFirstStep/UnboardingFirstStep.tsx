@@ -15,7 +15,7 @@ export const UnboardingFirstStep: React.FC<UnboardingFirstStepProps> = (props) =
         <div className={clsx(cls.step, {}, [className])}>
             <img src={StepImage} className={cls.img} />
             <Text className={cls.text}>
-                Tap on the streamer and get views. Use boosters and bonuses
+                Start your stream, tap on the streamer and get views. Use boosters and bonuses
             </Text>
         </div>
     );

@@ -20,5 +20,6 @@ export const getGameTapEvents = (state: StateSchema) => state.game?.gameTapEvent
 export const getGameIsBanned = (state: StateSchema) => state.game?.isBanned;
 export const getGameHasBanned = (state: StateSchema) => state.game?.hasBanned;
 
+export const getGameStreamsModalIsOpen = (state: StateSchema) => state.game?.streamsModalIsOpen;
 
 

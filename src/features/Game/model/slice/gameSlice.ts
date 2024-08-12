@@ -11,6 +11,7 @@ const initialState: GameSchema = {
   isStarted: false,
   isFinish: false,
   isAvailableToStart: false,
+  streamsModalIsOpen: false,
   farmedPoints: 0,
   gameTapEvents: [
     {
@@ -104,6 +105,12 @@ export const gameSlice = createSlice({
     getUnbunned: (state) => {
       state.isBanned = false;
       state.isPaused = false;
+    },
+    openStreamsModal: (state) => {
+      state.streamsModalIsOpen = true
+    },
+    closeStreamsModal: (state) => {
+      state.streamsModalIsOpen = false
     },
 
   },

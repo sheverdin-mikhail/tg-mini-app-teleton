@@ -15,7 +15,7 @@ interface LootBoxClaimModalPointsContentProps {
 
 export const LootBoxClaimModalPointsContent: React.FC<LootBoxClaimModalPointsContentProps> = (props) => {
     const { className, points } = props;
-    const [savePointsMutation] = useSavePoints();
+    const [savePointsMutation, {isLoading}] = useSavePoints();
     const dispatch = useAppDispatch();
     const totalPoints = useSelector(getUserTotalPoins)
 
@@ -28,7 +28,7 @@ export const LootBoxClaimModalPointsContent: React.FC<LootBoxClaimModalPointsCon
         <div className={clsx(cls.content, {}, [className])}>
             <Title weight="1" className={cls.text}>Your reward is <br/><span className={cls.points}>{points} <ViewsIcon className={cls.icon} /></span> </Title>
 
-            <Button onClick={onClickHandler}>Cool!</Button>
+            <Button disabled={isLoading} loading={isLoading} onClick={onClickHandler}>Cool!</Button>
         </div>
     );
 }

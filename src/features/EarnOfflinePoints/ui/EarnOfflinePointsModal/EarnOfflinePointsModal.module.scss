@@ -15,5 +15,7 @@
 }
 
 .icon {
-    fill: var(--tg-theme-text-color);
+    path {
+        fill: var(--tg-theme-text-color);
+    }
 }

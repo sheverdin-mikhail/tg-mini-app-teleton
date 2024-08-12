@@ -34,4 +34,6 @@ export interface GameSchema {
     activeStream?: Stream;
     farmedPoints: number;
     gameTapEvents: GameTapEvent[];
+
+    streamsModalIsOpen: boolean;
 }

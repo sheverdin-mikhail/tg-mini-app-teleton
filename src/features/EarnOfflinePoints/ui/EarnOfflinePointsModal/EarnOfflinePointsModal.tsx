@@ -22,7 +22,7 @@ export const EarnOfflinePointsModal: React.FC<EarnOfflinePointsModalProps> = (pr
     const lastSyncAt = useSelector(getLastSyncAt);
     const incomePerSeconds = useSelector(earnIncomePerSeconds);
     const totalPoints = useSelector(getUserTotalPoins);
-    const [savePointsMutation] = useSavePoints();
+    const [savePointsMutation, {isLoading} ] = useSavePoints();
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -54,7 +54,7 @@ export const EarnOfflinePointsModal: React.FC<EarnOfflinePointsModalProps> = (pr
             <Title className={cls.title}>The recordings of your streams have been watched.</Title>
 
             <Text weight='1' className={cls.text}>You recieved {Math.trunc(passiveIncome)} <ViewsIcon className={cls.icon}/></Text>
-            <Button className={cls.button} onClick={onCloseHandler}>
+            <Button className={cls.button} onClick={onCloseHandler} disabled={isLoading} loading={isLoading} >
                 Thank you
             </Button>
         </Modal>
