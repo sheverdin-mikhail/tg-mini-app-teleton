@@ -58,3 +58,8 @@
 .unavailable {
     filter: grayscale(100%);
 }
+.icon {
+    path {
+        stroke: var(--inverted-text-color);
+    }
+}

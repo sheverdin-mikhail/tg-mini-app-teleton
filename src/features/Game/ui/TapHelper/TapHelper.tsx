@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import cls from './TapHelper.module.scss';
-import TapIcon from '@/shared/assets/img/tap.svg';
+import TapIcon from '@/shared/assets/icons/tap-icon.svg';
 import { useSpring, animated, useSpringRef } from '@react-spring/web';
 import { useEffect, useRef, useState } from 'react';
 import { NOT_FIRST_START_LOCALSTORAGE } from '@/shared/const/localStorage';
@@ -80,6 +80,7 @@ export const TapHelper: React.FC<TapHelperProps> = (props) => {
         <div 
             className={clsx(cls.tapHelper, {}, [className])}
             onClick={onClickHandler}
+            onTouchEnd={onClickHandler}
         >
             <animated.div
                 style={{

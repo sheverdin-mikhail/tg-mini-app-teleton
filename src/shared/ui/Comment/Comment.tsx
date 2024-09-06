@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { Text } from '@telegram-apps/telegram-ui';
 import cls from './Comment.module.scss';
+import { FontSize, FontWeight, Text, TextColor } from '../Text/Text';
 
 interface CommentProps {
     className?: string;
@@ -12,7 +12,7 @@ export const Comment: React.FC<CommentProps> = (props) => {
 
     return (
         <div className={clsx(cls.comment, {}, [className])}>
-            <Text weight='1'>{children}</Text>
+            <Text weight={FontWeight.BOLD} size={FontSize.LG} color={TextColor.INVERTED}>{children}</Text>
         </div>
     );
 }

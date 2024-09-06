@@ -1,7 +1,7 @@
 .questsList {
    display: flex;
    flex-direction: column;
-   gap: 32px;
+   gap: 20px;
    padding: 4px;
    padding-bottom: 20px;
 }
@@ -9,16 +9,11 @@
 .section {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 }
 
 .sectionItems {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(45%, 1fr));
-    gap: 16px;
-}
-
-
-.title {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }

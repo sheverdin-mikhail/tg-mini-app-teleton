@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { Quest, QuestItem } from '@/entities/Quest';
 import { useMemo } from 'react';
-import { Text, Title } from '@telegram-apps/telegram-ui';
 import cls from './QuestsList.module.scss';
 import { useQuestsList } from '../../api/questsListApi';
 import { QuestsListSkeleton } from '../QuestsListSkeleton/QuestsListSkeleton';
+import { FontSize, Text, TextColor } from '@/shared/ui/Text/Text';
 
 interface QuestsListProps {
   className?: string;
@@ -31,9 +31,9 @@ export const QuestsList: React.FC<QuestsListProps> = (props) => {
     if (sections) {
       return Object.keys(sections).map((item) => (
         <div className={cls.section} key={item}>
-          <Title caps weight="1" className={cls.title}>
+          <Text className={cls.title} color={TextColor.SECONDARY} size={FontSize.LG}>
             {item}
-          </Title>
+          </Text>
           <div className={cls.sectionItems}>
             {
               sections[item].map((item: Quest) => (

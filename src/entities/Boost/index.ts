@@ -4,3 +4,7 @@ export {
     useGetBoostsList,
     useClaimBoost
 } from './api/boostsListApi'
+export {
+    BoostType,
+    BoostIcon,
+} from './model/types/boost'

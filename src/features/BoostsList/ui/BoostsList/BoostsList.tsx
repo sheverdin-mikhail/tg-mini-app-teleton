@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { getUserBoosts } from '@/entities/User';
-import { Text, Title } from '@telegram-apps/telegram-ui';
 import cls from './BoostsList.module.scss';
 import { useGetBoostsList } from '@/entities/Boost';
 import { BoostsListItem } from '../BoostsListItem/BoostsListItem';
 import { BoostsListLoading } from '../BoostsListLoading/BoostsListLoading';
+import { FontSize, Text, TextColor } from '@/shared/ui/Text/Text';
 
 interface BoostsListProps {
     className?: string;
@@ -20,9 +20,9 @@ export const BoostsList: React.FC<BoostsListProps> = (props) => {
 
   return (
     <div className={cls.boostsList}>
-      <Title weight="1" caps className={cls.title}>
+      <Text color={TextColor.SECONDARY} size={FontSize.LG}>
         Boosts
-      </Title>
+      </Text>
       {
         isLoading
           ? <BoostsListLoading />

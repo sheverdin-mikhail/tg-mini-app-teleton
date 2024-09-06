@@ -7,6 +7,7 @@ import LevelImage3 from '@/shared/assets/img/game/level_3.png';
 import { Text, Title } from '@telegram-apps/telegram-ui';
 import { useMemo } from 'react';
 import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
+import { formatNumber } from '@/shared/lib/utils/formatNumber';
 
 
 interface ConditionItemProps {
@@ -72,11 +73,11 @@ export const ConditionItem: React.FC<ConditionItemProps> = (props) => {
                     unavailable 
                     ? (
                       <span className={cls.text}>
-                        get {pointsToNextLevel} <ViewsIcon />
+                        get {formatNumber(pointsToNextLevel?.toString() ?? '0')} <ViewsIcon className={cls.icon} />
                       </span>
                     )
                     : <span className={cls.text}>
-                      {curValue} <ViewsIcon />
+                      {formatNumber(curValue.toString())} <ViewsIcon className={cls.icon} />
                     </span>
                   }
               </Text>

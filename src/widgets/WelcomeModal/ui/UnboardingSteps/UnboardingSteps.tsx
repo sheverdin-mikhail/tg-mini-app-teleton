@@ -5,8 +5,9 @@ import { UnboardingFirstStep } from './steps/UnboardingFirstStep/UnboardingFirst
 import { UnboardingSecondStep } from './steps/UnboardingSecondStep/UnboardingSecondStep';
 import { UnboardingThirdStep } from './steps/UnboardingThirdStep/UnboardingThirdStep';
 import { UnboardingForthStep } from './steps/UnboardingForthStep/UnboardingForthStep';
-import { Button, CompactPagination } from '@telegram-apps/telegram-ui';
+import { CompactPagination } from '@telegram-apps/telegram-ui';
 import { CompactPaginationItem } from '@telegram-apps/telegram-ui/dist/components/Navigation/CompactPagination/components/CompactPaginationItem/CompactPaginationItem';
+import { Button, ButtonTheme } from '@/shared/ui/Button/Button';
 
 interface UnboardingStepsProps {
     className?: string;
@@ -64,13 +65,18 @@ export const UnboardingSteps: React.FC<UnboardingStepsProps> = (props) => {
                     ))
                 }
             </CompactPagination>
-            <Button onClick={() => nextStepHandler()} className={cls.button}>
-                {
-                    step === STEPS 
-                    ? 'Start streaming'
-                    : 'Next'
-                }
-            </Button>
+            <div className={cls.buttons}>
+                <Button onClick={() => nextStepHandler()} className={cls.button}>
+                    {
+                        step === STEPS 
+                        ? 'Start streaming'
+                        : 'Next'
+                    }
+                </Button>
+                <Button onClick={() => nextStepHandler()} theme={ButtonTheme.SECONDARY} className={cls.button}>
+                    Skip
+                </Button>
+            </div>
         </div>
     );
 }

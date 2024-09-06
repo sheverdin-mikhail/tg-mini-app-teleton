@@ -1,5 +1,5 @@
 import {
-  ReactNode, useCallback, useEffect, useRef, useState,
+  ReactNode, useCallback, useEffect, useRef,
 } from 'react';
 import { Portal } from '@/shared/ui/Portal/Portal';
 import clsx from 'clsx';
@@ -10,32 +10,25 @@ interface ModalProps {
   className?: string;
   children?: ReactNode;
   isOpen?: boolean;
+  withClose?: boolean;
   onClose?: () => void;
 }
-
-const ANIMATION_DELAY = 200;
 
 export const Modal: React.FC<ModalProps> = (props) => {
   const {
     className,
     children,
     isOpen = false,
+    withClose = true,
     onClose,
   } = props;
 
-  const [isClosing, setIsClosing] = useState(false);
   const closeBtnRef = useRef(null);
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
   const modalRef = useRef(document.getElementById('app-modals'));
 
   const closeHandler = useCallback(() => {
-    if (onClose) {
-      setIsClosing(true);
-      timerRef.current = setTimeout(() => {
-        onClose();
-        setIsClosing(false);
-      }, ANIMATION_DELAY);
-    }
+    onClose?.()
   }, [onClose]);
 
   const overlayClickHandler = useCallback((e: any) => {
@@ -63,7 +56,6 @@ export const Modal: React.FC<ModalProps> = (props) => {
 
   const mods = {
     [cls.opened]: isOpen,
-    [cls.isClosing]: isClosing,
   };
 
   return (
@@ -71,9 +63,13 @@ export const Modal: React.FC<ModalProps> = (props) => {
       <div className={clsx(cls.modal, mods)}>
         <div className={cls.overlay}>
           <div className={clsx(cls.content, {}, [className])}>
-            <div className={cls.btn} onClick={overlayClickHandler} ref={closeBtnRef}>
-              <AwesomeIcon className={cls.icon} icon='fa-solid fa-xmark' />
-            </div>
+            {
+              withClose && (
+                <div className={cls.btn} onClick={overlayClickHandler} ref={closeBtnRef}>
+                  <AwesomeIcon className={cls.icon} icon='fa-solid fa-xmark' />
+                </div>
+              )
+            }
             {children}
           </div>
         </div>

@@ -1,0 +1,27 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    gap: 6px;
+}
+
+.icon {
+    fill: var(--secondary-text-color);
+    stroke: var(--secondary-text-color);
+}
+
+.text {
+    color: var(--secondary-text-color);
+    font: var(--font-xs);
+}
+
+.active {
+    .icon {
+        fill: var(--primary-text-color);
+        stroke: var(--primary-text-color);
+    }
+    .text {
+        color: var(--primary-text-color);
+    }
+}

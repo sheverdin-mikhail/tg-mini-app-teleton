@@ -6,7 +6,8 @@ import { GameTimer } from '../GameTimer/GameTimer';
 import { gameActions } from '../../model/slice/gameSlice';
 import { getGameIsInit } from '../../model/selectors/gameSelector';
 import { GameStreams } from '../GameStreams/GameStreams';
-import { GamePoints } from '../GamePoints/GamePoints';
+import { Container } from '@/shared/ui/Container/Container';
+
 
 interface GameProps {
   className?: string;
@@ -25,9 +26,10 @@ export const Game: React.FC<GameProps> = () => {
   return (
 
     <>
-      <GameTimer />
-      <GameStreams />
-      <GamePoints />
+      <Container>
+        <GameTimer />
+        <GameStreams />
+      </Container>
       <GameLevel />
     </>
   );

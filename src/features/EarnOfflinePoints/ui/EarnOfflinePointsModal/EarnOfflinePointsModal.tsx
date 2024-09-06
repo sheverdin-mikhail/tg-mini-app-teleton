@@ -4,11 +4,14 @@ import { useSelector } from 'react-redux';
 import { earnIncomePerSeconds, getLastSyncAt, getUserTotalPoins, userActions } from '@/entities/User';
 import moment from 'moment';
 import { Modal } from '@/shared/ui/Modal/Modal';
-import { Button, Text, Title } from '@telegram-apps/telegram-ui';
 import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
-import cls from './EarnOfflinePointsModal.module.scss';
 import { useSavePoints } from '@/features/Game';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { FontSize, FontWeight, Text } from '@/shared/ui/Text/Text';
+import RewardImage from '@/shared/assets/img/finish.png';
+import { Button } from '@/shared/ui/Button/Button';
+import cls from './EarnOfflinePointsModal.module.scss';
+import { formatNumber } from '@/shared/lib/utils/formatNumber';
 
 interface EarnOfflinePointsModalProps {
     className?: string;
@@ -51,11 +54,12 @@ export const EarnOfflinePointsModal: React.FC<EarnOfflinePointsModalProps> = (pr
             onClose={onCloseHandler} 
             isOpen={isOpen}
         >
-            <Title className={cls.title}>The recordings of your streams have been watched.</Title>
+            <img src={RewardImage} className={cls.rewardImage} />
+            <Text className={cls.title} weight={FontWeight.MEDIUM} size={FontSize.LG}>The recordings of your streams have been watched.</Text>
 
-            <Text weight='1' className={cls.text}>You recieved {Math.trunc(passiveIncome)} <ViewsIcon className={cls.icon}/></Text>
+            <Text className={cls.text} size={FontSize.LG} weight={FontWeight.MEDIUM}>You recieved <ViewsIcon className={cls.icon}/> {formatNumber(Math.trunc(passiveIncome).toString())} </Text>
             <Button className={cls.button} onClick={onCloseHandler} disabled={isLoading} loading={isLoading} >
-                Thank you
+                Cool
             </Button>
         </Modal>
     );

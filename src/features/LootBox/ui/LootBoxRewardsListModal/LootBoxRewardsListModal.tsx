@@ -1,10 +1,12 @@
 import clsx from 'clsx';
-import cls from './LootBoxRewardsListModal.module.scss';
 import { Modal } from '@/shared/ui/Modal/Modal';
 import { LootBoxReward } from '@/entities/LootBox';
 import { useMemo } from 'react';
-import { Text, Title } from '@telegram-apps/telegram-ui';
 import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
+import { Text } from '@/shared/ui/Text/Text';
+import cls from './LootBoxRewardsListModal.module.scss';
+import { formatNumber } from '@/shared/lib/utils/formatNumber';
+
 
 interface LootBoxRewardsListModalProps {
     className?: string;
@@ -33,14 +35,14 @@ export const LootBoxRewardsListModal: React.FC<LootBoxRewardsListModalProps> = (
             {
                 Object.keys(rewards).map((key) => (
                     <div key={key} className={cls.block}>
-                        <Title className={cls.title} caps weight='1'>{key}</Title>
+                        <Text className={cls.title} caps>{key}</Text>
                         {
                             <ul className={cls.rewardsList}>
                                 {rewards[key].map((reward) => (
                                     <li className={cls.rewardItem} key={reward.id}>
                                         {
                                             key === 'points'
-                                            ? <Text className={cls.text}>{reward.settings?.amount} <ViewsIcon className={cls.icon} /></Text>
+                                            ? <Text className={cls.text}>{formatNumber(reward.settings?.amount?.toString() ?? '0')} <ViewsIcon className={cls.icon} /></Text>
                                             : <Text className={cls.text}>{reward.title}</Text>
                                         }
                                     </li>

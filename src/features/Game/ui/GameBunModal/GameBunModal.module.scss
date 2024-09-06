@@ -8,22 +8,19 @@
 }
 
 .gameBunModal {
-    min-height: 40%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 20px;
+    align-items: center;
+    gap: 24px;
 }
 
 .buttons {
     display: flex;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    align-self: stretch;
+    gap: 8px;
 }
 
-.button {
-    flex: 1 0 45%;
-}
 
 .icon {
     color: var(--tg-theme-text-color);
@@ -33,4 +30,25 @@
 
 .text {
     text-align: center;
+}
+
+.rewardImage {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 16px;
+}
+
+
+.defenceIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+}
+
+
+.block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
 }

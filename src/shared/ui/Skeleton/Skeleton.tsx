@@ -25,13 +25,9 @@ export const Skeleton: React.FC<SkeletonProps> = (props) => {
       style={{
         width,
         height: isSquare ? width : height,
-        borderRadius: isCircle ? '100%' : '16px',
+        borderRadius: isCircle ? '100%' : '10px',
       }}
     >
-      <TgSkeleton
-        className={cls.skeleton}
-        visible
-      />
     </div>
   );
 };

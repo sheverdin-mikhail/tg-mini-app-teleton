@@ -4,6 +4,13 @@ export enum QuestStatus {
     DONE = 'Done'
 }
 
+export enum QuestIcon {
+    TELEGRAM = 'telegram',
+    TWITTER = 'twitter',
+    ENERGY = 'energy',
+    STREAM = 'stream',
+}
+
 export interface QuestSettings extends Record<string, any> {
     link?: string;
     title: string;
@@ -14,6 +21,7 @@ export interface QuestSettings extends Record<string, any> {
     skipChecking: boolean;
     count?: number;
     boostId?: string;
+    iconType?: QuestIcon;
 }
 
 export interface Quest {
@@ -21,4 +29,5 @@ export interface Quest {
     section: string;
     settings: QuestSettings;
     status: QuestStatus;
+    reward?: number;
 }

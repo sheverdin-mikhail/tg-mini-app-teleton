@@ -21,7 +21,7 @@
   position: relative;
   padding: 28px 40px 46px;
   border-radius: 10px;
-  background: var(--tg-theme-secondary-bg-color);
+  background: var(--primary-bg-color);
   transition: 0.3s transform;
   transform: scale(0.5);
   max-width: 60%;
@@ -45,7 +45,7 @@
 .icon {
   font-size: 24px !important;
   pointer-events: none;
-  color: var(--tg-theme-text-color);
+  color: var(--primary-text-color);
 }
 
 .opened {

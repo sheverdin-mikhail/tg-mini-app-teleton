@@ -32,6 +32,8 @@ export interface GameSchema {
     startedAt?: string;
     finishAt?: string;
     activeStream?: Stream;
+    chosedStream?: Stream;
+
     farmedPoints: number;
     gameTapEvents: GameTapEvent[];
 

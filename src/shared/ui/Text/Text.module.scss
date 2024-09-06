@@ -1,0 +1,52 @@
+
+.primary {
+    color: var(--primary-text-color);
+}
+
+.secondary {
+    color: var(--secondary-text-color);
+}
+
+.inverted {
+    color: var(--inverted-text-color);
+}
+
+
+.xs {
+    font: var(--font-xs);
+}
+
+.sm {
+    font: var(--font-sm);
+}
+
+.base {
+    font: var(--font-base);
+}
+
+.lg {
+    font: var(--font-lg);
+}
+
+.xl {
+    font: var(--font-xl);
+}
+
+
+
+.normal {
+    font-weight: 400;
+}
+.medium {
+    font-weight: 500;
+}
+.bold {
+    font-weight: 600;
+} 
+.black {
+    font-weight: 700;
+} 
+
+.caps {
+    text-transform: uppercase;
+} 

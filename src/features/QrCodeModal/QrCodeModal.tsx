@@ -4,7 +4,7 @@ import { Modal } from '@/shared/ui/Modal/Modal';
 import { useEffect, useState } from 'react';
 import { useTelegram } from '@/shared/lib/hooks/useTelegram/useTelegram';
 import QrCode from '@/shared/assets/img/qr-code.svg';
-import { Text, Title } from '@telegram-apps/telegram-ui';
+import { Text } from '@/shared/ui/Text/Text';
 
 interface QrCodeModalProps {
     className?: string;
@@ -26,8 +26,9 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = (props) => {
         <Modal 
             className={clsx(cls.qrCodeModal, {}, [className])}
             isOpen={isOpen}
+            withClose={false}
         >
-            <Title className={cls.title}>Play on your mobile</Title>
+            <Text className={cls.title}>Play on your mobile</Text>
             <QrCode className={cls.image} />
             <Text className={cls.text}>@TeletonClickerBot</Text>
         </Modal>

@@ -1,55 +1,9 @@
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.button {
-    display: flex;
-    flex: 0 1 50%;
-    text-transform: uppercase;
-}
-
-.viewsIcon {
-    width: 20px;
-    height: 20px;
-    fill: var(--tg-theme-text-color);
-}
-
-.energy {
-    font-size: var(--text-sm);
-    display: flex;
-    align-items: center;
-}
-
-.title {
-    font-size: var(--text-2xl);
-    text-align: center;
-}
-
-.text {
-    display: block;
-    text-align: center;
-}
-
-.points {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.textRow {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
 .gameFinishModal {
-    min-height: 40%;
-    gap: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    gap: 24px;
 }
 
 .icon {
@@ -60,4 +14,28 @@
 
 .text {
     text-align: center;
+}
+
+.rewardImage {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 16px;
+}
+
+
+.block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.button {
+    align-self: stretch;
+}
+
+.points {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }

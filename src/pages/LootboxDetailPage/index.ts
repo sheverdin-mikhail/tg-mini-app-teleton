@@ -1,0 +1,1 @@
+export { LootboxDetailPage } from './ui/LootboxDetailPage/LootboxDetailPage'

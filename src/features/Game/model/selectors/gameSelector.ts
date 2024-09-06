@@ -9,7 +9,8 @@ export const getGameIsDisabled = createSelector(getGame, (game) => game?.isDisab
 export const getGameIsAvaiableToStart = (state: StateSchema) => state.game?.isAvailableToStart;
 export const getGameIsStarted = (state: StateSchema) => state.game?.isStarted;
 export const getGameIsFinish = (state: StateSchema) => state.game?.isFinish;
-export const getGameStream = (state: StateSchema) => state.game?.activeStream;
+export const getGameActiveStream = (state: StateSchema) => state.game?.activeStream;
+export const getGameChosedStream = (state: StateSchema) => state.game?.chosedStream;
 export const getGameFarmedPoints = (state: StateSchema) => state.game?.farmedPoints;
 export const getGameTime = createSelector(getGame, (game) => ({
   startedAt: game?.startedAt,

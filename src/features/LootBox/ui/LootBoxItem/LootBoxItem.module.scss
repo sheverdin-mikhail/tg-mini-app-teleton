@@ -1,12 +1,8 @@
 .lootBoxIcon {
     position: relative;
     flex-grow: 1;
-    width: 190px;
-    height: 190px;
-
-    path {
-        fill: var(--tg-theme-text-color);
-    }
+    width: 80px;
+    height: 80px;
 }
 
 .lootBoxIcons {
@@ -27,29 +23,48 @@
     font-size: var(--text-base);
 }
 
-.button {
-    max-width: 80%;
-    min-width: 80%;
-    align-self: center;
+.buttonText {
+    display: inline-flex;
+    align-items: center;
+}
+
+.viewsIcon {
+    path {
+        stroke: var(--inverted-text-color);
+    }
 }
 
 .lootBoxItem {
     display: flex;
-    min-height: 80svw;
     flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    background: var(--tg-theme-secondary-bg-color);
-    padding: 20px 10px;
+    background: var(--gradient-color);
+    gap: 12px;
+    padding: 12px;
     border-radius: 16px;
 }
 
 .title {
     text-align: center;
+    letter-spacing: 0.15px;
 }
-
 
 .text {
     text-decoration: underline;
     text-align: center;
+}
+
+.link {
+    background: none;
+}
+
+.arrow {
+    stroke: var(--primary-button-color);
+}
+
+.detailLink {
+    display: flex;
+    color: var(--primary-button-color);
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
 }

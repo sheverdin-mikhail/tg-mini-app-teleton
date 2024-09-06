@@ -9,6 +9,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import { LevelsSchema } from '@/entities/Level';
 import { GameSchema } from '@/features/Game';
 import { LootBoxSchema } from '@/features/LootBox';
+import { LocationSchema } from '@/features/Location';
 
 export interface StateSchema {
     user: UserSchema
@@ -24,6 +25,7 @@ export interface StateSchema {
 
     // features
     lootBox: LootBoxSchema
+    location?: LocationSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;

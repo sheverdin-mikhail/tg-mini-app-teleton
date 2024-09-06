@@ -8,3 +8,13 @@ export interface Upgrade {
     isAvailable: boolean
     maxLevel: number
 }
+
+
+export enum UpgradeIcon {
+    TALISMAN = 'talisman',
+    MICROPHONE ='microphone',
+    NEON_LIGHTS ='neon_lights',
+    RECORDING_A_STREAM ='recording_a_stream',
+    COMPUTER_UPGRADE ='computer_upgrade'
+
+}

@@ -1,10 +1,13 @@
-import { LargeTitle, Spinner } from '@telegram-apps/telegram-ui';
+import { Spinner } from '@telegram-apps/telegram-ui';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { getUserIsLoading, getUserTotalPoins } from '@/entities/User';
 import { useSpring, animated } from '@react-spring/web';
-import cls from './GamePoints.module.scss';
 import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
+import { FontSize, FontWeight, Text } from '@/shared/ui/Text/Text';
+import cls from './GamePoints.module.scss';
+import { formatNumberWithSpaces } from '@/shared/lib/utils/formatNumber';
+
 
 interface GamePointsProps {
   className?: string;
@@ -21,21 +24,22 @@ export const GamePoints: React.FC<GamePointsProps> = (props) => {
   });
 
   return (
-    <LargeTitle
-      weight="1"
+    <Text
+      weight={FontWeight.BLACK}
+      size={FontSize.XL}
       className={clsx(cls.points, className)}
     >
       {(userIsLoading && userPoints === 0) ? <Spinner size="m" />
         : (
           <>
-            <ViewsIcon className={cls.icon} gradient/>
+            <ViewsIcon className={cls.icon}/>
             <animated.div className={cls.numbers}>
               {
-                anime.points.to((value) => Math.trunc(value))
+                anime.points.to((value) => formatNumberWithSpaces(Math.trunc(value)))
               }
             </animated.div>
           </>
         )}
-    </LargeTitle>
+    </Text>
   );
 };

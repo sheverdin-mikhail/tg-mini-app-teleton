@@ -3,13 +3,17 @@ import cls from './LootBoxItem.module.scss';
 import LootBoxImage from '@/shared/assets/img/lootbox.png';
 
 import clsx from 'clsx';
-import { Button, Text, Title } from '@telegram-apps/telegram-ui';
 import { useBuyLootBox } from '../../api/lootBoxApi';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
 import { useSelector } from 'react-redux';
 import { getUserTotalPoins } from '@/entities/User';
-import { LootBoxRewardsListModal } from '../LootBoxRewardsListModal/LootBoxRewardsListModal';
+import { FontSize, FontWeight, Text } from '@/shared/ui/Text/Text';
+import { Button } from '@/shared/ui/Button/Button';
+import { formatNumber } from '@/shared/lib/utils/formatNumber';
+import ArrowIcon from '@/shared/assets/icons/long-arrow-right.svg';
+import { Icon } from '@/shared/ui/Icon/Icon';
+import { useNavigate } from 'react-router-dom';
 
 interface LootBoxItemProps {
     className?: string;
@@ -20,10 +24,10 @@ interface LootBoxItemProps {
 }
 
 export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
-    const { className, price, lootBox, count, rewards } = props;
+    const { className, price, lootBox, count } = props;
     const [buyLootBoxMutation, {isLoading}] = useBuyLootBox();
     const totalPoints = useSelector(getUserTotalPoins)
-    const [lootBoxRewardsListIsOpen, setLootBoxRewardsListIsOpen] = useState(false)
+    const navigate = useNavigate();
 
 
     const onBuyClickHandler = useCallback(() => {
@@ -36,6 +40,9 @@ export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
 
     return (
         <div className={clsx(cls.lootBoxItem, {}, [className])}>
+            <button className={cls.link} onClick={() => navigate(`/lootbox/${lootBox.id}/${count}`)}>
+                <Text size={FontSize.SM} weight={FontWeight.MEDIUM} className={cls.detailLink}>What's inside? <Icon Svg={ArrowIcon}  className={cls.arrow} /></Text>
+            </button>
             <div className={cls.lootBoxIcons}>
                 {
                     [...Array(count)].map((id, index) => (
@@ -43,24 +50,12 @@ export const LootBoxItem: React.FC<LootBoxItemProps> = (props) => {
                     ))
                 }
             </div>
-            <Title weight='2' className={cls.title}>
+            <Text className={cls.title} weight={FontWeight.BOLD}>
                 Open loot boxes and win bonuses!
-            </Title>
-            <Text className={cls.text} onClick={() => setLootBoxRewardsListIsOpen(true)}>
-                What's inside?
             </Text>
             <Button className={cls.button} onClick={onBuyClickHandler} disabled={totalPoints < price || isLoading} loading={isLoading}>
-                <span className={cls.buttonText}>
-                    Open for { price } <ViewsIcon />
-                </span>
+                <span className={cls.buttonText}><ViewsIcon className={cls.viewsIcon} /> Open for { formatNumber(price.toString()) }</span>
             </Button>
-            {
-                rewards?.length && <LootBoxRewardsListModal
-                    rewards={rewards} 
-                    isOpen={lootBoxRewardsListIsOpen} 
-                    setIsOpen={setLootBoxRewardsListIsOpen}
-                 />
-            }
         </div>
     );
 }

@@ -4,14 +4,26 @@
 
 
 .page-wrapper {
-    padding: 10px 14px 0 14px;
-    flex-grow: 1;
-    height: calc(100svh - var(--header-height));
     position: fixed;
     bottom: 0;
     width: 100svw;
+    height: 100svh;
     display: flex;
     flex-direction: column;
-    padding-bottom: calc(var(--bottom-navbar-height) + 10px);
     overflow-y: auto;
+    background: var(--secondary-bg-color);
+    font: var(--font-base);
+    color: var(--primary-text-color);
+}
+
+.main-content {
+    flex: 1 1 auto;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
+body {
+    overflow: hidden;
 }

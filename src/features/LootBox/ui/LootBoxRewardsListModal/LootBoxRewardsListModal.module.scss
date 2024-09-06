@@ -23,7 +23,6 @@
 }
 
 .icon {
-    path {
-        fill: var(--tg-theme-text-color);
-    }
+    fill: var(--secondary-text-color);
+    stroke: var(--secondary-text-color);
 }

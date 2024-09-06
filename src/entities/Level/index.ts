@@ -9,3 +9,5 @@ export {
 
 export { levelsActions, levelsReducer } from './model/slice/levelSlice';
 export { fetchLevelsList } from './model/services/fetchLevelsList';
+
+export {LevelImages} from './model/types/level';

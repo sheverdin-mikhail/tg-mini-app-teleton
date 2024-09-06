@@ -1,12 +1,12 @@
 .referralLink {
     position: fixed;
-    width: calc(100% - 28px);
+    width: calc(100svw - 32px);
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 18px;
-    padding: 20px;
-    background: var(--tg-theme-secondary-bg-color);
+    gap: 12px;
     border-radius: 16px;
     bottom: calc(var(--bottom-navbar-height) + 20px);
 }
@@ -24,14 +24,24 @@
 
 
 .shareIcon {
-    font-size: var(--text-base);
-    margin-left: 6px;
+    margin-right: 4px;
+    stroke: var(--inverted-text-color);
 }
 
-.copyIcon {
-    font-size: var(--text-lg);
-}
 
 .button {
     flex-grow: 1;
+}
+
+.copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-button-color-10);
+    padding: 9px;
+    border-radius: 10px;
+}
+
+.copyIcon {
+    stroke: var(--primary-button-color);
 }

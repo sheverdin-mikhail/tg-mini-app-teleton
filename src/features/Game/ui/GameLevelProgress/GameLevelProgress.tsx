@@ -4,7 +4,7 @@ import { getUser } from '@/entities/User/model/selectors/userSelector';
 import { useSelector } from 'react-redux';
 import { CircularProgress } from '@/shared/ui/CircularProgress/CircularProgress';
 import { HTMLAttributes, useMemo } from 'react';
-import { Text } from '@telegram-apps/telegram-ui';
+import { FontWeight, Text } from '@/shared/ui/Text/Text';
 import cls from './GameLevelProgress.module.scss';
 
 interface GameLevelProgressProps extends HTMLAttributes<HTMLDivElement> {
@@ -29,12 +29,12 @@ export const GameLevelProgress: React.FC<GameLevelProgressProps> = (props) => {
 
   return (
     <div className={clsx(cls.gameLevelProgress, className)} onClick={(e) => onClick?.(e)} {...otherProps}>
-      <Text weight="1"><span className={cls.textLevel} >Location</span></Text>
       <CircularProgress size="large" progress={progress + 1}>
         <div className={cls.level}>
-          <span className={cls.curLevel}>{user.level?.level ?? 1}</span>
+          <Text className={cls.curLevel}>{user.level?.level ?? 1}</Text>
         </div>
       </CircularProgress>
+      <Text weight={FontWeight.BOLD} ><span className={cls.textLevel} >Location</span></Text>
     </div>
   );
 };

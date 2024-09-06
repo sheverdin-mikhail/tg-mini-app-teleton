@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import cls from './GameBackground.module.scss';
+import clsx from 'clsx';
 
 interface GameBackgroundProps {
   level?: number;
+  online?: boolean;
 }
 
 export const GameBackground: React.FC<GameBackgroundProps> = (props) => {
-  const { level } = props;
+  const { level, online } = props;
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const gifSrc = `https://tap-cdn.teleton.app/animations/level_${level ?? 1}.gif`;
   const placeholderSrc = `/levels/level_${level ?? 1}.png`;
@@ -16,7 +18,9 @@ export const GameBackground: React.FC<GameBackgroundProps> = (props) => {
   };
 
   return (
-    <div className={cls.imageContainer}>
+    <div className={clsx(cls.imageContainer, {
+      [cls.online]: online
+    })}>
       { !isImageLoaded && <img src={placeholderSrc} alt="Loading" className={cls.placeholderImage} />}
       <img
         src={gifSrc}

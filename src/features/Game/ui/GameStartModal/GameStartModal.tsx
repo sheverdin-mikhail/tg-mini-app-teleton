@@ -5,9 +5,10 @@ import { applyUserBoost, getUserBoosts } from '@/entities/User';
 import { useStartGame } from '@/features/Game/api/gameApi';
 import { gameActions } from '@/features/Game/model/slice/gameSlice';
 import { Modal } from '@/shared/ui/Modal/Modal';
-import { getGameStream } from '@/features/Game/model/selectors/gameSelector';
-import { Button, Text, Title } from '@telegram-apps/telegram-ui';
-import FlashIcon from '@/shared/assets/icons/flash-icon.svg';
+import { getGameActiveStream } from '@/features/Game/model/selectors/gameSelector';
+import { Button } from '@telegram-apps/telegram-ui';
+import EnergyImage from '@/shared/assets/img/energy.png';
+import { Text } from '@/shared/ui/Text/Text';
 import cls from './GameStartModal.module.scss';
 
 interface GameStartModalProps {
@@ -26,7 +27,7 @@ export const GameStartModal: React.FC<GameStartModalProps> = (props) => {
   const dispatch = useAppDispatch();
   const userBoosts = useSelector(getUserBoosts);
   const [startGameMutation, {isLoading}] = useStartGame();
-  const stream = useSelector(getGameStream);
+  const stream = useSelector(getGameActiveStream);
 
   const energyBoost = useMemo(() => userBoosts?.find((boost) => Object.keys((boost?.settings ?? {})).includes('durationMultiply')), [userBoosts]);
 
@@ -55,15 +56,15 @@ export const GameStartModal: React.FC<GameStartModalProps> = (props) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onCloseHandler} className={cls.gameStartModal}>
-      <Title caps className={cls.title} weight="1">
+      <Text caps className={cls.title}>
         Start {stream?.title} stream now?
-      </Title>
-      <Text className={cls.title} weight="1">
+      </Text>
+      <Text className={cls.title}>
       This stream is {stream?.duration} minute long
       </Text>
       {
         energyBoost?.user_boost.isPurchased && (
-          <Text className={cls.title} weight="1">
+          <Text className={cls.title}>
             You have an energy drink. The duration of this stream will be increases x1.5
           </Text>
         )
@@ -75,7 +76,7 @@ export const GameStartModal: React.FC<GameStartModalProps> = (props) => {
           loading={isLoading} 
           className={cls.button} 
           onClick={onStartHandler}
-        >Go live { energyBoost?.user_boost.isPurchased && <span className={cls.energy}><FlashIcon className={cls.icon} />Energy boost</span> }</Button>
+        >Go live { energyBoost?.user_boost.isPurchased && <span className={cls.energy}><img src={EnergyImage} className={cls.icon} />Energy boost</span> }</Button>
       </div>
     </Modal>
   );

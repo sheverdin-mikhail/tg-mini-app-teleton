@@ -1,0 +1,41 @@
+.icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 6px;
+    path {
+        fill: var(--tg-theme-text-color);
+    }
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 1;
+    font-size: var(--text-2xl);
+}
+
+
+.points {
+    display: flex;
+    align-items: center;
+}
+
+.img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 16px;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.button {
+    align-self: stretch;
+}

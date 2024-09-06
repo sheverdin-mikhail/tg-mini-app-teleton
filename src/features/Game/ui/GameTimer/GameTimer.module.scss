@@ -5,6 +5,33 @@
 }
 
 .text {
-    font-size: var(--text-base);
     text-align: center;
+}
+
+.row {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.boosts {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    img {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+.timer {
+    opacity: 0.7;
+}
+
+.timerBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
 }

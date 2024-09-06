@@ -3,20 +3,26 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: var(--text-2xl);
-    color: #fff;
+    color: var(--inverted-text-color);
     gap: 8px;
 
-    background: linear-gradient(170deg, rgba(1,86,143,1) 0%, rgba(0,179,221,1) 38%, rgba(123,92,196,1) 78%); /* Градиент */
-    -webkit-background-clip: text; /* Подрезка фона по тексту для WebKit-браузеров */
-    -webkit-text-fill-color: transparent; /* Сделать цвет текста прозрачным, чтобы фон был виден */
-    background-clip: text; /* Подрезка фона по тексту для других браузеров */
-    color: transparent; /* Для поддержки старых браузеров */
+    // background: linear-gradient(170deg, rgba(1,86,143,1) 0%, rgba(0,179,221,1) 38%, rgba(123,92,196,1) 78%); /* Градиент */
+    // -webkit-background-clip: text; /* Подрезка фона по тексту для WebKit-браузеров */
+    // -webkit-text-fill-color: transparent; /* Сделать цвет текста прозрачным, чтобы фон был виден */
+    // background-clip: text; /* Подрезка фона по тексту для других браузеров */
+    // color: transparent; /* Для поддержки старых браузеров */
 }
 
 .icon {
     width: auto;
     height: 32px;
-    fill: transparent;
+    path {
+        fill: transparent;
+        stroke: var(--inverted-text-color);
+    }
+}
+
+.number {
+    color: var(--inverted-text-color);
 }
 

@@ -2,14 +2,17 @@ import { useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getUserTotalPoins } from '@/entities/User';
 import { Modal } from '@/shared/ui/Modal/Modal';
-import { Button, Text, Title } from '@telegram-apps/telegram-ui';
-import ViewsIcon from '@/shared/assets/icons/views-icon.svg';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { gameActions } from '../../model/slice/gameSlice';
 import { useSavePoints } from '../../api/gameApi';
-import { getGameFarmedPoints, getGameStream } from '../../model/selectors/gameSelector';
+import { getGameActiveStream, getGameFarmedPoints,  } from '../../model/selectors/gameSelector';
+import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
+import { FontSize, FontWeight, Text } from '@/shared/ui/Text/Text';
+import { Button } from '@/shared/ui/Button/Button';
+import RewardImage from '@/shared/assets/img/finish.png';
 import cls from './GameFinishModal.module.scss';
-import { AwesomeIcon } from '@/shared/ui/AwesomeIcon/AwesomeIcon';
+import { formatNumber } from '@/shared/lib/utils/formatNumber';
+
 
 interface GameFinishModalProps {
     className?: string;
@@ -22,7 +25,7 @@ export const GameFinishModal: React.FC<GameFinishModalProps> = (props) => {
     isOpen,
     onClose,
   } = props;
-  const stream = useSelector(getGameStream);
+  const stream = useSelector(getGameActiveStream);
   const farmedPoints = useSelector(getGameFarmedPoints);
   const [savePointsMutation, {isLoading}] = useSavePoints();
   const totalPoints = useSelector(getUserTotalPoins);
@@ -41,20 +44,26 @@ export const GameFinishModal: React.FC<GameFinishModalProps> = (props) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onCloseHandler} className={cls.gameFinishModal}>
-      <Title caps className={cls.title} weight="1">
-        Stream is ended
-      </Title>
-      <AwesomeIcon icon='fa-solid fa-trophy' className={cls.icon} />
-      <Text className={cls.text} weight="1">
-        During the stream, you received <span className={cls.points}>{farmedPoints} <ViewsIcon className={cls.viewsIcon} /></span>
-      </Text>
-      <Text className={cls.text} weight="1">
-        You completed the stream and earned a bonus of <span className={cls.points}>{Math.trunc(bonus)} <ViewsIcon className={cls.viewsIcon} /></span>
-      </Text>
-      
-      <div className={cls.buttons}>
-        <Button className={cls.button} onClick={onCloseHandler} disabled={isLoading} loading={isLoading}>Cool!</Button>
+      <div className={cls.block}>
+        <img src={RewardImage} className={cls.rewardImage} />
+        <Text className={cls.title} weight={FontWeight.MEDIUM} size={FontSize.LG}>Stream is finished!</Text>
       </div>
+
+      <div className={cls.block}>
+        <Text className={cls.text}>
+          During the stream, you received
+        </Text>
+        <Text className={cls.points} size={FontSize.LG} weight={FontWeight.MEDIUM}><ViewsIcon className={cls.viewsIcon} /> {formatNumber(farmedPoints.toString())} </Text>
+      </div>
+
+      <div className={cls.block}>
+        <Text className={cls.text}>
+          You completed the stream and earned a bonus of
+        </Text>
+        <Text className={cls.points} size={FontSize.LG} weight={FontWeight.MEDIUM}><ViewsIcon className={cls.viewsIcon} /> {formatNumber(Math.trunc(bonus).toString())} </Text>
+      </div>
+      
+      <Button className={cls.button} onClick={onCloseHandler} disabled={isLoading} loading={isLoading}>Cool!</Button>
     </Modal>
   );
 };

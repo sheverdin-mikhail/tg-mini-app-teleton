@@ -1,14 +1,16 @@
 .bottomNavbar {
+    display: flex;
+    justify-content: space-between;
     position: fixed;
     width: 100svw;
     height: var(--bottom-navbar-height);
-    bottom: 10px;
-    padding: 0 14px;
+    bottom: 0px;
+    padding: 7px 14px 34px 14px;
+    background: var(--primary-bg-color);
+    z-index: 1000;
 }
 
-.tabList {
-    background: var(--tg-theme-section-bg-color);
-    div > div {
-        background: var(--tg-theme-section-separator-color);
-    }
+
+.item {
+    flex: 1 1 auto;
 }

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useGetUpgradesList } from '../../api/upgradesListApi';
 import cls from './UpgradesList.module.scss';
 import { UpgradesListItem } from '../UpgradesListItem/UpgradesListItem';
-import { Text, Title } from '@telegram-apps/telegram-ui';
+import { FontSize, Text, TextColor } from '@/shared/ui/Text/Text';
 
 interface UpgradesListProps {
     className?: string;
@@ -16,9 +16,9 @@ export const UpgradesList: React.FC<UpgradesListProps> = (props) => {
 
     if (isError) {
         return <div className={cls.upgradesList}>
-            <Title caps weight='1'>
+            <Text color={TextColor.SECONDARY} size={FontSize.LG}>
                 Upgrades
-            </Title>
+            </Text>
             <Text style={{ textAlign: "start" }}>
                 Error! Can't load Upgrades list, check your connection.
             </Text>
@@ -27,9 +27,9 @@ export const UpgradesList: React.FC<UpgradesListProps> = (props) => {
 
     if (!upgradesList?.length) {
         return <div className={cls.upgradesList}>
-            <Title caps weight='1'>
+            <Text color={TextColor.SECONDARY} size={FontSize.LG}>
                 Upgrades
-            </Title>
+            </Text>
             <Text style={{ textAlign: "start" }}>
                 Upgrades list is empty.
             </Text>
@@ -38,9 +38,9 @@ export const UpgradesList: React.FC<UpgradesListProps> = (props) => {
 
     return (
         <div className={clsx(cls.upgradesList, {}, [className])}>
-            <Title caps weight='1'>
+            <Text color={TextColor.SECONDARY} size={FontSize.LG}>
                 Upgrades
-            </Title>
+            </Text>
             <div className={cls.list}>
                 {
                     upgradesList?.map((upgrade) => (

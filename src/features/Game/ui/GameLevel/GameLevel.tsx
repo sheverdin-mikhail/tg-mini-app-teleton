@@ -10,18 +10,20 @@ import { useUserData } from '@/shared/lib/hooks/useUserData/useUserData';
 import cls from './GameLevel.module.scss';
 import { useSavePoints } from '../../api/gameApi';
 import { 
+  getGameActiveStream,
   getGameIsDisabled, 
   getGameIsPaused, 
-  getGameIsStarted, 
-  getGameStream 
+  getGameIsStarted,  
 } from '../../model/selectors/gameSelector';
 import { GameBackground } from '../GameBackground/GameBackground';
 import { gameActions } from '../../model/slice/gameSlice';
 import { GameBunModal } from '../GameBunModal/GameBunModal';
-import { LiveLablel } from '@/shared/ui/LiveLablel/LiveLablel';
+import LiveLablelImage from '@/shared/assets/img/live.png';
+import OfflineLablelImage from '@/shared/assets/img/offline.png';
 import { GameTouchContent } from '../GameTouchContent/GameTouchContent';
 import { useSpringRef, useTransition } from '@react-spring/web';
 import { TapHelper } from '../TapHelper/TapHelper';
+import { GamePoints } from '../GamePoints/GamePoints';
 
 interface GameLevelProps {
   className?: string;
@@ -37,7 +39,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
   const isDisabled = useSelector(getGameIsDisabled);
   const { isInit: userIsInit } = useUserData();
   const userLevel = useSelector(getUserCurrentLevel);
-  const stream = useSelector(getGameStream);
+  const stream = useSelector(getGameActiveStream);
   const isPaused = useSelector(getGameIsPaused);
   const gameIsStarted = useSelector(getGameIsStarted);
   const transitionRef = useSpringRef();
@@ -69,7 +71,7 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
 
   const handleTouchStart = useCallback(
     (event: any) => {
-      if (!isDisabled && stream && !isPaused) {
+      if (!isDisabled && gameIsStarted && !isPaused) {
         const newTouches = Array.from(event.touches);
         setTouches(newTouches);
 
@@ -103,8 +105,9 @@ export const GameLevel: React.FC<GameLevelProps> = (props) => {
 
   return (
     <div className={clsx(cls.level, {}, [className])} onTouchStart={handleTouchStart}>
-      {gameIsStarted && <LiveLablel className={cls.live} />}
-      <GameBackground level={userLevel?.level} />
+      <img src={gameIsStarted ? LiveLablelImage : OfflineLablelImage} className={cls.live} />
+      <GameBackground online={gameIsStarted} level={userLevel?.level} />
+      <GamePoints className={cls.points} />
       <div>
         {transitions((anime, touch) => (
           <GameTouchContent touch={touch} anime={anime} key={touch.identifier} />

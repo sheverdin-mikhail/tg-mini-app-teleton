@@ -1,44 +1,36 @@
 import { useTelegram } from '@/shared/lib/hooks/useTelegram/useTelegram';
 import clsx from 'clsx';
-import {
-  Avatar, Caption, Text,
-} from '@telegram-apps/telegram-ui';
 import { GameLevelProgress } from '@/features/Game';
-import { UpLevelConditionsModal } from '@/features/UpLevelConditions';
-import { useRef, useState } from 'react';
-import AvatarImage from '@/shared/assets/img/logo.jpg';
+import AvatarImage from '@/shared/assets/img/avatar.png';
 import cls from './Header.module.scss';
+import { FontWeight, Text } from '@/shared/ui/Text/Text';
+import { useSelector } from 'react-redux';
+import { getEarnIncomePerDay } from '@/entities/User';
+import { formatNumber } from '@/shared/lib/utils/formatNumber';
+import { PointsBadge, PointsBadgeSize } from '@/shared/ui/PointsBadge/PointsBadge';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   className?: string;
 }
 
+
 export const Header: React.FC<HeaderProps> = (props) => {
   const { className } = props;
   const { tgUser } = useTelegram();
-  const trigger = useRef(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const incomePerDay = useSelector(getEarnIncomePerDay)
+  const navigate = useNavigate();
 
   return (
-    <>
       <header className={clsx(cls.header, {}, [className])}>
         <div className={cls.block}>
-          <Avatar src={tgUser?.photoUrl ?? AvatarImage} className={cls.avatar} />
-          <div className={clsx(cls.userLabel, cls.col)}>
-            <Caption weight="2" caps>Streamers Producer</Caption>
-            <Text weight="2" caps className={cls.name}>{tgUser?.firstName}</Text>
+          <img src={tgUser?.photoUrl ?? AvatarImage} className={cls.avatar} />
+          <div className={cls.col}>
+            <Text className={cls.headerName}>Streamers Producer <Text weight={FontWeight.BOLD} className={cls.name}>{tgUser?.firstName}</Text></Text>
+            <Text weight={FontWeight.MEDIUM} className={cls.headerName}>profit per day <PointsBadge size={PointsBadgeSize.SMALL}>{formatNumber(incomePerDay?.toString() ?? '0')}</PointsBadge></Text>
           </div>
         </div>
-        <UpLevelConditionsModal 
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          trigger={(
-            <div className={cls.block} ref={trigger}>
-              <GameLevelProgress onClick={() => setIsOpen(true)} />
-            </div>
-          )}
-        />
+        <GameLevelProgress onClick={() => navigate('location')} />
       </header>
-    </>
   );
 };

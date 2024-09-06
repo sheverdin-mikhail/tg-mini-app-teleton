@@ -4,10 +4,12 @@ import { getGameIsBanned } from '../../model/selectors/gameSelector';
 import { Modal } from '@/shared/ui/Modal/Modal';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { gameActions } from '../../model/slice/gameSlice';
-import { Button, Text, Title } from '@telegram-apps/telegram-ui';
 import { applyUserBoost, getUserBoosts } from '@/entities/User';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { AwesomeIcon } from '@/shared/ui/AwesomeIcon/AwesomeIcon';
+import { FontSize, FontWeight, Text } from '@/shared/ui/Text/Text';
+import StrikeImage from '@/shared/assets/img/attention.png';
+import DefenceIcon from '@/shared/assets/img/defence.png';
+import { Button, ButtonTheme } from '@/shared/ui/Button/Button';
 import cls from './GameBunModal.module.scss';
 
 interface GameBunModalProps {
@@ -49,20 +51,29 @@ export const GameBunModal: React.FC<GameBunModalProps> = (props) => {
 
     return (
         <Modal className={clsx(cls.gameBunModal, {}, [className])} isOpen={isBanned} onClose={onCancelHandler}>
-            <Title caps className={cls.title} weight="1">
-                Oops
-            </Title>
-            <AwesomeIcon icon='fa-solid fa-ban' className={cls.icon} />
-            <Text className={cls.text}>You got a strike. It looks like the stream has come to an end</Text>
-            {
-
-                !banDefence?.user_boost.isPurchased && <Text className={cls.text}>Use the Ban defence next time!</Text>
-            }
-            <div className={cls.buttons}>
-                <Button onClick={onCancelHandler} className={cls.button} disabled={disabled}>finish stream</Button>
+            <div className={cls.block}>
+                <img src={StrikeImage} className={cls.rewardImage} />
+                <Text caps className={cls.title} size={FontSize.LG} weight={FontWeight.MEDIUM}>
+                    Oops, you got a strike
+                </Text>
+            </div>
+            <div className={cls.block}>
+                <Text className={cls.text}>It looks like the stream has come to an end</Text>
                 {
-                    banDefence?.user_boost.isPurchased && <Button onClick={onUseBunDefence} className={cls.button} disabled={disabled}>🛡 Use ban defence</Button>
+
+                    !banDefence?.user_boost.isPurchased && <Text className={cls.text}>Use the Ban defence next time!</Text>
                 }
+            </div>
+            <div className={cls.buttons}>
+                {
+                    banDefence?.user_boost.isPurchased && <Button onClick={onUseBunDefence} className={cls.button} disabled={disabled}> 
+                        <img src={DefenceIcon} className={cls.defenceIcon} />
+                        Use ban defence
+                    </Button>
+                }
+                <Button theme={
+                    banDefence?.user_boost.isPurchased ? ButtonTheme.SECONDARY : ButtonTheme.PRIMARY
+                } onClick={onCancelHandler} className={cls.button} disabled={disabled}>Finish stream</Button>
             </div>
         </Modal>
     );

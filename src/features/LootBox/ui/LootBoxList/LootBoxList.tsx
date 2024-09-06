@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import cls from './LootBoxList.module.scss';
-import { Text, Title } from '@telegram-apps/telegram-ui';
 import { LootBoxItem } from '../LootBoxItem/LootBoxItem';
 import { useGetLootBoxList } from '../../api/lootBoxApi';
 import { DynamicModuleLoader, ReducersList } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -9,6 +8,7 @@ import { useEffect } from 'react';
 import { LOOTBOX_REWARDS_LOCALSTORAGE } from '@/shared/const/localStorage';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { LootBoxClaimModal } from '../LootBoxClaimModal/ui/LootBoxClaimModal/LootBoxClaimModal';
+import { FontSize, Text, TextColor } from '@/shared/ui/Text/Text';
 
 interface LootBoxListProps {
     className?: string;
@@ -37,18 +37,18 @@ export const LootBoxList: React.FC<LootBoxListProps> = (props) => {
 
     if (isError) {
         return <>
-            <Title weight="1" caps className={cls.title}>
+            <Text color={TextColor.SECONDARY} size={FontSize.LG}>
                 Loot boxes
-            </Title>
+            </Text>
             <Text >Error! Can't load Lootboxes list, check your connection.</Text>
         </>
     }
 
     if (!lootBoxList?.length) {
         return <>
-            <Title weight="1" caps className={cls.title}>
+            <Text color={TextColor.SECONDARY} size={FontSize.LG}>
                 Loot boxes
-            </Title>
+            </Text>
             <Text >Lootboxes list is empty</Text>
         </>
     }
@@ -57,9 +57,9 @@ export const LootBoxList: React.FC<LootBoxListProps> = (props) => {
     return (
     <DynamicModuleLoader reducers={reducers}>
         <div className={clsx(cls.lootBoxList, {}, [className])}>
-            <Title weight="1" caps className={cls.title}>
+            <Text color={TextColor.SECONDARY} size={FontSize.LG}>
                 Loot boxes
-            </Title>
+            </Text>
             <div className={cls.items}>
                 {
                     lootBoxList?.map((lootBox) => (

@@ -1,0 +1,17 @@
+.locationImage {
+    position: relative;
+    z-index: 5000;
+    object-fit: cover;
+    height: fit-content;
+    margin-top: -16px;
+}
+
+.location {
+    display: flex;
+    flex-direction: column;
+    height: 100svh;
+}
+
+.notAvailable {
+    filter: grayscale(90%) contrast(60%);
+}

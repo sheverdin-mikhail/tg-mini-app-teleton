@@ -1,34 +1,26 @@
 .questItem {
-    display: flex;
-    flex-direction: column;
-    padding: 12px;
-    border-radius: 12px;
-    background: var(--tg-theme-secondary-bg-color);
-    box-shadow: 0px 0px 5px 0px rgba($color: #000000, $alpha: 0.4);
-    gap: 5px;
-}
-
-.header {
-    text-align: center;
-    line-height: 112%;
-    font-size: var(--text-sm);
-}
-
-.description {
-    text-align: center;
-    font-size: var(--text-sm);
-}
-
-.title {
-    font-size: var(--text-base);
-    line-height: 100%;
-    text-align: center;
+    gap: 8px;
+    align-items: center;
 }
 
 .button {
-    margin-top: auto;
-    h6 {
-        font-size: var(--text-sm);
-        text-transform: uppercase;
-    }
+    margin-left: auto;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 47%;
+}
+
+.icon {
+    width: 40px;
+    height: auto;
+}
+
+.description {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }

@@ -1,0 +1,1 @@
+export { DailyRewardDetailPage } from './ui/DailyRewardDetailPage/DailyRewardDetailPage'

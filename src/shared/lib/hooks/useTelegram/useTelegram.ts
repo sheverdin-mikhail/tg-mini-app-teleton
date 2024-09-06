@@ -1,4 +1,6 @@
 import {
+  initBackButton,
+  initMiniApp,
   initSettingsButton,
   mockTelegramEnv,
   parseInitData,
@@ -6,6 +8,7 @@ import {
 } from '@telegram-apps/sdk';
 import { useEffect } from 'react';
 import { copyToClipboard } from '../../utils/clipboard';
+import { useNavigate } from 'react-router-dom';
 
 declare global {
     interface Window {
@@ -16,7 +19,7 @@ declare global {
 
 // убрать на проде
 // eslint-disable-next-line max-len
-const initDataRaw = 'query_id=AAHWD2IuAAAAANYPYi7PYjAO&user=%7B%22id%22%3A778178518%2C%22first_name%22%3A%22Mikhail%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22sheverdin_mikhail%22%2C%22language_code%22%3A%22ru%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1723473396&hash=0bd9171ec47c8c771c7ebe7ee59213f8b1928dddda9de876e0e3c37a3fd681ab';
+const initDataRaw = 'query_id=AAHWD2IuAAAAANYPYi7FBEnz&user=%7B%22id%22%3A778178518%2C%22first_name%22%3A%22Mikhail%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22sheverdin_mikhail%22%2C%22language_code%22%3A%22ru%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1724333928&hash=fc652f7668002aeab3944f449213743b93cb189c68246ba0fee056b7f174f0a4';
 
 mockTelegramEnv({
   themeParams: {
@@ -45,6 +48,9 @@ export const useTelegram = () => {
 
   const { initData, initDataRaw } = retrieveLaunchParams();
   const [settingsButton] = initSettingsButton();
+  const [backButton] = initBackButton();
+  const [miniApp] = initMiniApp();
+  const navigate = useNavigate()
 
   const tgUser = initData?.user;
   const platform = tg.platform;
@@ -61,11 +67,22 @@ export const useTelegram = () => {
     }
   };
 
+  const initBackButtonHandler = (location?: string) => {
+    backButton.show()
+    backButton.on('click', () => location ? navigate(location) : navigate(-1))
+  }
+
+  const removeBackButtonHandler = () => {
+    backButton.hide()
+  }
+
   useEffect(() => {
     // @ts-ignore
     if (tg.disableVerticalSwipes) tg.disableVerticalSwipes();
     settingsButton.show()
     settingsButton.on('click', () => copyToClipboard(initDataRaw ?? ''))
+    miniApp.setHeaderColor('#ffffff')
+    miniApp.setBgColor('#ffffff')
   }, [])
 
   return ({
@@ -76,5 +93,7 @@ export const useTelegram = () => {
     platform,
     closeTelegram,
     onToggleMainButton,
+    initBackButton: initBackButtonHandler,
+    removeBackButton: removeBackButtonHandler
   });
 };

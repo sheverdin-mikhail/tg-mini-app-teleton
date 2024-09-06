@@ -1,16 +1,19 @@
 import { MouseEventHandler, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SegmentedControlItem } from '@telegram-apps/telegram-ui/dist/components/Navigation/SegmentedControl/components/SegmentedControlItem/SegmentedControlItem';
 import { IBottomNavbarItem } from '../../model/types/bottomNavbar';
+import clsx from 'clsx';
+import { Icon } from '@/shared/ui/Icon/Icon';
+import cls from './BottomNavbarItem.module.scss'
 
 interface BottomNavbarItemProps {
-    className?: string;
-    selected: boolean;
-    item: IBottomNavbarItem;
+  className?: string;
+  selected: boolean;
+  item: IBottomNavbarItem;
+  disabled?: boolean;
 }
 
 export const BottomNavbarItem: React.FC<BottomNavbarItemProps> = (props) => {
-  const { selected = false, item, className } = props;
+  const { selected = false, item, className, disabled = false } = props;
 
   const navigate = useNavigate();
 
@@ -19,8 +22,17 @@ export const BottomNavbarItem: React.FC<BottomNavbarItemProps> = (props) => {
   }, [navigate, item.path]);
 
   return (
-    <SegmentedControlItem className={className} onClick={onClickHandler} selected={selected}>
-      {item.text}
-    </SegmentedControlItem>
+    <button 
+      disabled = {disabled}
+      className={clsx(cls.item, className, {
+        [cls.active]: selected
+      })} 
+      onClick={onClickHandler}
+    >
+      <Icon Svg={item.image} className={cls.icon} />
+      <span className={cls.text}>
+        {item.text}
+      </span>
+    </button>
   );
 };

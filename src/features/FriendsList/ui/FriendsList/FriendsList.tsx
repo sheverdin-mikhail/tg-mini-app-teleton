@@ -4,7 +4,7 @@ import { useGetFriendsList } from '@/entities/Referral';
 import { FriendsListItem } from '../FriendsListItem/FriendsListItem';
 import { FriendsListLoading } from '../FriendsListLoading/FriendsListLoading';
 import { FriendsListIsEmpty } from '../FriendsListIsEmpty/FriendsListIsEmpty';
-import { Text, Title } from '@telegram-apps/telegram-ui';
+import { FontSize, FontWeight, Text, TextColor } from '@/shared/ui/Text/Text';
 
 interface FriendsListProps {
     className?: string;
@@ -24,18 +24,18 @@ export const FriendsList: React.FC<FriendsListProps> = (props) => {
 
     if (isError) {
         return <>
-        <Title weight="1" caps className={cls.title}>
+        <Text className={cls.Text}>
             Friends
-        </Title>
+        </Text>
         <Text >Error! Can't load Upgrades list, check your connection.</Text>
         </>
     }
 
     return (
         <div className={clsx(cls.friendsList, {}, [className])}>
-             <Title weight="1" caps className={cls.title}>
-                Friends
-            </Title>
+             <Text className={cls.Text} size={FontSize.LG} color={TextColor.SECONDARY}>
+                Your friends <Text weight={FontWeight.MEDIUM} color={TextColor.PRIMARY}>({friendsList?.length ?? 0})</Text>
+            </Text>
             {
                 friendsList?.length 
                 ? (

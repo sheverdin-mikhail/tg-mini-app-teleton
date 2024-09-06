@@ -4,10 +4,11 @@ import {
 import { useSelector } from 'react-redux';
 import { getUserCurrentLevel, getUserTotalPoins } from '@/entities/User';
 import { Modal } from '@/shared/ui/Modal/Modal';
-import { Button, Title } from '@telegram-apps/telegram-ui';
 import { getGameIsStarted, useLevelUp } from '@/features/Game';
-import { getLevels } from '@/entities/Level';
+import { getLevels, LevelImages } from '@/entities/Level';
 import cls from './LevelUpModal.module.scss';
+import { FontSize, FontWeight, Text, TextColor } from '@/shared/ui/Text/Text';
+import { Button } from '@/shared/ui/Button/Button';
 
 interface LevelUpModalProps {
     className?: string;
@@ -24,9 +25,9 @@ export const LevelUpModal: React.FC<LevelUpModalProps> = (props) => {
   const gameIsStart = useSelector(getGameIsStarted);
   const userLevel = useSelector(getUserCurrentLevel);
   const levelsList = useSelector(getLevels);
+  const nextLevel = levelsList.find((level) => level.level === Number(userLevel?.level) + 1);
 
   useEffect(() => {
-    const nextLevel = levelsList.find((level) => level.level === Number(userLevel?.level) + 1);
     if (nextLevel && userLevel?.pointToNextLevel && (totalPoints >= userLevel?.pointToNextLevel)) {
       if (!gameIsStart) {
         setIsOpen(true);
@@ -42,12 +43,21 @@ export const LevelUpModal: React.FC<LevelUpModalProps> = (props) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onCloseHandler} className={cls.levelUpModal}>
-      <Title caps className={cls.title} weight="1">
+      <Text className={cls.title} size={FontSize.LG} weight={FontWeight.MEDIUM} >
         Your lvl is UP!
-      </Title>
-      <div className={cls.buttons}>
-        <Button disabled={isLoading} loading={isLoading} className={cls.button} onClick={onCloseHandler}>Cool!</Button>
+      </Text>
+
+      <div className={cls.imageContainer}>
+        <img src={LevelImages[nextLevel?.level ?? 1]} alt="level-image"  className={cls.image}/>
       </div>
+
+      <div className={cls.block}>
+        <Text size={FontSize.LG} weight={FontWeight.BOLD}>{nextLevel?.name}</Text>
+        <Text size={FontSize.SM} weight={FontWeight.MEDIUM} color={TextColor.SECONDARY}>Current location</Text>
+        <Text size={FontSize.SM} weight={FontWeight.MEDIUM} color={TextColor.SECONDARY}>{nextLevel?.description}</Text>
+      </div>
+
+      <Button disabled={isLoading} loading={isLoading} className={cls.button} onClick={onCloseHandler}>Cool!</Button>
     </Modal>
   );
 };

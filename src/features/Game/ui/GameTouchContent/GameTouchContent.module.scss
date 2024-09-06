@@ -8,14 +8,13 @@
     align-items: center;
 }
 
-.points {
-    color: var(--white-color);
-    font-weight: bold;
-    font-size: var(--text-xl);
-    font-family: var();
-}
+
 
 .viewIcon {
     width: 30px;
     height: 30px;
+    path {
+        stroke: var(--inverted-text-color);
+    }
 }
+

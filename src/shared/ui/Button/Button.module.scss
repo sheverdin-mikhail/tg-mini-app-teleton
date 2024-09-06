@@ -1,0 +1,39 @@
+.button {
+    white-space: nowrap;
+    border-radius: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.primary {
+    background: var(--primary-button-color);
+    color: var(--inverted-text-color);
+}
+
+.secondary {
+    background: var(--primary-bg-color);
+    border: var(--button-border);
+}
+
+.text {
+    letter-spacing: -0.23px;
+}
+
+
+.lg {
+    padding: 12px 20px;
+}
+
+.sm {
+    padding: 8px 20px;
+}
+
+.disabled {
+    opacity: 0.3;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

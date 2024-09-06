@@ -1,0 +1,23 @@
+.dailyRewardIcon {
+    width: 40px;
+    height: 40px;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dailyRewardCard {
+    gap: 8px;
+}
+
+.arrow {
+    margin-left: auto;
+}
+
+.points {
+    display: flex;
+    align-items: center;
+}

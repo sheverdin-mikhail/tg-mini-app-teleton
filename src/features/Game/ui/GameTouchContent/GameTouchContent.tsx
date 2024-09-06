@@ -4,7 +4,6 @@ import React, { useMemo } from 'react';
 import { animated } from '@react-spring/web';
 import { Comment } from '@/shared/ui/Comment/Comment';
 import { Emoji } from '@/shared/ui/Emoji/Emoji';
-import { Text } from '@telegram-apps/telegram-ui';
 import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
 import { getGameFinishAt, getGameHasBanned, getGameStartedAt, getGameTapEvents } from '../../model/selectors/gameSelector';
 import { useSelector } from 'react-redux';
@@ -13,6 +12,7 @@ import { getRandomGameTapEvent } from '../../model/services/getRandomGameTapEven
 import cls from './GameTouchContent.module.scss';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { gameActions } from '../../model/slice/gameSlice';
+import { FontSize, FontWeight, Text, TextColor } from '@/shared/ui/Text/Text';
 
 
 
@@ -67,7 +67,7 @@ export const GameTouchContent: React.FC<GameTouchContentProps> = React.memo(({ t
     const getRandomContent = (type: GameTapEventType): JSX.Element | null => {
         switch (type) {
             case GameTapEventType.VIEW:
-                return <Text className={cls.row}> <span className={cls.points}>+1</span> <ViewsIcon className={cls.viewIcon}/> </Text>
+                return <Text className={cls.row} color={TextColor.INVERTED} weight={FontWeight.MEDIUM} size={FontSize.XL}> <span className={cls.points}>+1</span> <ViewsIcon className={cls.viewIcon}/> </Text>
             case GameTapEventType.COMMENT:
                 const randomComment = comments[Math.floor(Math.random() * comments.length)];
                 return <Comment>{randomComment}</Comment>;

@@ -3,7 +3,7 @@ import { CircularProgressProps as TGCircularProgressProps, Text, CircularProgres
 import cls from './CircularProgress.module.scss';
 
 interface CircularProgressProps extends TGCircularProgressProps{
-    className?: string;
+  className?: string;
 }
 
 export const CircularProgress: React.FC<CircularProgressProps> = (props) => {

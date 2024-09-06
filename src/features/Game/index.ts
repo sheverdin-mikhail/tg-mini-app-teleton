@@ -15,7 +15,6 @@ export {
   getGameIsInit,
   getGameIsStarted,
   getGameStartedAt,
-  getGameStream,
   getGameTime,
 } from './model/selectors/gameSelector';
 

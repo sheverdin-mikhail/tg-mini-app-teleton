@@ -24,9 +24,14 @@ export function formatNumber(str: string) {
     suffix = 'K';
   }
   // Округляем число до двух знаков после запятой
-  const roundedNum = num.toFixed(0);
+  const roundedNum = num
 
   // Формируем итоговую строку
   const formatted = isDollar ? `$${roundedNum}${suffix}` : `${roundedNum}${suffix}`;
   return formatted;
+}
+
+
+export function formatNumberWithSpaces(number: number) {
+  return number.toLocaleString('ru-RU').replace(/,/g, ' ');
 }

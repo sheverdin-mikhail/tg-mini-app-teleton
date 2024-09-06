@@ -5,13 +5,15 @@
 }
 
 
-.button {
-    display: block;
-    margin-top: auto;
+.pagination {
+    margin-top: 16px;
     align-self: center;
-    min-width: 50%;
 }
 
-.pagination {
-    align-self: center;
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    gap: 8px;
+    margin-top: 16px;
 }

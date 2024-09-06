@@ -55,7 +55,7 @@ export const gameSlice = createSlice({
       }
     },
     choseStream: (state, { payload: stream }: PayloadAction<Stream>) => {
-      state.activeStream = stream;
+      state.chosedStream = stream;
     },
     startStream: (state, { payload: { stream, boost } }: PayloadAction<StartStreamProps>) => {
       state.startedAt = moment().toISOString();
@@ -90,6 +90,7 @@ export const gameSlice = createSlice({
       state.isBanned = false;
       state.isPaused = false;
       state.hasBanned = false;
+      state.activeStream = undefined;
     },
     pauseStream: (state) => {
       state.isPaused = true;
@@ -111,8 +112,8 @@ export const gameSlice = createSlice({
     },
     closeStreamsModal: (state) => {
       state.streamsModalIsOpen = false
+      state.chosedStream = undefined
     },
-
   },
   extraReducers: (builder) => builder,
 });

@@ -1,32 +1,38 @@
 import clsx from 'clsx';
-import { Quest, QuestStatus } from '@/entities/Quest';
-import {
-  Button,
-  Headline,
-  Image,
-  Text,
-} from '@telegram-apps/telegram-ui';
-import cls from './QuestItem.module.scss';
+import { Quest, QuestIcon, QuestStatus } from '@/entities/Quest';
 import { useQuestClaim, useQuestVerify } from '../../api/questsListApi';
 import { initUtils } from '@telegram-apps/sdk';
-import { useSelector } from 'react-redux';
-import { getUserDailyStreamsCount, makeGetUserBoost } from '@/entities/User';
-import { StateSchema } from '@/app/providers';
+import { Card } from '@/shared/ui/Card/Card';
+import { FontSize, FontWeight, Text } from '@/shared/ui/Text/Text';
+import EnergyIcon from '@/shared/assets/img/energy.png';
+import StreamIcon from '@/shared/assets/img/live.png';
+import TelegramIcon from '@/shared/assets/img/tg.png';
+import TwitterIcon from '@/shared/assets/img/twitter.png';
+
+import cls from './QuestItem.module.scss';
+import { Button, ButtonSize } from '@/shared/ui/Button/Button';
+import { ViewsIcon } from '@/shared/ui/ViewsIcon/ViewsIcon';
+import { formatNumber } from '@/shared/lib/utils/formatNumber';
 
 interface QuestItemProps {
-    className?: string;
-    item: Quest;
+  className?: string;
+  item: Quest;
 }
 
 export const QuestItem: React.FC<QuestItemProps> = (props) => {
   const { className, item } = props;
 
+  const QuestIcons: Record<QuestIcon, string> = {
+    [QuestIcon.ENERGY]: EnergyIcon,
+    [QuestIcon.STREAM]: StreamIcon,
+    [QuestIcon.TELEGRAM]: TelegramIcon,
+    [QuestIcon.TWITTER]: TwitterIcon,
+  }
+  
+
   const [questVerifyMutation, { isLoading }] = useQuestVerify();
   const [questClaimMutation] = useQuestClaim();
   const utils = initUtils()
-  const userDailyStreams = useSelector(getUserDailyStreamsCount)
-  const getUserBoost = makeGetUserBoost();
-  const boostCount = useSelector((state: StateSchema) => getUserBoost(state, item.settings.boostId ?? ''))?.dailyUseCount;
 
   const buttonClickHandler = (item: Quest) => () => {
     if (item.status === QuestStatus.START) {
@@ -38,19 +44,21 @@ export const QuestItem: React.FC<QuestItemProps> = (props) => {
   };
 
   return (
-    <div key={item.id} className={clsx(cls.questItem, className)}>
+    <Card key={item.id} className={clsx(cls.questItem, className)}>
       {
-        item.settings.image && <Image src={item.settings.image} />
+        item?.settings?.iconType && <img className={cls.icon} src={QuestIcons[item.settings.iconType]} />
       }
-      <Text caps className={cls.title} weight="1">
-        {item.settings.title}
-      </Text>
-      <Text className={cls.description} weight="3">
-        {item.settings.description}
-      </Text>
-      {
+      <div className={cls.col}>
+        <Text className={cls.title} weight={FontWeight.MEDIUM}>
+        {item.settings.title} {item.settings.description}
+        </Text>
+        <Text className={cls.description} size={FontSize.LG} weight={FontWeight.MEDIUM} >
+          <ViewsIcon/> {formatNumber(item?.reward?.toString() ?? '0')}
+        </Text>
+      </div>
+      {/* {
         (item.settings.action === 'boosts' || item.settings.action === 'streams') && (
-          <Text className={cls.description} weight="3">
+          <Text className={cls.description} >
             {
               item.settings.action === 'streams'
               ? <span>{userDailyStreams ?? 0} / {item.settings.count ?? 0}</span>
@@ -58,14 +66,11 @@ export const QuestItem: React.FC<QuestItemProps> = (props) => {
             } 
           </Text>
         )
-      }
-      <Headline className={cls.header} caps weight="1">
-        {item.settings.header}
-      </Headline>
+      } */}
       {
         item.settings.buttonTitle && (
           <Button
-            size="s"
+            size={ButtonSize.SMALL}
             className={cls.button}
             disabled={item.status === QuestStatus.DONE}
             onClick={buttonClickHandler(item)}
@@ -75,6 +80,6 @@ export const QuestItem: React.FC<QuestItemProps> = (props) => {
           </Button>
         )
       }
-    </div>
+    </Card>
   );
 };

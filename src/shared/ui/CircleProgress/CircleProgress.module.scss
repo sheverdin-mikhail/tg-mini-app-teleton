@@ -1,0 +1,31 @@
+.circle {
+    position: relative;
+}
+
+.svg {
+    position: relative; 
+    margin: 0 auto;
+    overflow: visible;
+}
+
+.outerCircle {
+    stroke: var(--highlight-color-10) ;
+    fill: transparent;
+}
+
+.innerCircle {
+    fill: transparent;
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.disabled {
+    opacity: 0.5;
+}

@@ -1,0 +1,24 @@
+.pointsBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--highlight-color-10);
+    border-radius: 100px;
+}
+
+.icon {
+    stroke: var(--secondary-text-color);
+    margin-right: 2px;
+}
+
+.sm {
+    padding: 4px 8px;
+}
+
+.lg {
+    padding: 18px 16px;
+}
+
+.disabled {
+    opacity: 0.5;
+}

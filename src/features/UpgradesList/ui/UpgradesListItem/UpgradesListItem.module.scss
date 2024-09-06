@@ -1,25 +1,19 @@
 .upgradesListItem {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: var(--tg-theme-secondary-bg-color);
-    padding: 16px 8px;
-    border-radius: 16px;
+    gap: 8px;
+}
+
+.lvl {
     text-align: center;
-    gap: 24px;
 }
 
-.title {
-    font-size: var(--text-base);
-}
-
-.text {
-    font-size: var(--text-base);
+.reward {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .button {
-    margin-top: auto;
+    margin-left: auto;
 }
 .buttonContent {
     display: flex;
@@ -30,6 +24,7 @@
 .block {
     display: flex;
     flex-direction: column;
+    gap: 4px;
 }
 
 .badge {
@@ -43,4 +38,24 @@
 .description {
     display: flex;
     flex-direction: column;
+}
+
+.viewsIcon {
+    path {
+        stroke: var(--inverted-text-color);
+    }
+}
+
+.iconBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 60px;
+    height: 60px;
+}
+
+.upgradeIcon {
+    width: 40px;
+    height: 40px;
 }

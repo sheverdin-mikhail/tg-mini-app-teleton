@@ -1,34 +1,45 @@
 .header {
     width: 100%;
-    position: fixed;
-    top: 0;
     height: var(--header-height);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 14px;
+    padding: 0 16px;
+}
+
+.headerName {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    white-space: nowrap;    
+    overflow: hidden;
 }
 
 .avatar {
-    margin-right: 12px;
-}
-
-.col {
-    display: flex;
-    flex-direction: column;
+    margin-right: 8px;
+    width: 57px;
+    height: 57px;
 }
 
 .block {
     display: flex;
     align-items: center;
     &:first-child {
-        max-width: 70%;
+        flex-grow: 1;
+        max-width: 80%;
     }
 }
 
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 80%;
+}
+
+
 .name {
-    overflow-x: hidden;
+    max-width: fit-content;
+    overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 80%;
 }
